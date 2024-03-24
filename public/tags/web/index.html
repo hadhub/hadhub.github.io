@@ -122,7 +122,7 @@
 
         <div class="post-content">
           
-            🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap
+            🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap avec la commande nmap -p 22,80,8089 -sCV -T4
 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots.
           
         </div>

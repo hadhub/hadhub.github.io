@@ -13,7 +13,7 @@
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
       <guid>//localhost:1313/posts/1/</guid>
-      <description>🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap
+      <description>🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap avec la commande nmap -p 22,80,8089 -sCV -T4
 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots.</description>
       <content>&lt;h1 id=&#34;-périmètre&#34;&gt;🔭 Périmètre&lt;/h1&gt;
 &lt;ul&gt;
@@ -21,7 +21,7 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 &lt;li&gt;Domaine / Virtual Host : &lt;code&gt;doctors.htb&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h1&gt;
-&lt;p&gt;Scan des ports de la machine avec nmap&lt;/p&gt;
+&lt;p&gt;Scan des ports de la machine avec nmap avec la commande &lt;code&gt;nmap -p 22,80,8089 -sCV -T4&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT     STATE SERVICE  VERSION
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22/tcp   open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssh-hostkey: 
@@ -39,8 +39,8 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_Not valid after:  2023-09-06T15:57:27
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| http-robots.txt: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; disallowed entry 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;alt&#34; src=&#34;//localhost:1313/hadhub/static/images/doctor-1.png&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services :&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;static&#34; src=&#34;../../static/imgs/doctor-1.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
 &lt;h1 id=&#34;-élévation-de-privilèges&#34;&gt;🔼 Élévation de privilèges&lt;/h1&gt;
 &lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
