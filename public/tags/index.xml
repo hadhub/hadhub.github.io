@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Blog | Hadrien</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Blog | Hadrien</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Boot2root</title>
+      <link>/tags/boot2root/</link>
+      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
+      
+      <guid>/tags/boot2root/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>HackTheBox</title>
+      <link>/tags/hackthebox/</link>
+      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
+      
+      <guid>/tags/hackthebox/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>/tags/linux/</link>
+      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
+      
+      <guid>/tags/linux/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>/tags/web/</link>
+      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
+      
+      <guid>/tags/web/</guid>
+      <description></description>
+      <content></content>
+    </item>
+    
+  </channel>
+</rss>

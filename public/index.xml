@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog | Hadrien</title>
+    <link>/</link>
+    <description>Recent content on Blog | Hadrien</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox - Doctor</title>
+      <link>/posts/1/</link>
+      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
+      
+      <guid>/posts/1/</guid>
+      <description>🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap
+PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots.</description>
+      <content>&lt;h1 id=&#34;-périmètre&#34;&gt;🔭 Périmètre&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;IP de la machine : &lt;code&gt;10.10.10.209&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Domaine / Virtual Host : &lt;code&gt;doctors.htb&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h1&gt;
+&lt;p&gt;Scan des ports de la machine avec nmap&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT     STATE SERVICE  VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22/tcp   open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssh-hostkey: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;3072&lt;/span&gt; 594d4ec2d8cfda9da8c8d0fd99a84617 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;RSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 7ff3dcfb2dafcbff9934ace0f8001e47 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ECDSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_  &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 530e966b9ce9c1a170516c2dce7b43e8 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ED25519&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80/tcp   open  http     Apache httpd 2.4.41 &lt;span style=&#34;color:#f92672&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-server-header: Apache/2.4.41 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-title: Doctor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8089/tcp open  ssl/http Splunkd httpd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-title: splunkd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-server-header: Splunkd
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssl-cert: Subject: commonName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SplunkServerDefaultCert/organizationName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SplunkUser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| Not valid before: 2020-09-06T15:57:27
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_Not valid after:  2023-09-06T15:57:27
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| http-robots.txt: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; disallowed entry 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image alt text&#34; src=&#34;/hadhub/static/images/doctor-1.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
+&lt;h1 id=&#34;-élévation-de-privilèges&#34;&gt;🔼 Élévation de privilèges&lt;/h1&gt;
+&lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
+&lt;h1 id=&#34;-outils--environnement&#34;&gt;🧰 Outils / Environnement&lt;/h1&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Refonte</title>
+      <link>/posts/new_website/</link>
+      <pubDate>Sun, 24 Mar 2024 13:17:48 +0100</pubDate>
+      
+      <guid>/posts/new_website/</guid>
+      <description>Re! Site en construction !
+Contenu à venir :
+Solutions de machine (boot2root) HackTheBox et Vulnlab CheatSheets </description>
+      <content>&lt;h2 id=&#34;re&#34;&gt;Re!&lt;/h2&gt;
+&lt;p&gt;Site en construction !&lt;/p&gt;
+&lt;p&gt;Contenu à venir :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Solutions de machine (boot2root) HackTheBox et Vulnlab&lt;/li&gt;
+&lt;li&gt;CheatSheets&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
