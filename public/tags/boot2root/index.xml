@@ -40,7 +40,7 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| http-robots.txt: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; disallowed entry 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image alt text&#34; src=&#34;/hadhub/static/images/doctor-1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;alt&#34; src=&#34;/hadhub/static/images/doctor-1.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
 &lt;h1 id=&#34;-élévation-de-privilèges&#34;&gt;🔼 Élévation de privilèges&lt;/h1&gt;
 &lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
