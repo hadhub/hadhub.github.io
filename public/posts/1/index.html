@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   
     <title>HackTheBox - Doctor - En cours de rédaction :: Blog | Hadrien</title>
   
@@ -12,7 +12,7 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 
   <meta name="robots" content="noodp" />
 
-<link rel="canonical" href="//localhost:1313/posts/1/" />
+<link rel="canonical" href="/posts/1/" />
 
 
 
@@ -24,7 +24,7 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
   
   
   
-  <link rel="stylesheet" href="//localhost:1313/styles.css">
+  <link rel="stylesheet" href="/styles.css">
 
 
 
@@ -32,8 +32,8 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 
 
 
-  <link rel="shortcut icon" href="//localhost:1313/img/theme-colors/green.png">
-  <link rel="apple-touch-icon" href="//localhost:1313/img/theme-colors/green.png">
+  <link rel="shortcut icon" href="/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/green.png">
 
 
 
@@ -46,12 +46,12 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 <meta property="og:title" content="HackTheBox - Doctor - En cours de rédaction">
 <meta property="og:description" content="🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap avec la commande nmap -p 22,80,8089 -sCV -T4
 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots." />
-<meta property="og:url" content="//localhost:1313/posts/1/" />
+<meta property="og:url" content="/posts/1/" />
 <meta property="og:site_name" content="Blog | Hadrien" />
 
   
   
-  <meta property="og:image" content="//localhost:1313/">
+  <meta property="og:image" content="/">
 
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -97,20 +97,20 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
     
 <article class="post">
   <h1 class="post-title">
-    <a href="//localhost:1313/posts/1/">HackTheBox - Doctor - En cours de rédaction</a>
+    <a href="/posts/1/">HackTheBox - Doctor - En cours de rédaction</a>
   </h1>
   <div class="post-meta"><time class="post-date">2024-03-24</time><span class="post-author">Hadrien</span></div>
 
   
     <span class="post-tags">
       
-      #<a href="//localhost:1313/tags/boot2root/">boot2root</a>&nbsp;
+      #<a href="/tags/boot2root/">boot2root</a>&nbsp;
       
-      #<a href="//localhost:1313/tags/hackthebox/">HackTheBox</a>&nbsp;
+      #<a href="/tags/hackthebox/">HackTheBox</a>&nbsp;
       
-      #<a href="//localhost:1313/tags/linux/">Linux</a>&nbsp;
+      #<a href="/tags/linux/">Linux</a>&nbsp;
       
-      #<a href="//localhost:1313/tags/web/">Web</a>&nbsp;
+      #<a href="/tags/web/">Web</a>&nbsp;
       
     </span>
   
@@ -144,8 +144,19 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 </span></span><span style="display:flex;"><span>|_Not valid after:  2023-09-06T15:57:27
 </span></span><span style="display:flex;"><span>| http-robots.txt: <span style="color:#ae81ff">1</span> disallowed entry 
 </span></span><span style="display:flex;"><span>|_/
-</span></span></code></pre></div><p><img alt="test" src="doctor-1.png"></p>
-<p>En visitant la page web, on retrouve un domaine dans la présentation des différents services :</p>
+</span></span></code></pre></div><p>En visitant la page web, on retrouve un domaine dans la présentation des différents services :</p>
+<p><img alt="test" src="/doctor/doctor-1.png"></p>
+<p>En ajoutant dans <code>10.10.10.209 doctors.htb</code> dans /etc/hosts, la résolution permet d&rsquo;afficher une application web qui n&rsquo;était pas présente précédemment :</p>
+<p><img alt="test" src="/doctor/doctor-2.png"></p>
+<p>En consultant Wappalyzer, l&rsquo;application web n&rsquo;est plus static comme avant mais possède un backend en python :</p>
+<p><img alt="alt text" src="/doctor/doctor-3.png"></p>
+<p>Après avoir créer un compte, il est possible d&rsquo;effectuer plusieurs actioms :</p>
+<ul>
+<li>Poster un message</li>
+<li>Le modifier</li>
+<li>Se déconnecter</li>
+<li>Aller sur le profil du compte</li>
+</ul>
 <h1 id="-exploitation">🤯 Exploitation<a href="#-exploitation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <h1 id="-élévation-de-privilèges">🔼 Élévation de privilèges<a href="#-élévation-de-privilèges" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <h1 id="-documentations">📚 Documentations<a href="#-documentations" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
@@ -164,7 +175,7 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
         
         
         <span class="button next">
-            <a href="//localhost:1313/posts/new_website/">
+            <a href="/posts/new_website/">
                 <span class="button__text">Refonte</span>
                 <span class="button__icon">→</span>
             </a>

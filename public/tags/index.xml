@@ -2,47 +2,47 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Blog | Hadrien</title>
-    <link>//localhost:1313/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="//localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Boot2root</title>
-      <link>//localhost:1313/tags/boot2root/</link>
+      <link>/tags/boot2root/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>//localhost:1313/tags/boot2root/</guid>
+      <guid>/tags/boot2root/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>HackTheBox</title>
-      <link>//localhost:1313/tags/hackthebox/</link>
+      <link>/tags/hackthebox/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>//localhost:1313/tags/hackthebox/</guid>
+      <guid>/tags/hackthebox/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>//localhost:1313/tags/linux/</link>
+      <link>/tags/linux/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>//localhost:1313/tags/linux/</guid>
+      <guid>/tags/linux/</guid>
       <description></description>
       <content></content>
     </item>
     
     <item>
       <title>Web</title>
-      <link>//localhost:1313/tags/web/</link>
+      <link>/tags/web/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>//localhost:1313/tags/web/</guid>
+      <guid>/tags/web/</guid>
       <description></description>
       <content></content>
     </item>
