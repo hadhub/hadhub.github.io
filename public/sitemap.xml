@@ -2,33 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/</loc>
+    <loc>//localhost:1313/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/tags/boot2root/</loc>
+    <loc>//localhost:1313/tags/boot2root/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/tags/hackthebox/</loc>
+    <loc>//localhost:1313/tags/hackthebox/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/posts/1/</loc>
+    <loc>//localhost:1313/posts/1/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/tags/linux/</loc>
+    <loc>//localhost:1313/tags/linux/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
+    <loc>//localhost:1313/posts/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>//localhost:1313/tags/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/tags/web/</loc>
+    <loc>//localhost:1313/tags/web/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>/posts/new_website/</loc>
+    <loc>//localhost:1313/posts/new_website/</loc>
     <lastmod>2024-03-24T13:17:48+01:00</lastmod>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>//localhost:1313/categories/</loc>
   </url>
 </urlset>
