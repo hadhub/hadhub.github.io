@@ -8,73 +8,34 @@
     <language>en</language>
     <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>HackTheBox - Doctor - En cours de rédaction</title>
-      <link>/posts/1/</link>
+      <title>Click me ! 😼</title>
+      <link>/posts/about-me/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>/posts/1/</guid>
-      <description>🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap avec la commande nmap -p 22,80,8089 -sCV -T4
-PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots.</description>
-      <content>&lt;h1 id=&#34;-périmètre&#34;&gt;🔭 Périmètre&lt;/h1&gt;
+      <guid>/posts/about-me/</guid>
+      <description>🇫🇷 Hey ! Je suis Hadrien, un étudiant en cybersécurité et passionné de tout ce qui s&amp;rsquo;approche de près ou de loin au monde de l&amp;rsquo;offensif 🔴
+Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais également des homelabs que je recommande pour débuter dans le domaine !
+Il m&amp;rsquo;arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube :
+https://www.twitch.tv/hadzaaaa https://www.youtube.com/@hadzaaaaa/ https://www.linkedin.com/in/hadrien-c/ Merci d&amp;rsquo;avoir lu 👋</description>
+      <content>&lt;p&gt;🇫🇷 Hey ! Je suis Hadrien, un étudiant en cybersécurité et passionné de tout ce qui s&amp;rsquo;approche de près ou de loin au monde de l&amp;rsquo;offensif 🔴&lt;/p&gt;
+&lt;p&gt;Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais également des homelabs que je recommande pour débuter dans le domaine !&lt;/p&gt;
+&lt;p&gt;Il m&amp;rsquo;arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube  :&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;IP de la machine : &lt;code&gt;10.10.10.209&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Domaine / Virtual Host : &lt;code&gt;doctors.htb&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.twitch.tv/hadzaaaa&#34;&gt;https://www.twitch.tv/hadzaaaa&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/@hadzaaaaa/&#34;&gt;https://www.youtube.com/@hadzaaaaa/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/hadrien-c/&#34;&gt;https://www.linkedin.com/in/hadrien-c/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h1&gt;
-&lt;p&gt;Scan des ports de la machine avec nmap avec la commande &lt;code&gt;nmap -p 22,80,8089 -sCV -T4&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT     STATE SERVICE  VERSION
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22/tcp   open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssh-hostkey: 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;3072&lt;/span&gt; 594d4ec2d8cfda9da8c8d0fd99a84617 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;RSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 7ff3dcfb2dafcbff9934ace0f8001e47 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ECDSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_  &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 530e966b9ce9c1a170516c2dce7b43e8 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ED25519&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80/tcp   open  http     Apache httpd 2.4.41 &lt;span style=&#34;color:#f92672&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-server-header: Apache/2.4.41 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-title: Doctor
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8089/tcp open  ssl/http Splunkd httpd
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-title: splunkd
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-server-header: Splunkd
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssl-cert: Subject: commonName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SplunkServerDefaultCert/organizationName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;SplunkUser
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| Not valid before: 2020-09-06T15:57:27
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_Not valid after:  2023-09-06T15:57:27
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| http-robots.txt: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; disallowed entry 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;test&#34; src=&#34;/doctor/doctor-1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;En ajoutant dans &lt;code&gt;10.10.10.209 doctors.htb&lt;/code&gt; dans /etc/hosts, la résolution permet d&amp;rsquo;afficher une application web qui n&amp;rsquo;était pas présente précédemment :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;test&#34; src=&#34;/doctor/doctor-2.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;En consultant Wappalyzer, l&amp;rsquo;application web n&amp;rsquo;est plus static comme avant mais possède un backend en python :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;alt text&#34; src=&#34;/doctor/doctor-3.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Après avoir créer un compte, il est possible d&amp;rsquo;effectuer plusieurs actioms :&lt;/p&gt;
+&lt;p&gt;Merci d&amp;rsquo;avoir lu 👋&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;🇬🇧 Hey, I&amp;rsquo;m Hadrien, a cybersecurity student with a passion for all things offensive 🔴&lt;/p&gt;
+&lt;p&gt;Here you&amp;rsquo;ll find machine solutions from HackTheBox and Vulnlab, as well as homelabs, which I recommend for beginners !&lt;/p&gt;
+&lt;p&gt;I sometimes stream machines on twitch and post replays on youtube :&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Poster un message&lt;/li&gt;
-&lt;li&gt;Le modifier&lt;/li&gt;
-&lt;li&gt;Se déconnecter&lt;/li&gt;
-&lt;li&gt;Aller sur le profil du compte&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.twitch.tv/hadzaaaa&#34;&gt;https://www.twitch.tv/hadzaaaa&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/@hadzaaaaa/&#34;&gt;https://www.youtube.com/@hadzaaaaa/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.linkedin.com/in/hadrien-c/&#34;&gt;https://www.linkedin.com/in/hadrien-c/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
-&lt;h1 id=&#34;-élévation-de-privilèges&#34;&gt;🔼 Élévation de privilèges&lt;/h1&gt;
-&lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
-&lt;h1 id=&#34;-outils--environnement&#34;&gt;🧰 Outils / Environnement&lt;/h1&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>Refonte</title>
-      <link>/posts/new_website/</link>
-      <pubDate>Sun, 24 Mar 2024 13:17:48 +0100</pubDate>
-      
-      <guid>/posts/new_website/</guid>
-      <description>Re! Site en construction !
-Contenu à venir :
-Solutions de machine (boot2root) HackTheBox et Vulnlab CheatSheets </description>
-      <content>&lt;h2 id=&#34;re&#34;&gt;Re!&lt;/h2&gt;
-&lt;p&gt;Site en construction !&lt;/p&gt;
-&lt;p&gt;Contenu à venir :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Solutions de machine (boot2root) HackTheBox et Vulnlab&lt;/li&gt;
-&lt;li&gt;CheatSheets&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Thanks for reading 👋&lt;/p&gt;
 </content>
     </item>
     

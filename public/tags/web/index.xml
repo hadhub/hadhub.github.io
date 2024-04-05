@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web on Blog | Hadrien</title>
-    <link>/tags/web/</link>
+    <link>//localhost:1313/tags/web/</link>
     <description>Recent content in Web on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Mar 2024 15:02:39 +0100</lastBuildDate><atom:link href="//localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HackTheBox - Doctor - En cours de rédaction</title>
-      <link>/posts/1/</link>
+      <link>//localhost:1313/posts/1/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>/posts/1/</guid>
+      <guid>//localhost:1313/posts/1/</guid>
       <description>🔭 Périmètre IP de la machine : 10.10.10.209 Domaine / Virtual Host : doctors.htb 🔍 Énumération Scan des ports de la machine avec nmap avec la commande nmap -p 22,80,8089 -sCV -T4
 PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 3072 594d4ec2d8cfda9da8c8d0fd99a84617 (RSA) | 256 7ff3dcfb2dafcbff9934ace0f8001e47 (ECDSA) |_ 256 530e966b9ce9c1a170516c2dce7b43e8 (ED25519) 80/tcp open http Apache httpd 2.4.41 ((Ubuntu)) |_http-server-header: Apache/2.4.41 (Ubuntu) |_http-title: Doctor 8089/tcp open ssl/http Splunkd httpd |_http-title: splunkd |_http-server-header: Splunkd | ssl-cert: Subject: commonName=SplunkServerDefaultCert/organizationName=SplunkUser | Not valid before: 2020-09-06T15:57:27 |_Not valid after: 2023-09-06T15:57:27 | http-robots.</description>
       <content>&lt;h1 id=&#34;-périmètre&#34;&gt;🔭 Périmètre&lt;/h1&gt;
@@ -40,11 +40,11 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| http-robots.txt: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; disallowed entry 
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En visitant la page web, on retrouve un domaine dans la présentation des différents services :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;test&#34; src=&#34;/doctor/doctor-1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;doctor1&#34; src=&#34;//localhost:1313/doctor/doctor-1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;En ajoutant dans &lt;code&gt;10.10.10.209 doctors.htb&lt;/code&gt; dans /etc/hosts, la résolution permet d&amp;rsquo;afficher une application web qui n&amp;rsquo;était pas présente précédemment :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;test&#34; src=&#34;/doctor/doctor-2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;doctor2&#34; src=&#34;//localhost:1313/doctor/doctor-2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;En consultant Wappalyzer, l&amp;rsquo;application web n&amp;rsquo;est plus static comme avant mais possède un backend en python :&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;alt text&#34; src=&#34;/doctor/doctor-3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;doctor3&#34; src=&#34;//localhost:1313/doctor/doctor-3.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Après avoir créer un compte, il est possible d&amp;rsquo;effectuer plusieurs actioms :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Poster un message&lt;/li&gt;
@@ -52,6 +52,16 @@ PORT STATE SERVICE VERSION 22/tcp open ssh OpenSSH 8.2p1 Ubuntu 4ubuntu0.1 (Ubun
 &lt;li&gt;Se déconnecter&lt;/li&gt;
 &lt;li&gt;Aller sur le profil du compte&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;En même temps de découvrir les fonctionnalités de l&amp;rsquo;application, je lance une fuzzer en arrière plan :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;register                &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 4493, Words: 1171, Lines: 101, Duration: 25ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;archive                 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 101, Words: 7, Lines: 6, Duration: 34ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;account                 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 302, Size: 251, Words: 22, Lines: 4, Duration: 26ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;logout                  &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 302, Size: 217, Words: 22, Lines: 4, Duration: 41ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 302, Size: 237, Words: 22, Lines: 4, Duration: 78ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reset_password          &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 200, Size: 3493, Words: 752, Lines: 77, Duration: 58ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;server-status           &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Status: 403, Size: 276, Words: 20, Lines: 10, Duration: 21ms&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;la page /archive permet de lister les postes de l&amp;rsquo;utilisateur connectés, sachant que c&amp;rsquo;est une application web avec comme backend python, il est potentiellement vulnérable à des SSTI (Server Side Template Injection)
+pour comprendre cette vulnérabilité, la vidéo de Fransosiche l&amp;rsquo;explique très bien ! : &lt;a href=&#34;https://www.youtube.com/watch?v=CDsP2T8Q504&#34;&gt;Prendre le CONTROLE d&amp;rsquo;un SERVEUR WEB | Server Side Template Injection&lt;/a&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
 &lt;h1 id=&#34;-élévation-de-privilèges&#34;&gt;🔼 Élévation de privilèges&lt;/h1&gt;
 &lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
