@@ -214,7 +214,15 @@ PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerber
 &lt;p&gt;&lt;code&gt;evil-winrm -i 10.10.112.19 -u &amp;quot;administrator&amp;quot; -H &amp;quot;Hash NT&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;h1 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;Désactiver les null sessions&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Désactiver les nulles sessions&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Attribuer le groupe &amp;ldquo;Backup Operator&amp;rdquo; à un compte de service et non à un compte utilisateur&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Nettoyer les descriptions des objects AD&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
 &lt;ul&gt;
