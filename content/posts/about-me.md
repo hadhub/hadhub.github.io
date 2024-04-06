@@ -1,5 +1,5 @@
 +++
-title = "Click me ! 😼"
+title = "Click Me ! 😼"
 date = "2024-03-24T15:02:39+01:00"
 author = "Hadrien"
 description = "**Introducing myself**"
@@ -18,7 +18,7 @@ Il m'arrive de streamer des machines sur twitch et de poster les rediffusions su
 - https://www.youtube.com/@hadzaaaaa/
 - https://www.linkedin.com/in/hadrien-c/
 
-Merci d'avoir lu 👋
+- Certification(s) : PJPT (By TCM Security)
 
 ---
 
@@ -31,4 +31,5 @@ I sometimes stream machines on twitch and post replays on youtube :
 - https://www.youtube.com/@hadzaaaaa/
 - https://www.linkedin.com/in/hadrien-c/
 
-Thanks for reading 👋
+- Certification(s) : PJPT (By TCM Security)
+

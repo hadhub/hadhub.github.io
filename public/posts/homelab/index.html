@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>3 Homelabs Pour Apprendre l&#39;Offensif 🖥️ :: Blog | Hadrien</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="**3 Homelabs à faire pour apprendre le pentest Web et AD**" />
+<meta name="keywords" content="homelab, linux, windows" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="/posts/homelab/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="3 Homelabs Pour Apprendre l&#39;Offensif 🖥️">
+<meta property="og:description" content="**3 Homelabs à faire pour apprendre le pentest Web et AD**" />
+<meta property="og:url" content="/posts/homelab/" />
+<meta property="og:site_name" content="Blog | Hadrien" />
+
+  
+    <meta property="og:image" content="/img/favicon/red.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-04-05 22:44:32 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Home | Accueil
+  </div>
+</a>
+
+    </div>
+    
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="/posts/homelab/">3 Homelabs Pour Apprendre l&rsquo;Offensif 🖥️</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-04-05</time><span class="post-author">Hadrien</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="pourquoi-faire-un-homelab-">Pourquoi faire un homelab ?<a href="#pourquoi-faire-un-homelab-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Lors de déplacements (ou entre 2 cours de management 👀), il m&rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.</p>
+<p>Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&rsquo;autres plateformes.</p>
+<p>Voici donc les différents labs que j&rsquo;ai eu l&rsquo;occasion de déployer afin d&rsquo;apprendre de nouvelles compétences.</p>
+<p>⚠️ <em><strong>Attention</strong>, dans aucun contexte ces labs sont à déployer dans un environnement de production</em></p>
+<h2 id="-lab-1--owasp-juice-shop">🌐 Lab 1 : OWASP Juice Shop<a href="#-lab-1--owasp-juice-shop" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Le lab Juice Shop proposé par l&rsquo;OWASP est une application web (à ne surtout pas déployer en prod), permettant d&rsquo;apprendre le pentest web reprenant le top 10 des vulnérabilités par l&rsquo;OWASP.</p>
+<p>Déployable via conteneur Docker, cette application est basée sur des technologies souvent utilisées dans le monde du développement web :</p>
+<p><strong>Frontend</strong> :</p>
+<ul>
+<li>Angular JS</li>
+<li>Material</li>
+</ul>
+<p><strong>Backend</strong> :</p>
+<ul>
+<li>NodeJS</li>
+<li>Express</li>
+<li>Sequelize</li>
+<li>Serveur NoSQL et SQL</li>
+</ul>
+<p>Lien vers la documentation officielle : <a href="https://owasp.org/www-project-juice-shop">https://owasp.org/www-project-juice-shop</a></p>
+<hr>
+<h2 id="-lab-2--game-of-active-directory">🖥 Lab 2 : Game of Active Directory<a href="#-lab-2--game-of-active-directory" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Côté Actice Directory, Orange Cyberdefense propose un lab intitulé &ldquo;GOAD&rdquo;.
+Le but de ce laboratoire est de déployer un lab AD vulnérable prêt à être utilisé pour pratiquer et comprendre des attaques.</p>
+<p><strong>4</strong> versions du lab sont proposé en fonction de votre configuration hardware :</p>
+<ul>
+<li><strong>GOAD</strong> : 5 vms, 2 forêts, 3 domaines (la version &ldquo;full&rdquo;)</li>
+<li><strong>GOAD-Light</strong> : 3 vms, 1 forêt, 2 domaines (la version &ldquo;light&rdquo;)</li>
+<li><strong>SCCM</strong> : 4 vms, 1 forêt, 1 domaine, avec Microsoft Configuration Manager installé</li>
+<li><strong>NHA</strong> : Un défi avec 5 vms et 2 domaines.</li>
+</ul>
+<p>Lien vers le repo github : <a href="https://github.com/Orange-Cyberdefense/GOAD">https://github.com/Orange-Cyberdefense/GOAD</a></p>
+<hr>
+<h2 id="-lab-3--pimpmyadlab">🖥 Lab 3 : PimpMyADLab<a href="#-lab-3--pimpmyadlab" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>TCM Security propose un également un lab en 3 vms pour les petites configurations hardware.</p>
+<ul>
+<li>1 DC et 2 Workstations W10</li>
+</ul>
+<p>L&rsquo;installation de ce lab est également indiqué dans la documentation avec un script permettant d&rsquo;automatiser les actions à réaliser :</p>
+<p>Lien vers le repo github : <a href="https://github.com/Dewalt-arch/pimpmyadlab">https://github.com/Dewalt-arch/pimpmyadlab</a></p>
+<hr>
+<h2 id="-pour-aller-plus-loin--ajouter-une-approche--et--team">🔍 Pour aller plus loin : Ajouter une approche 🔵 et 🔴 Team<a href="#-pour-aller-plus-loin--ajouter-une-approche--et--team" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Pour les labs AD, il est possible de rajouter Wazuh, un XDR + SIEM pouvant apporter un côté défense à vos labs. -&gt; <a href="https://wazuh.com">https://wazuh.com</a></p>
+<p>Si vous voulez monter en compétences sur des outils d&rsquo;infrastructure C2, il en existe plusieurs mais voici les 3 que j&rsquo;utilise le plus souvent :</p>
+<ul>
+<li>Havoc C2 <a href="https://github.com/HavocFramework/Havoc">https://github.com/HavocFramework/Havoc</a></li>
+<li>Mythic <a href="https://github.com/its-a-feature/Mythic">https://github.com/its-a-feature/Mythic</a></li>
+<li>Sliver <a href="https://github.com/BishopFox/sliver">https://github.com/BishopFox/sliver</a></li>
+</ul>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h"></span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="/posts/about-me/">
+                <span class="button__text">Click Me ! 😼</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
