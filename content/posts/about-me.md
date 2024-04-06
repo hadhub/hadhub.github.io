@@ -1,5 +1,5 @@
 +++
-title = "Click Me ! 😼"
+title = "😼 Click Me !"
 date = "2024-03-24T15:02:39+01:00"
 author = "Hadrien"
 description = "**Introducing myself**"
