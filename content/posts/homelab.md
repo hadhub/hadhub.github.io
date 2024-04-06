@@ -1,5 +1,5 @@
 +++
-title = "3 Homelabs Pour Apprendre l'Offensif 🖥️"
+title = "3 Homelabs Pour Apprendre la Sécurité Offensive 🖥️"
 date = "2024-04-05T22:44:32+02:00"
 author = "Hadrien"
 keywords = ["homelab", "linux", "windows"]
