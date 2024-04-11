@@ -66,7 +66,7 @@ SMB         192.168.56.11   445    WINTERFELL       [*] Windows 10 / Server 2019
 SMB         192.168.56.22   445    CASTELBLACK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:CASTELBLACK) (domain:north.sevenkingdoms.local) (signing:False) (SMBv1:False)
 ```
 
-=> Pour ne pas à réécrire les adresses, je les enregistre dans un fichier `scope.txt`
+=> Pour ne pas avoir à réécrire les adresses, je les enregistre dans un fichier `scope.txt`
 
 ```js
 [Apr 11, 2024 - 22:34:49 (CEST)] exegol-goad-light /workspace # nmap -iL scope.txt
