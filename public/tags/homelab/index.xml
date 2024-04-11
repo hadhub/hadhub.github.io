@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homelab on Blog | Hadrien</title>
+    <link>//localhost:1313/tags/homelab/</link>
+    <description>Recent content in Homelab on Blog | Hadrien</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 11 Apr 2024 21:36:41 +0200</lastBuildDate><atom:link href="//localhost:1313/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>⚔️ Game of Active Directory - EP 1</title>
+      <link>//localhost:1313/posts/goad-light-1/</link>
+      <pubDate>Thu, 11 Apr 2024 21:36:41 +0200</pubDate>
+      
+      <guid>//localhost:1313/posts/goad-light-1/</guid>
+      <description>🏁 Introduction Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense “GOAD”.
+Je me suis donc donné l’objectif de déployer la version light afin de reprendre la main sur le sujet du pentest AD.
+Ce post est donc le premier d’une suite partant de 0 jusqu’à devenir DA (Administrateur du domaine).
+Malgré qu’un schéma soit disponible expliquant le contenu du lab et certaines informations pouvant fortement aider à sa compromission, je décide de le faire en mode “blackbox”.</description>
+      <content>&lt;h2 id=&#34;-introduction&#34;&gt;🏁 Introduction&lt;/h2&gt;
+&lt;p&gt;Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense “GOAD”.&lt;/p&gt;
+&lt;p&gt;Je me suis donc donné l’objectif de déployer la version &lt;strong&gt;light&lt;/strong&gt; afin de reprendre la main sur le sujet du pentest AD.&lt;/p&gt;
+&lt;p&gt;Ce post est donc le &lt;strong&gt;premier d’une suite&lt;/strong&gt; partant de 0 jusqu’à devenir DA (Administrateur du domaine).&lt;/p&gt;
+&lt;p&gt;Malgré qu’un schéma soit disponible expliquant le contenu du lab et certaines informations pouvant fortement aider à sa compromission, je décide de le faire en mode “&lt;strong&gt;blackbox&lt;/strong&gt;”.&lt;/p&gt;
+&lt;p&gt;La procédure d&amp;rsquo;installation ce trouve ici =&amp;gt; &lt;a href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;&gt;Lien vers le repo officiel&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-installation&#34;&gt;⚙️ Installation&lt;/h2&gt;
+&lt;p&gt;Ayant un ordinateur avec 16Go de RAM, je modifie le fichier de config contenant le paramétrages des VMs qui vont être déployées
+=&amp;gt; &lt;a href=&#34;https://github.com/Orange-Cyberdefense/GOAD/blob/main/ad/GOAD-Light/providers/virtualbox/Vagrantfile&#34;&gt;Lien vers le fichier de configuration&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;v.memory&lt;/code&gt; et &lt;code&gt;v.vmx[&amp;quot;memsize&amp;quot;]&lt;/code&gt; indiquent la quantité de RAM utilisée par les VMs, je réduis la quantité en passant de 4Go à 2Go.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;SNIP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;config&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;vm&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;provider&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;virtualbox&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;memory&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;cpus&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;config&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;vm&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;provider&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;vmware_desktop&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;vmx&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;memsize&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2000&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;vmx&lt;/span&gt;[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;numvcpus&amp;#34;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;SNIP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check de la config avec la commande : ✅&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;./goad.sh -t check -l GOAD-Light -p virtualbox -m docker&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;et installation avec : ✅&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;./goad.sh -t install -l GOAD-Light -p virtualbox  -m docker&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
+&lt;p&gt;Dans mon cas, l&amp;rsquo;interface réseau utilisée pour le lab est la suivante :&lt;/p&gt;
+&lt;p&gt;=&amp;gt; &lt;code&gt;vboxnet0&lt;/code&gt; avec comme plage d&amp;rsquo;adresse : &lt;code&gt;192.168.56.1/24&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#a6e22e&#34;&gt;Apr&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;11&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2024&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;34&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;29&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;CEST&lt;/span&gt;)] &lt;span style=&#34;color:#a6e22e&#34;&gt;exegol&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;goad&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;light&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;workspace&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;netexec&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;smb&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;56.1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;SMB&lt;/span&gt;         &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;56.10&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;445&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;KINGSLANDING&lt;/span&gt;     [&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;Windows&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Server&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Build&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;17763&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;x64&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;KINGSLANDING&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;sevenkingdoms&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;local&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;signing&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;True&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;SMBv1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;SMB&lt;/span&gt;         &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;56.11&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;445&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;WINTERFELL&lt;/span&gt;       [&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;Windows&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Server&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Build&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;17763&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;x64&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;WINTERFELL&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;north&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;sevenkingdoms&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;local&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;signing&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;True&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;SMBv1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;SMB&lt;/span&gt;         &lt;span style=&#34;color:#ae81ff&#34;&gt;192.168&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;56.22&lt;/span&gt;   &lt;span style=&#34;color:#ae81ff&#34;&gt;445&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;CASTELBLACK&lt;/span&gt;      [&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;Windows&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Server&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2019&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Build&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;17763&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;x64&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CASTELBLACK&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;north&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;sevenkingdoms&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;local&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;signing&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;False&lt;/span&gt;) (&lt;span style=&#34;color:#a6e22e&#34;&gt;SMBv1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;False&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+    </item>
+    
+    <item>
+      <title>🖥️ 3 Homelabs Pour Apprendre la Sécurité Offensive</title>
+      <link>//localhost:1313/posts/homelab/</link>
+      <pubDate>Fri, 05 Apr 2024 22:44:32 +0200</pubDate>
+      
+      <guid>//localhost:1313/posts/homelab/</guid>
+      <description>Pourquoi faire un homelab ? Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.
+Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.
+Voici donc les différents labs que j&amp;rsquo;ai eu l&amp;rsquo;occasion de déployer afin d&amp;rsquo;apprendre de nouvelles compétences.</description>
+      <content>&lt;h1 id=&#34;pourquoi-faire-un-homelab-&#34;&gt;Pourquoi faire un homelab ?&lt;/h1&gt;
+&lt;p&gt;Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.&lt;/p&gt;
+&lt;p&gt;Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.&lt;/p&gt;
+&lt;p&gt;Voici donc les différents labs que j&amp;rsquo;ai eu l&amp;rsquo;occasion de déployer afin d&amp;rsquo;apprendre de nouvelles compétences.&lt;/p&gt;
+&lt;p&gt;⚠️ &lt;em&gt;&lt;strong&gt;Attention&lt;/strong&gt;, dans aucun contexte ces labs sont à déployer dans un environnement de production&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;-lab-1--owasp-juice-shop&#34;&gt;🌐 Lab 1 : OWASP Juice Shop&lt;/h2&gt;
+&lt;p&gt;Le lab Juice Shop proposé par l&amp;rsquo;OWASP est une application web (à ne surtout pas déployer en prod), permettant d&amp;rsquo;apprendre le pentest web reprenant le top 10 des vulnérabilités par l&amp;rsquo;OWASP.&lt;/p&gt;
+&lt;p&gt;Déployable via conteneur Docker, cette application est basée sur des technologies souvent utilisées dans le monde du développement web :&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Frontend&lt;/strong&gt; :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Angular JS&lt;/li&gt;
+&lt;li&gt;Material&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Backend&lt;/strong&gt; :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NodeJS&lt;/li&gt;
+&lt;li&gt;Express&lt;/li&gt;
+&lt;li&gt;Sequelize&lt;/li&gt;
+&lt;li&gt;Serveur NoSQL et SQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lien vers la documentation officielle : &lt;a href=&#34;https://owasp.org/www-project-juice-shop&#34;&gt;https://owasp.org/www-project-juice-shop&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-lab-2--game-of-active-directory&#34;&gt;🖥 Lab 2 : Game of Active Directory&lt;/h2&gt;
+&lt;p&gt;Côté Actice Directory, Orange Cyberdefense propose un lab intitulé &amp;ldquo;GOAD&amp;rdquo;.
+Le but de ce laboratoire est de déployer un lab AD vulnérable prêt à être utilisé pour pratiquer et comprendre des attaques.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; versions du lab sont proposé en fonction de votre configuration hardware :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;GOAD&lt;/strong&gt; : 5 vms, 2 forêts, 3 domaines (la version &amp;ldquo;full&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GOAD-Light&lt;/strong&gt; : 3 vms, 1 forêt, 2 domaines (la version &amp;ldquo;light&amp;rdquo;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SCCM&lt;/strong&gt; : 4 vms, 1 forêt, 1 domaine, avec Microsoft Configuration Manager installé&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NHA&lt;/strong&gt; : Un défi avec 5 vms et 2 domaines.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lien vers le repo github : &lt;a href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;&gt;https://github.com/Orange-Cyberdefense/GOAD&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-lab-3--pimpmyadlab&#34;&gt;🖥 Lab 3 : PimpMyADLab&lt;/h2&gt;
+&lt;p&gt;TCM Security propose un également un lab en 3 vms pour les petites configurations hardware.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1 DC et 2 Workstations W10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L&amp;rsquo;installation de ce lab est également indiqué dans la documentation avec un script permettant d&amp;rsquo;automatiser les actions à réaliser :&lt;/p&gt;
+&lt;p&gt;Lien vers le repo github : &lt;a href=&#34;https://github.com/Dewalt-arch/pimpmyadlab&#34;&gt;https://github.com/Dewalt-arch/pimpmyadlab&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-pour-aller-plus-loin--ajouter-une-approche--et--team&#34;&gt;🔍 Pour aller plus loin : Ajouter une approche 🔵 et 🔴 Team&lt;/h2&gt;
+&lt;p&gt;Pour les labs AD, il est possible de rajouter Wazuh, un XDR + SIEM pouvant apporter un côté défense à vos labs. -&amp;gt; &lt;a href=&#34;https://wazuh.com&#34;&gt;https://wazuh.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Si vous voulez monter en compétences sur des outils d&amp;rsquo;infrastructure C2, il en existe plusieurs mais voici les 3 que j&amp;rsquo;utilise le plus souvent :&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Havoc C2 &lt;a href=&#34;https://github.com/HavocFramework/Havoc&#34;&gt;https://github.com/HavocFramework/Havoc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mythic &lt;a href=&#34;https://github.com/its-a-feature/Mythic&#34;&gt;https://github.com/its-a-feature/Mythic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sliver &lt;a href=&#34;https://github.com/BishopFox/sliver&#34;&gt;https://github.com/BishopFox/sliver&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

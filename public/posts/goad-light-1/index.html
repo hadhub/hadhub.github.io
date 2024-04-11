@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>⚔️ Game of Active Directory - EP 1 :: Blog | Hadrien</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="**Mise en place** et **début de l&#39;énumération** du **lab GOAD-Light**," />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/goad-light-1/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:1313/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="//localhost:1313/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="⚔️ Game of Active Directory - EP 1">
+<meta property="og:description" content="**Mise en place** et **début de l&#39;énumération** du **lab GOAD-Light**," />
+<meta property="og:url" content="//localhost:1313/posts/goad-light-1/" />
+<meta property="og:site_name" content="Blog | Hadrien" />
+
+  
+    <meta property="og:image" content="//localhost:1313/img/favicon/red.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-04-11 21:36:41 &#43;0200 CEST" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Home | Accueil
+  </div>
+</a>
+
+    </div>
+    
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/goad-light-1/">⚔️ Game of Active Directory - EP 1</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-04-11</time><span class="post-author">Hadrien</span><span class="post-reading-time">3 min read (520 words)</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="//localhost:1313/tags/homelab/">homelab</a>&nbsp;
+      
+      #<a href="//localhost:1313/tags/ad/">AD</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h2 id="-introduction">🏁 Introduction<a href="#-introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense “GOAD”.</p>
+<p>Je me suis donc donné l’objectif de déployer la version <strong>light</strong> afin de reprendre la main sur le sujet du pentest AD.</p>
+<p>Ce post est donc le <strong>premier d’une suite</strong> partant de 0 jusqu’à devenir DA (Administrateur du domaine).</p>
+<p>Malgré qu’un schéma soit disponible expliquant le contenu du lab et certaines informations pouvant fortement aider à sa compromission, je décide de le faire en mode “<strong>blackbox</strong>”.</p>
+<p>La procédure d&rsquo;installation se trouve ici =&gt; <a href="https://github.com/Orange-Cyberdefense/GOAD">Lien vers le repo officiel</a></p>
+<h2 id="-installation">⚙️ Installation<a href="#-installation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Ayant un ordinateur avec 16Go de RAM, je modifie le fichier de config contenant le paramétrage des VMs qui vont être déployés
+=&gt; <a href="https://github.com/Orange-Cyberdefense/GOAD/blob/main/ad/GOAD-Light/providers/virtualbox/Vagrantfile">Lien vers le fichier de configuration</a></p>
+<p><code>v.memory</code> et <code>v.vmx[&quot;memsize&quot;]</code> indiquent la quantité de RAM utilisée par les VMs, je réduis la quantité en passant de 4Go à 2Go.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">SNIP</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">provider</span> <span style="color:#e6db74">&#34;virtualbox&#34;</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span><span style="color:#a6e22e">v</span><span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">memory</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">cpus</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">end</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">vm</span>.<span style="color:#a6e22e">provider</span> <span style="color:#e6db74">&#34;vmware_desktop&#34;</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span><span style="color:#a6e22e">v</span><span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">vmx</span>[<span style="color:#e6db74">&#34;memsize&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2000&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">v</span>.<span style="color:#a6e22e">vmx</span>[<span style="color:#e6db74">&#34;numvcpus&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">end</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">SNIP</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>Vérification de la configuration avec la commande : ✅</p>
+<p><code>./goad.sh -t check -l GOAD-Light -p virtualbox -m docker</code></p>
+<p>et installation avec : ✅</p>
+<p><code>./goad.sh -t install -l GOAD-Light -p virtualbox  -m docker</code></p>
+<h2 id="-énumération">🔍 Énumération<a href="#-énumération" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Dans mon cas, l&rsquo;interface réseau utilisée pour le lab est la suivante :</p>
+<p>=&gt; <code>vboxnet0</code> avec comme plage d&rsquo;adresse : <code>192.168.56.1/24</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>[<span style="color:#a6e22e">Apr</span> <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">2024</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">22</span><span style="color:#f92672">:</span><span style="color:#ae81ff">34</span><span style="color:#f92672">:</span><span style="color:#ae81ff">29</span> (<span style="color:#a6e22e">CEST</span>)] <span style="color:#a6e22e">exegol</span><span style="color:#f92672">-</span><span style="color:#a6e22e">goad</span><span style="color:#f92672">-</span><span style="color:#a6e22e">light</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">workspace</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">netexec</span> <span style="color:#a6e22e">smb</span> <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24</span> 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.10</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">KINGSLANDING</span>     [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">KINGSLANDING</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">True</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.11</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">WINTERFELL</span>       [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">WINTERFELL</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">north</span>.<span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">True</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.22</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">CASTELBLACK</span>      [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">CASTELBLACK</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">north</span>.<span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
+</span></span></code></pre></div><p>=&gt; Pour ne pas à réécrire les adresses, je les place dans un fichier <code>scope.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>[<span style="color:#a6e22e">Apr</span> <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">2024</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">22</span><span style="color:#f92672">:</span><span style="color:#ae81ff">34</span><span style="color:#f92672">:</span><span style="color:#ae81ff">49</span> (<span style="color:#a6e22e">CEST</span>)] <span style="color:#a6e22e">exegol</span><span style="color:#f92672">-</span><span style="color:#a6e22e">goad</span><span style="color:#f92672">-</span><span style="color:#a6e22e">light</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">workspace</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">nmap</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">iL</span> <span style="color:#a6e22e">scope</span>.<span style="color:#a6e22e">txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Nmap</span> <span style="color:#a6e22e">scan</span> <span style="color:#a6e22e">report</span> <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.10</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Host</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">up</span> (<span style="color:#ae81ff">0.00010</span><span style="color:#a6e22e">s</span> <span style="color:#a6e22e">latency</span>).
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Not</span> <span style="color:#a6e22e">shown</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">987</span> <span style="color:#a6e22e">closed</span> <span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">ports</span> (<span style="color:#a6e22e">reset</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">PORT</span>     <span style="color:#a6e22e">STATE</span> <span style="color:#a6e22e">SERVICE</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">53</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">domain</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">80</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">http</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">88</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">kerberos</span><span style="color:#f92672">-</span><span style="color:#a6e22e">sec</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">135</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">msrpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">139</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">netbios</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ssn</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">389</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ldap</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">445</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">microsoft</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ds</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">464</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">kpasswd5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">593</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">http</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rpc</span><span style="color:#f92672">-</span><span style="color:#a6e22e">epmap</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">636</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ldapssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3268</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">globalcatLDAP</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3269</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">globalcatLDAPssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3389</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ms</span><span style="color:#f92672">-</span><span style="color:#a6e22e">wbt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">server</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MAC</span> <span style="color:#a6e22e">Address</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">08</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">27</span><span style="color:#f92672">:</span><span style="color:#ae81ff">15</span><span style="color:#f92672">:</span><span style="color:#a6e22e">B6</span><span style="color:#f92672">:</span><span style="color:#ae81ff">75</span> (<span style="color:#a6e22e">Oracle</span> <span style="color:#a6e22e">VirtualBox</span> <span style="color:#a6e22e">virtual</span> <span style="color:#a6e22e">NIC</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Nmap</span> <span style="color:#a6e22e">scan</span> <span style="color:#a6e22e">report</span> <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.11</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Host</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">up</span> (<span style="color:#ae81ff">0.000069</span><span style="color:#a6e22e">s</span> <span style="color:#a6e22e">latency</span>).
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Not</span> <span style="color:#a6e22e">shown</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">988</span> <span style="color:#a6e22e">closed</span> <span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">ports</span> (<span style="color:#a6e22e">reset</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">PORT</span>     <span style="color:#a6e22e">STATE</span> <span style="color:#a6e22e">SERVICE</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">53</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">domain</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">88</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">kerberos</span><span style="color:#f92672">-</span><span style="color:#a6e22e">sec</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">135</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">msrpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">139</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">netbios</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ssn</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">389</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ldap</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">445</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">microsoft</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ds</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">464</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">kpasswd5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">593</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">http</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rpc</span><span style="color:#f92672">-</span><span style="color:#a6e22e">epmap</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">636</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ldapssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3268</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">globalcatLDAP</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3269</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">globalcatLDAPssl</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3389</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ms</span><span style="color:#f92672">-</span><span style="color:#a6e22e">wbt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">server</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MAC</span> <span style="color:#a6e22e">Address</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">08</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">27</span><span style="color:#f92672">:</span><span style="color:#ae81ff">17</span><span style="color:#f92672">:</span><span style="color:#ae81ff">8</span><span style="color:#a6e22e">D</span><span style="color:#f92672">:</span><span style="color:#a6e22e">E7</span> (<span style="color:#a6e22e">Oracle</span> <span style="color:#a6e22e">VirtualBox</span> <span style="color:#a6e22e">virtual</span> <span style="color:#a6e22e">NIC</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Nmap</span> <span style="color:#a6e22e">scan</span> <span style="color:#a6e22e">report</span> <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.22</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Host</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">up</span> (<span style="color:#ae81ff">0.00010</span><span style="color:#a6e22e">s</span> <span style="color:#a6e22e">latency</span>).
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Not</span> <span style="color:#a6e22e">shown</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">994</span> <span style="color:#a6e22e">closed</span> <span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">ports</span> (<span style="color:#a6e22e">reset</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">PORT</span>     <span style="color:#a6e22e">STATE</span> <span style="color:#a6e22e">SERVICE</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">80</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">http</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">135</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">msrpc</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">139</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">netbios</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ssn</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">445</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>  <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">microsoft</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ds</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1433</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ms</span><span style="color:#f92672">-</span><span style="color:#a6e22e">sql</span><span style="color:#f92672">-</span><span style="color:#a6e22e">s</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3389</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span> <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">ms</span><span style="color:#f92672">-</span><span style="color:#a6e22e">wbt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">server</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MAC</span> <span style="color:#a6e22e">Address</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">08</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">27</span><span style="color:#f92672">:</span><span style="color:#ae81ff">31</span><span style="color:#f92672">:</span><span style="color:#ae81ff">40</span><span style="color:#f92672">:</span><span style="color:#ae81ff">53</span> (<span style="color:#a6e22e">Oracle</span> <span style="color:#a6e22e">VirtualBox</span> <span style="color:#a6e22e">virtual</span> <span style="color:#a6e22e">NIC</span>)
+</span></span></code></pre></div><p>Avec les ports ouverts, on peut très vite remarquer que nous avons :</p>
+<ul>
+<li>2 DC (<code>192.168.56.11</code> et <code>192.168.56.10</code>)</li>
+<li>1 Windows Server (<code>192.168.56.22</code>)</li>
+</ul>
+<p>Suite au prochain post !</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h"></span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="//localhost:1313/posts/1/">
+                <span class="button__text">📦 Machine Baby - Vulnlab</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

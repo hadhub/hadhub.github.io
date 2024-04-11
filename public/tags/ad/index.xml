@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Blog | Hadrien</title>
-    <link>//localhost:1313/posts/</link>
-    <description>Recent content in Posts on Blog | Hadrien</description>
+    <title>AD on Blog | Hadrien</title>
+    <link>//localhost:1313/tags/ad/</link>
+    <description>Recent content in AD on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 11 Apr 2024 21:36:41 +0200</lastBuildDate><atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Apr 2024 21:36:41 +0200</lastBuildDate><atom:link href="//localhost:1313/tags/ad/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>⚔️ Game of Active Directory - EP 1</title>
       <link>//localhost:1313/posts/goad-light-1/</link>
@@ -289,119 +289,6 @@ PORT STATE SERVICE VERSION 53/tcp open domain Simple DNS Plus 88/tcp open kerber
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/diskshadow&#34;&gt;diskshadow.exe&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/robocopy&#34;&gt;robocopy.exe&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>🖥️ 3 Homelabs Pour Apprendre la Sécurité Offensive</title>
-      <link>//localhost:1313/posts/homelab/</link>
-      <pubDate>Fri, 05 Apr 2024 22:44:32 +0200</pubDate>
-      
-      <guid>//localhost:1313/posts/homelab/</guid>
-      <description>Pourquoi faire un homelab ? Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.
-Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.
-Voici donc les différents labs que j&amp;rsquo;ai eu l&amp;rsquo;occasion de déployer afin d&amp;rsquo;apprendre de nouvelles compétences.</description>
-      <content>&lt;h1 id=&#34;pourquoi-faire-un-homelab-&#34;&gt;Pourquoi faire un homelab ?&lt;/h1&gt;
-&lt;p&gt;Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.&lt;/p&gt;
-&lt;p&gt;Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.&lt;/p&gt;
-&lt;p&gt;Voici donc les différents labs que j&amp;rsquo;ai eu l&amp;rsquo;occasion de déployer afin d&amp;rsquo;apprendre de nouvelles compétences.&lt;/p&gt;
-&lt;p&gt;⚠️ &lt;em&gt;&lt;strong&gt;Attention&lt;/strong&gt;, dans aucun contexte ces labs sont à déployer dans un environnement de production&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&#34;-lab-1--owasp-juice-shop&#34;&gt;🌐 Lab 1 : OWASP Juice Shop&lt;/h2&gt;
-&lt;p&gt;Le lab Juice Shop proposé par l&amp;rsquo;OWASP est une application web (à ne surtout pas déployer en prod), permettant d&amp;rsquo;apprendre le pentest web reprenant le top 10 des vulnérabilités par l&amp;rsquo;OWASP.&lt;/p&gt;
-&lt;p&gt;Déployable via conteneur Docker, cette application est basée sur des technologies souvent utilisées dans le monde du développement web :&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Frontend&lt;/strong&gt; :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Angular JS&lt;/li&gt;
-&lt;li&gt;Material&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Backend&lt;/strong&gt; :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;NodeJS&lt;/li&gt;
-&lt;li&gt;Express&lt;/li&gt;
-&lt;li&gt;Sequelize&lt;/li&gt;
-&lt;li&gt;Serveur NoSQL et SQL&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Lien vers la documentation officielle : &lt;a href=&#34;https://owasp.org/www-project-juice-shop&#34;&gt;https://owasp.org/www-project-juice-shop&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;-lab-2--game-of-active-directory&#34;&gt;🖥 Lab 2 : Game of Active Directory&lt;/h2&gt;
-&lt;p&gt;Côté Actice Directory, Orange Cyberdefense propose un lab intitulé &amp;ldquo;GOAD&amp;rdquo;.
-Le but de ce laboratoire est de déployer un lab AD vulnérable prêt à être utilisé pour pratiquer et comprendre des attaques.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4&lt;/strong&gt; versions du lab sont proposé en fonction de votre configuration hardware :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;GOAD&lt;/strong&gt; : 5 vms, 2 forêts, 3 domaines (la version &amp;ldquo;full&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GOAD-Light&lt;/strong&gt; : 3 vms, 1 forêt, 2 domaines (la version &amp;ldquo;light&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;SCCM&lt;/strong&gt; : 4 vms, 1 forêt, 1 domaine, avec Microsoft Configuration Manager installé&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;NHA&lt;/strong&gt; : Un défi avec 5 vms et 2 domaines.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Lien vers le repo github : &lt;a href=&#34;https://github.com/Orange-Cyberdefense/GOAD&#34;&gt;https://github.com/Orange-Cyberdefense/GOAD&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;-lab-3--pimpmyadlab&#34;&gt;🖥 Lab 3 : PimpMyADLab&lt;/h2&gt;
-&lt;p&gt;TCM Security propose un également un lab en 3 vms pour les petites configurations hardware.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1 DC et 2 Workstations W10&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;L&amp;rsquo;installation de ce lab est également indiqué dans la documentation avec un script permettant d&amp;rsquo;automatiser les actions à réaliser :&lt;/p&gt;
-&lt;p&gt;Lien vers le repo github : &lt;a href=&#34;https://github.com/Dewalt-arch/pimpmyadlab&#34;&gt;https://github.com/Dewalt-arch/pimpmyadlab&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;-pour-aller-plus-loin--ajouter-une-approche--et--team&#34;&gt;🔍 Pour aller plus loin : Ajouter une approche 🔵 et 🔴 Team&lt;/h2&gt;
-&lt;p&gt;Pour les labs AD, il est possible de rajouter Wazuh, un XDR + SIEM pouvant apporter un côté défense à vos labs. -&amp;gt; &lt;a href=&#34;https://wazuh.com&#34;&gt;https://wazuh.com&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Si vous voulez monter en compétences sur des outils d&amp;rsquo;infrastructure C2, il en existe plusieurs mais voici les 3 que j&amp;rsquo;utilise le plus souvent :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Havoc C2 &lt;a href=&#34;https://github.com/HavocFramework/Havoc&#34;&gt;https://github.com/HavocFramework/Havoc&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Mythic &lt;a href=&#34;https://github.com/its-a-feature/Mythic&#34;&gt;https://github.com/its-a-feature/Mythic&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Sliver &lt;a href=&#34;https://github.com/BishopFox/sliver&#34;&gt;https://github.com/BishopFox/sliver&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    </item>
-    
-    <item>
-      <title>😼 Click Me !</title>
-      <link>//localhost:1313/posts/about-me/</link>
-      <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
-      
-      <guid>//localhost:1313/posts/about-me/</guid>
-      <description>🇫🇷 Hey ! Je suis Hadrien, un étudiant en cybersécurité et passionné de tout ce qui s&amp;rsquo;approche de près ou de loin au monde de l&amp;rsquo;offensif 🔴
-Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais également des homelabs que je recommande pour débuter dans le domaine !
-Il m&amp;rsquo;arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube :
-https://www.twitch.tv/hadzaaaa
-https://www.youtube.com/@hadzaaaaa/
-https://www.linkedin.com/in/hadrien-c/
-Certification(s) : PJPT (By TCM Security)</description>
-      <content>&lt;p&gt;🇫🇷 Hey ! Je suis Hadrien, un étudiant en cybersécurité et passionné de tout ce qui s&amp;rsquo;approche de près ou de loin au monde de l&amp;rsquo;offensif 🔴&lt;/p&gt;
-&lt;p&gt;Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais également des homelabs que je recommande pour débuter dans le domaine !&lt;/p&gt;
-&lt;p&gt;Il m&amp;rsquo;arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube  :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.twitch.tv/hadzaaaa&#34;&gt;https://www.twitch.tv/hadzaaaa&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@hadzaaaaa/&#34;&gt;https://www.youtube.com/@hadzaaaaa/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/in/hadrien-c/&#34;&gt;https://www.linkedin.com/in/hadrien-c/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Certification(s) : PJPT (By TCM Security)&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;🇬🇧 Hey, I&amp;rsquo;m Hadrien, a cybersecurity student with a passion for all things offensive 🔴&lt;/p&gt;
-&lt;p&gt;Here you&amp;rsquo;ll find machine solutions from HackTheBox and Vulnlab, as well as homelabs, which I recommend for beginners !&lt;/p&gt;
-&lt;p&gt;I sometimes stream machines on twitch and post replays on youtube :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.twitch.tv/hadzaaaa&#34;&gt;https://www.twitch.tv/hadzaaaa&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/@hadzaaaaa/&#34;&gt;https://www.youtube.com/@hadzaaaaa/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/in/hadrien-c/&#34;&gt;https://www.linkedin.com/in/hadrien-c/&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Certification(s) : PJPT (By TCM Security)&lt;/p&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 </content>
     </item>
