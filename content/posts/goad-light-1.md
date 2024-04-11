@@ -13,7 +13,7 @@ color = "" #color from the theme settings
 
 ## 🏁 Introduction
 
-Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense “GOAD”. 
+Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense intitulé “GOAD”. 
 
 Je me suis donc donné l’objectif de déployer la version **light** afin de reprendre la main sur le sujet du pentest AD.
 
@@ -66,7 +66,7 @@ SMB         192.168.56.11   445    WINTERFELL       [*] Windows 10 / Server 2019
 SMB         192.168.56.22   445    CASTELBLACK      [*] Windows 10 / Server 2019 Build 17763 x64 (name:CASTELBLACK) (domain:north.sevenkingdoms.local) (signing:False) (SMBv1:False)
 ```
 
-=> Pour ne pas à réécrire les adresses, je les place dans un fichier `scope.txt`
+=> Pour ne pas à réécrire les adresses, je les enregistre dans un fichier `scope.txt`
 
 ```js
 [Apr 11, 2024 - 22:34:49 (CEST)] exegol-goad-light /workspace # nmap -iL scope.txt
@@ -121,7 +121,7 @@ MAC Address: 08:00:27:31:40:53 (Oracle VirtualBox virtual NIC)
 ```
 Avec les ports ouverts, on peut très vite remarquer que nous avons :
 
-- 2 DC (`192.168.56.11` et `192.168.56.10`)
+- 2 DC (`192.168.56.10` et `192.168.56.11`)
 - 1 Windows Server (`192.168.56.22`)
 
 
