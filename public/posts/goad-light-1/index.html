@@ -97,7 +97,7 @@
   <h1 class="post-title">
     <a href="//localhost:1313/posts/goad-light-1/">⚔️ Game of Active Directory - EP 1</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2024-04-11</time><span class="post-author">Hadrien</span><span class="post-reading-time">3 min read (520 words)</span></div>
+  <div class="post-meta"><time class="post-date">2024-04-11</time><span class="post-author">Hadrien</span><span class="post-reading-time">3 min read (522 words)</span></div>
 
   
     <span class="post-tags">
@@ -115,7 +115,7 @@
 
   <div class="post-content"><div>
         <h2 id="-introduction">🏁 Introduction<a href="#-introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
-<p>Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense “GOAD”.</p>
+<p>Dans un précédent article, j’avais parlé brièvement d’un lab AD proposé sur github par Orange Cyberdefense intitulé “GOAD”.</p>
 <p>Je me suis donc donné l’objectif de déployer la version <strong>light</strong> afin de reprendre la main sur le sujet du pentest AD.</p>
 <p>Ce post est donc le <strong>premier d’une suite</strong> partant de 0 jusqu’à devenir DA (Administrateur du domaine).</p>
 <p>Malgré qu’un schéma soit disponible expliquant le contenu du lab et certaines informations pouvant fortement aider à sa compromission, je décide de le faire en mode “<strong>blackbox</strong>”.</p>
@@ -146,7 +146,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.10</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">KINGSLANDING</span>     [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">KINGSLANDING</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">True</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.11</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">WINTERFELL</span>       [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">WINTERFELL</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">north</span>.<span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">True</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">SMB</span>         <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.22</span>   <span style="color:#ae81ff">445</span>    <span style="color:#a6e22e">CASTELBLACK</span>      [<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Windows</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">Server</span> <span style="color:#ae81ff">2019</span> <span style="color:#a6e22e">Build</span> <span style="color:#ae81ff">17763</span> <span style="color:#a6e22e">x64</span> (<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span><span style="color:#a6e22e">CASTELBLACK</span>) (<span style="color:#a6e22e">domain</span><span style="color:#f92672">:</span><span style="color:#a6e22e">north</span>.<span style="color:#a6e22e">sevenkingdoms</span>.<span style="color:#a6e22e">local</span>) (<span style="color:#a6e22e">signing</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>) (<span style="color:#a6e22e">SMBv1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">False</span>)
-</span></span></code></pre></div><p>=&gt; Pour ne pas à réécrire les adresses, je les place dans un fichier <code>scope.txt</code></p>
+</span></span></code></pre></div><p>=&gt; Pour ne pas avoir à réécrire les adresses, je les enregistre dans un fichier <code>scope.txt</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>[<span style="color:#a6e22e">Apr</span> <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">2024</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">22</span><span style="color:#f92672">:</span><span style="color:#ae81ff">34</span><span style="color:#f92672">:</span><span style="color:#ae81ff">49</span> (<span style="color:#a6e22e">CEST</span>)] <span style="color:#a6e22e">exegol</span><span style="color:#f92672">-</span><span style="color:#a6e22e">goad</span><span style="color:#f92672">-</span><span style="color:#a6e22e">light</span> <span style="color:#f92672">/</span><span style="color:#a6e22e">workspace</span> <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#a6e22e">nmap</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">iL</span> <span style="color:#a6e22e">scope</span>.<span style="color:#a6e22e">txt</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">Nmap</span> <span style="color:#a6e22e">scan</span> <span style="color:#a6e22e">report</span> <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">192.168</span>.<span style="color:#ae81ff">56.10</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">Host</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">up</span> (<span style="color:#ae81ff">0.00010</span><span style="color:#a6e22e">s</span> <span style="color:#a6e22e">latency</span>).
@@ -198,7 +198,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">MAC</span> <span style="color:#a6e22e">Address</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">08</span><span style="color:#f92672">:</span><span style="color:#ae81ff">00</span><span style="color:#f92672">:</span><span style="color:#ae81ff">27</span><span style="color:#f92672">:</span><span style="color:#ae81ff">31</span><span style="color:#f92672">:</span><span style="color:#ae81ff">40</span><span style="color:#f92672">:</span><span style="color:#ae81ff">53</span> (<span style="color:#a6e22e">Oracle</span> <span style="color:#a6e22e">VirtualBox</span> <span style="color:#a6e22e">virtual</span> <span style="color:#a6e22e">NIC</span>)
 </span></span></code></pre></div><p>Avec les ports ouverts, on peut très vite remarquer que nous avons :</p>
 <ul>
-<li>2 DC (<code>192.168.56.11</code> et <code>192.168.56.10</code>)</li>
+<li>2 DC (<code>192.168.56.10</code> et <code>192.168.56.11</code>)</li>
 <li>1 Windows Server (<code>192.168.56.22</code>)</li>
 </ul>
 <p>Suite au prochain post !</p>
@@ -213,6 +213,13 @@
         <hr />
     </div>
     <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="//localhost:1313/posts/goad-light-2/">
+                <span class="button__icon">←</span>
+                <span class="button__text">⚔️ Game of Active Directory - EP 2</span>
+            </a>
+        </span>
         
         
         <span class="button next">
