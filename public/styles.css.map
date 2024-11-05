@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/home/had/Documents/website/hadhub",
+	"sourceRoot": "/home/had/Documents/website/hadhub.github.io",
 	"sources": [
 		"css/base.scss",
 		"themes/terminal/assets/css/variables.scss",

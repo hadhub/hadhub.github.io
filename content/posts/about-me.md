@@ -15,7 +15,7 @@ Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais égalem
 
 Il m'arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube  :
 - https://www.twitch.tv/hadzaaaa
-- https://www.youtube.com/@hadzaaaaa/
+- https://www.youtube.com/@hadzah_fr
 - https://www.linkedin.com/in/hadrien-c/
 
 - Certification(s) : PJPT (By TCM Security)
@@ -28,7 +28,7 @@ Here you'll find machine solutions from HackTheBox and Vulnlab, as well as homel
 
 I sometimes stream machines on twitch and post replays on youtube :
 - https://www.twitch.tv/hadzaaaa
-- https://www.youtube.com/@hadzaaaaa/
+- https://www.youtube.com/@hadzah_fr
 - https://www.linkedin.com/in/hadrien-c/
 
 - Certification(s) : PJPT (By TCM Security)

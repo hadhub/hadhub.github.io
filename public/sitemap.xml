@@ -2,39 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/posts/goad-light-2/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/ad/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/homelab/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/posts/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/</loc>
-    <lastmod>2024-04-14T21:48:08+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/posts/goad-light-1/</loc>
-    <lastmod>2024-04-11T21:36:41+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/posts/1/</loc>
+    <loc>/posts/1/</loc>
     <lastmod>2024-04-06T22:19:21+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/vulnlab/</loc>
+    <loc>/tags/ad/</loc>
     <lastmod>2024-04-06T22:19:21+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/homelab/</loc>
+    <loc>/</loc>
+    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
+  </url><url>
+    <loc>/tags/vulnlab/</loc>
+    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
+  </url><url>
+    <loc>/tags/homelab/</loc>
     <lastmod>2024-04-05T22:44:32+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/about-me/</loc>
+    <loc>/posts/homelab/</loc>
+    <lastmod>2024-04-05T22:44:32+02:00</lastmod>
+  </url><url>
+    <loc>/posts/about-me/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>/categories/</loc>
   </url>
 </urlset>
