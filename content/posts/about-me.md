@@ -3,7 +3,7 @@ title = "😼 Click Me !"
 date = "2024-03-24T15:02:39+01:00"
 author = "Hadrien"
 description = "**Introducing myself**"
-showFullContent = falseO
+showFullContent = false
 readingTime = false
 hideComments = false
 color = "" #color from the theme settings
@@ -20,7 +20,9 @@ Il m'arrive de streamer des machines sur twitch et de poster les rediffusions su
 
 - Certification(s) : PJPT (By TCM Security)
 
+
 ---
+
 
 🇬🇧 Hey, I'm Hadrien, a cybersecurity student with a passion for all things offensive 🔴 
 
