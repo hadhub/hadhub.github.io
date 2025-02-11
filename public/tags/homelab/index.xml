@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homelab on Blog | Hadrien</title>
-    <link>/tags/homelab/</link>
+    <link>//localhost:1313/tags/homelab/</link>
     <description>Recent content in Homelab on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 05 Apr 2024 22:44:32 +0200</lastBuildDate><atom:link href="/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Apr 2024 22:44:32 +0200</lastBuildDate><atom:link href="//localhost:1313/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>🖥️ 3 Homelabs Pour Apprendre la Sécurité Offensive</title>
-      <link>/posts/homelab/</link>
+      <link>//localhost:1313/posts/homelab/</link>
       <pubDate>Fri, 05 Apr 2024 22:44:32 +0200</pubDate>
       
-      <guid>/posts/homelab/</guid>
+      <guid>//localhost:1313/posts/homelab/</guid>
       <description>&lt;h1 id=&#34;pourquoi-faire-un-homelab-&#34;&gt;Pourquoi faire un homelab ?&lt;/h1&gt;
 &lt;p&gt;Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.&lt;/p&gt;
 &lt;p&gt;Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.&lt;/p&gt;
