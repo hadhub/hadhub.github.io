@@ -39,7 +39,7 @@ Pour rappel voici la liste des services de stockage Azure avec les URLs associé
 | Queue Storage                 | https://"storage-account".queue.core.windows.net |
 | Table Storage                 | https://"storage-account".table.core.windows.net |
 
-En lisant plusieurs documentations, je comprendre que l'URL est donc sous cette forme : 
+En lisant plusieurs documentations, je comprends que l'URL est donc sous cette forme : 
 ``https://mbtwebsite.blob.core.windows.net/$web/<fichiers>``
 
 - **Nom du compte de stockage Azure** : `mbtwebsite`
