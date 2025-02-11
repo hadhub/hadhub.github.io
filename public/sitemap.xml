@@ -2,33 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/posts/1/</loc>
+    <loc>/posts/azure_blob_container_to_initial_access/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/tags/aad/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/tags/pwnedlabs/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2025-02-11T15:32:11+01:00</lastmod>
+  </url><url>
+    <loc>/posts/1/</loc>
     <lastmod>2024-04-06T22:19:21+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/ad/</loc>
+    <loc>/tags/ad/</loc>
     <lastmod>2024-04-06T22:19:21+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/</loc>
+    <loc>/tags/vulnlab/</loc>
     <lastmod>2024-04-06T22:19:21+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
-    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/</loc>
-    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/vulnlab/</loc>
-    <lastmod>2024-04-06T22:19:21+02:00</lastmod>
-  </url><url>
-    <loc>//localhost:1313/tags/homelab/</loc>
+    <loc>/tags/homelab/</loc>
     <lastmod>2024-04-05T22:44:32+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/homelab/</loc>
+    <loc>/posts/homelab/</loc>
     <lastmod>2024-04-05T22:44:32+02:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/about-me/</loc>
+    <loc>/posts/about-me/</loc>
     <lastmod>2024-03-24T15:02:39+01:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>/categories/</loc>
   </url>
 </urlset>

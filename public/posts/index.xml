@@ -2,17 +2,159 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Blog | Hadrien</title>
-    <link>//localhost:1313/posts/</link>
+    <link>/posts/</link>
     <description>Recent content in Posts on Blog | Hadrien</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 06 Apr 2024 22:19:21 +0200</lastBuildDate><atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Feb 2025 15:32:11 +0100</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>☁️ - Azure Blob Container to Initial Access</title>
+      <link>/posts/azure_blob_container_to_initial_access/</link>
+      <pubDate>Tue, 11 Feb 2025 15:32:11 +0100</pubDate>
+      
+      <guid>/posts/azure_blob_container_to_initial_access/</guid>
+      <description>&lt;p&gt;&lt;em&gt;N&amp;rsquo;ayant jamais fait d&amp;rsquo;Azure dans un contexte offsec, il est possible qu&amp;rsquo;il y ait des erreurs dans ce writeup, n&amp;rsquo;hésitez pas à me contacter pour les remonter :)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Aucun mot de passe ni flag ne sera publié dans ce writeup&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;scénario-du-challenge-&#34;&gt;Scénario du challenge :&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;entreprise &amp;ldquo;Mega Big Tech&amp;rdquo; utilise une architecture cloud hybride avec un domaine Active Directory sur site et Azure.
+En raison de son importance dans la tech, elle craint des cyberattaques et demande une évaluation de la sécurité de son infrastructure, incluant ses services cloud. Une URL trouvée dans une documentation publique doit être analysée.&lt;/p&gt;</description>
+      <content>&lt;p&gt;&lt;em&gt;N&amp;rsquo;ayant jamais fait d&amp;rsquo;Azure dans un contexte offsec, il est possible qu&amp;rsquo;il y ait des erreurs dans ce writeup, n&amp;rsquo;hésitez pas à me contacter pour les remonter :)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Aucun mot de passe ni flag ne sera publié dans ce writeup&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;scénario-du-challenge-&#34;&gt;Scénario du challenge :&lt;/h2&gt;
+&lt;p&gt;L&amp;rsquo;entreprise &amp;ldquo;Mega Big Tech&amp;rdquo; utilise une architecture cloud hybride avec un domaine Active Directory sur site et Azure.
+En raison de son importance dans la tech, elle craint des cyberattaques et demande une évaluation de la sécurité de son infrastructure, incluant ses services cloud. Une URL trouvée dans une documentation publique doit être analysée.&lt;/p&gt;
+&lt;p&gt;Globalement, le but ici est de récupérer des informations confidentielles stockées sur un blob Azure.&lt;/p&gt;
+&lt;h2 id=&#34;-enumération&#34;&gt;🔍 Enumération&lt;/h2&gt;
+&lt;p&gt;Pwnedlabs nous fourni une URL : &amp;ldquo;&lt;a href=&#34;http://dev.megabigtech.com/$web/index.html%22&#34;&gt;http://dev.megabigtech.com/$web/index.html&#34;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;website&#34; src=&#34;/azure_blob_container_to_initial_access/website.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;En regardant les différentes ressources récupérées par l&amp;rsquo;application web, on remarque que l&amp;rsquo;application utilise un blob azure pour stocker des ressources (images, fichier javascript, etc&amp;hellip;).&lt;/p&gt;
+&lt;p&gt;Pour rappel voici la liste des services de stockage Azure avec les URLs associés.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Storage service&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Endpoint&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Blob Storage&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.blob.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Data Lake Storage&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.dfs.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Static website (Blob Storage)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.web.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Azure Files&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.file.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Queue Storage&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.queue.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Table Storage&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;https://&amp;ldquo;storage-account&amp;rdquo;.table.core.windows.net&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;En lisant plusieurs documentations, je comprendre que l&amp;rsquo;URL est donc sous cette forme :
+&lt;code&gt;https://mbtwebsite.blob.core.windows.net/$web/&amp;lt;fichiers&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Nom du compte de stockage Azure&lt;/strong&gt; : &lt;code&gt;mbtwebsite&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Le nom du conteneur qui héberge le site web&lt;/strong&gt; : &lt;code&gt;$web&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-&#34;&gt;todo :&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;expliquer le principe des versions des fichiers dans azure&lt;/li&gt;
+&lt;li&gt;expliquer comment jouer avec les verions des fichiers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Regarder les fichiers supprimés :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://mbtwebsite.blob.core.windows.net/$web/?restype=container&amp;amp;comp=list&amp;amp;include=versions&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;x-ms-version: 2019-12-12&amp;#39;&lt;/span&gt; | xmllint --format - &amp;gt; all_version_id.xml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Après avoir identifié un fichier zip, on peux le télécharger :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;https://mbtwebsite.blob.core.windows.net/$web/scripts-transfer.zip?versionid=2024-03-29T20:55:40.8265593Z&amp;#39;&lt;/span&gt; -H &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;x-ms-version: 2019-12-12&amp;#39;&lt;/span&gt; --output scripts-transfer.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;En l&amp;rsquo;ouvrant, on constate qu&amp;rsquo;il contient 2 scripts powershell :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-ps1&#34; data-lang=&#34;ps1&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Install the required modules if not already installed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Install-Module -Name Az -Force -Scope CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Install-Module -Name MSAL.PS -Force -Scope CurrentUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Import the required modules&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Import-Module Az
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Import-Module MSAL.PS
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Define your Azure AD credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$Username = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;marcus@megabigtech.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$Password = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Th*************&amp;#34;&lt;/span&gt; | ConvertTo-SecureString -AsPlainText -Force
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$Credential = New-Object System.Management.Automation.PSCredential ($Username, $Password)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Authenticate to Azure AD using the specified credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Connect-AzAccount -Credential $Credential
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Define the Microsoft Graph API URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$GraphApiUrl = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://graph.microsoft.com/v1.0/users?&lt;/span&gt;$select&lt;span style=&#34;color:#e6db74&#34;&gt;=displayName,userPrincipalName&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Retrieve the access token for Microsoft Graph&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$AccessToken = (Get-AzAccessToken -ResourceType MSGraph).Token
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Create a headers hashtable with the access token&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$headers = @{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Authorization&amp;#34;&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Bearer &lt;/span&gt;$AccessToken&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ContentType&amp;#34;&lt;/span&gt;   = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;application/json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Retrieve User Information and Last Sign-In Time using Microsoft Graph via PowerShell&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$response = Invoke-RestMethod -Uri $GraphApiUrl -Method Get -Headers $headers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Output the response (formatted as JSON)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$response | ConvertTo-Json
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;et&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-ps1&#34; data-lang=&#34;ps1&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Define the target domain and OU&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$domain = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;megabigtech.local&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ouName = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Review&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Set the threshold for stale computer accounts (adjust as needed)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$staleDays = &lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# Computers not modified in the last 90 days will be considered stale&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Hardcoded credentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$securePassword = ConvertTo-SecureString &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Me******&amp;#34;&lt;/span&gt; -AsPlainText -Force
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$credential = New-Object System.Management.Automation.PSCredential (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mar*****&amp;#34;&lt;/span&gt;, $securePassword)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Get the current date&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$currentDate = Get-Date
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Calculate the date threshold for stale accounts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$thresholdDate = $currentDate.AddDays(-$staleDays)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Disable and move stale computer accounts to the &amp;#34;Review&amp;#34; OU&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Get-ADComputer -Filter {(LastLogonTimeStamp &lt;span style=&#34;color:#f92672&#34;&gt;-lt&lt;/span&gt; $thresholdDate) &lt;span style=&#34;color:#f92672&#34;&gt;-and&lt;/span&gt; (Enabled &lt;span style=&#34;color:#f92672&#34;&gt;-eq&lt;/span&gt; $true)} -SearchBase &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DC=&lt;/span&gt;$domain&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -Properties LastLogonTimeStamp -Credential $credential |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ForEach-Object {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $computerName = $_.Name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    $computerDistinguishedName = $_.DistinguishedName
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Disable the computer account&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Disable-ADAccount -Identity $computerDistinguishedName -Credential $credential
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Move the computer account to the &amp;#34;Review&amp;#34; OU&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Move-ADObject -Identity $computerDistinguishedName -TargetPath &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OU=&lt;/span&gt;$ouName&lt;span style=&#34;color:#e6db74&#34;&gt;,DC=&lt;/span&gt;$domain&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -Credential $credential
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Write-Host &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Disabled and moved computer account: &lt;/span&gt;$computerName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Avec les différentes informations de récupérées, nous pouvons nous connecter au portail Azure afin de s&amp;rsquo;authentifier.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+</content>
+    </item>
+    
     <item>
       <title>📦 Machine Baby - Vulnlab</title>
-      <link>//localhost:1313/posts/1/</link>
+      <link>/posts/1/</link>
       <pubDate>Sat, 06 Apr 2024 22:19:21 +0200</pubDate>
       
-      <guid>//localhost:1313/posts/1/</guid>
+      <guid>/posts/1/</guid>
       <description>&lt;p&gt;A travers cet article, nous allons voir comment passer administrateur d&amp;rsquo;une machine proposée par &lt;a href=&#34;https://www.vulnlab.com&#34;&gt;Vulnlab&lt;/a&gt; &amp;ldquo;Baby&amp;rdquo;.&lt;/p&gt;
 &lt;h2 id=&#34;-énumération&#34;&gt;🔍 Énumération&lt;/h2&gt;
 &lt;p&gt;La découverte de port s&amp;rsquo;effectue avec nmap : &lt;code&gt;nmap IP -sCV -T4&lt;/code&gt;&lt;/p&gt;
@@ -247,7 +389,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Info&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Download&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;successful&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Une fois les fichiers récupérés sur notre machine, nous pouvons extraire la base NTDS.dit avec l&amp;rsquo;outil secretsdump de la suite impacket :&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;secretsdump.py -sam sam -system system -ntds ntds.dit LOCAL&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;1&#34; src=&#34;//localhost:1313/1/baby-1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;1&#34; src=&#34;/1/baby-1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Nous pouvons nous connecter en utilisant le hash NT du compte Administrateur.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;wmiexec.py -hashes :&amp;quot;Hash NT&amp;quot; &amp;quot;baby.vl&amp;quot;/&amp;quot;Administrator&amp;quot;@&amp;quot;$10.10.112.19&amp;quot;&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&#34;-proposition-de-remédiation&#34;&gt;🩹 Proposition de remédiation&lt;/h2&gt;
@@ -288,10 +430,10 @@
     
     <item>
       <title>🖥️ 3 Homelabs Pour Apprendre la Sécurité Offensive</title>
-      <link>//localhost:1313/posts/homelab/</link>
+      <link>/posts/homelab/</link>
       <pubDate>Fri, 05 Apr 2024 22:44:32 +0200</pubDate>
       
-      <guid>//localhost:1313/posts/homelab/</guid>
+      <guid>/posts/homelab/</guid>
       <description>&lt;h1 id=&#34;pourquoi-faire-un-homelab-&#34;&gt;Pourquoi faire un homelab ?&lt;/h1&gt;
 &lt;p&gt;Lors de déplacements (ou entre 2 cours de management 👀), il m&amp;rsquo;arrive de déployer des petits et moyens labs permettant de perfectionner mes connaissances.&lt;/p&gt;
 &lt;p&gt;Les homelabs sont un moyen de pouvoir tester des technologies et des concepts localement sans avoir à faire tourner un VPN vers HackTheBox ou d&amp;rsquo;autres plateformes.&lt;/p&gt;
@@ -351,10 +493,10 @@ Le but de ce laboratoire est de déployer un lab AD vulnérable prêt à être u
     
     <item>
       <title>😼 Click Me !</title>
-      <link>//localhost:1313/posts/about-me/</link>
+      <link>/posts/about-me/</link>
       <pubDate>Sun, 24 Mar 2024 15:02:39 +0100</pubDate>
       
-      <guid>//localhost:1313/posts/about-me/</guid>
+      <guid>/posts/about-me/</guid>
       <description>&lt;p&gt;🇫🇷 Hey ! Je suis Hadrien, un étudiant en cybersécurité et passionné de tout ce qui s&amp;rsquo;approche de près ou de loin au monde de l&amp;rsquo;offensif 🔴&lt;/p&gt;
 &lt;p&gt;Ici vous retrouverez des solutions de machine HackTheBox et Vulnlab mais également des homelabs que je recommande pour débuter dans le domaine !&lt;/p&gt;
 &lt;p&gt;Il m&amp;rsquo;arrive de streamer des machines sur twitch et de poster les rediffusions sur youtube  :&lt;/p&gt;
