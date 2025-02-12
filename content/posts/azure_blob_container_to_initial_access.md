@@ -45,10 +45,28 @@ En lisant plusieurs documentations, je comprends que l'URL est donc sous cette f
 - **Nom du compte de stockage Azure** : `mbtwebsite`
 - **Le nom du conteneur qui héberge le site web** : `$web`
 
-### todo : 
-- expliquer le principe des versions des fichiers dans azure
-- expliquer comment jouer avec les verions des fichiers
 
+Avec le paramètre : ``?comp=list`` on peut lister les éléments stocké dans le blob
+
+``https://mbtwebsite.blob.core.windows.net/$web/?comp=list``
+
+> Tips : Avec xmllint pour créer un fichier xml stockang la sortie de la commande curl.
+
+```bash
+curl 'https://mbtwebsite.blob.core.windows.net/$web/?comp=list' | xmllint --format - > file_list.xml
+```
+
+> Tips : Si l'on souhaite récupérer un fichier précis.
+```bash
+curl 'https://mbtwebsite.blob.core.windows.net/$web/<file-name>' -o file-name
+```
+
+Articles explquant comment récupérer des fichiers de différentes versions sur un blob :
+https://dzone.com/articles/document-versioning-with-azure-blob-storage
+
+### todo : 
+- Expliquer comment jouer avec les verions des fichiers
+- Expliquer le principe des versions des fichiers dans azure
 
 Regarder les fichiers supprimés : 
 

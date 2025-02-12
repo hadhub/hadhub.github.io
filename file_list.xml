@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EnumerationResults ContainerName="https://mbtwebsite.blob.core.windows.net/$web/">
+  <Blobs>
+    <Blob>
+      <Name>index.html</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/index.html</Url>
+      <LastModified>Fri, 20 Oct 2023 20:08:20 GMT</LastModified>
+      <Etag>0x8DBD1A84E6455C0</Etag>
+      <Size>782359</Size>
+      <ContentType>text/html</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/application-0162b80622a4b825c801f8afcd695b5918649df6f9b26eb012974f9b00a777c5.css</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/application-0162b80622a4b825c801f8afcd695b5918649df6f9b26eb012974f9b00a777c5.css</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACCED483A</Etag>
+      <Size>18303</Size>
+      <ContentType>text/css</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/application-76970cb8dc49a9af2f2bbc74a0ec0781ef24ead86c4f7b6273577d16c2f1506a.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/application-76970cb8dc49a9af2f2bbc74a0ec0781ef24ead86c4f7b6273577d16c2f1506a.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACCFADAD2</Etag>
+      <Size>70364</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/common.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/common.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACCFD9988</Etag>
+      <Size>260277</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/css</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/css</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACCFD727B</Etag>
+      <Size>61584</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/iframe_api</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/iframe_api</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACCF0CA32</Etag>
+      <Size>993</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/jquery-3.6.0.min.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/jquery-3.6.0.min.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:07 GMT</LastModified>
+      <Etag>0x8DBD18ACD1AE134</Etag>
+      <Size>89501</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/js</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/js</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD42D5BA</Etag>
+      <Size>284312</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/magnific-popup-2f7f85183333c84a42262b5f8a4f8251958809e29fa31c65bdee53c4603502cd.css</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/magnific-popup-2f7f85183333c84a42262b5f8a4f8251958809e29fa31c65bdee53c4603502cd.css</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD391324</Etag>
+      <Size>5269</Size>
+      <ContentType>text/css</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/magnific-popup.min-37130bcc3f8b01fe7473f8bb60a9aea35dc77c05eedc37fbd70135363feb6999.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/magnific-popup.min-37130bcc3f8b01fe7473f8bb60a9aea35dc77c05eedc37fbd70135363feb6999.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD39FD64</Etag>
+      <Size>20173</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/player.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/player.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD4398EA</Etag>
+      <Size>37626</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/swiper-18be8aa3f032dded246a45a9da3dafdb3934e39e1f1b3b623c1722f3152b2788.css</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/swiper-18be8aa3f032dded246a45a9da3dafdb3934e39e1f1b3b623c1722f3152b2788.css</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD44D135</Etag>
+      <Size>21726</Size>
+      <ContentType>text/css</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/swiper.min-d36969d50f8c2fa3a00a68e55fe929e3af3fdd249cf33fd128b6a17a410e2c59.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/swiper.min-d36969d50f8c2fa3a00a68e55fe929e3af3fdd249cf33fd128b6a17a410e2c59.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD646280</Etag>
+      <Size>120650</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/util.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/util.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD6B665D</Etag>
+      <Size>157918</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+    <Blob>
+      <Name>static/www-widgetapi.js.download</Name>
+      <Url>https://mbtwebsite.blob.core.windows.net/$web/static/www-widgetapi.js.download</Url>
+      <LastModified>Fri, 20 Oct 2023 16:37:08 GMT</LastModified>
+      <Etag>0x8DBD18ACD75EC24</Etag>
+      <Size>217803</Size>
+      <ContentType>application/octet-stream</ContentType>
+      <ContentEncoding/>
+      <ContentLanguage/>
+    </Blob>
+  </Blobs>
+  <NextMarker/>
+</EnumerationResults>

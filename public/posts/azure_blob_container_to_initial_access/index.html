@@ -97,7 +97,7 @@
   <h1 class="post-title">
     <a href="/posts/azure_blob_container_to_initial_access/">☁️ - Azure Blob Container to Initial Access</a>
   </h1>
-  <div class="post-meta"><time class="post-date">2025-02-11</time><span class="post-author">Hadrien C</span><span class="post-reading-time">3 min read (583 words)</span></div>
+  <div class="post-meta"><time class="post-date">2025-02-11</time><span class="post-author">Hadrien C</span><span class="post-reading-time">4 min read (649 words)</span></div>
 
   
     <span class="post-tags">
@@ -159,16 +159,28 @@ En raison de son importance dans la tech, elle craint des cyberattaques et deman
       </tr>
   </tbody>
 </table>
-<p>En lisant plusieurs documentations, je comprendre que l&rsquo;URL est donc sous cette forme :
+<p>En lisant plusieurs documentations, je comprends que l&rsquo;URL est donc sous cette forme :
 <code>https://mbtwebsite.blob.core.windows.net/$web/&lt;fichiers&gt;</code></p>
 <ul>
 <li><strong>Nom du compte de stockage Azure</strong> : <code>mbtwebsite</code></li>
 <li><strong>Le nom du conteneur qui héberge le site web</strong> : <code>$web</code></li>
 </ul>
+<p>Avec le paramètre : <code>?comp=list</code> on peut lister les éléments stocké dans le blob</p>
+<p><code>https://mbtwebsite.blob.core.windows.net/$web/?comp=list</code></p>
+<blockquote>
+<p>Tips : Avec xmllint pour créer un fichier xml stockang la sortie de la commande curl.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://mbtwebsite.blob.core.windows.net/$web/?comp=list&#39;</span> | xmllint --format - &gt; file_list.xml
+</span></span></code></pre></div><blockquote>
+<p>Tips : Si l&rsquo;on souhaite récupérer un fichier précis.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://mbtwebsite.blob.core.windows.net/$web/&lt;file-name&gt;&#39;</span> -o file-name
+</span></span></code></pre></div><p>Articles explquant comment récupérer des fichiers de différentes versions sur un blob :
+<a href="https://dzone.com/articles/document-versioning-with-azure-blob-storage">https://dzone.com/articles/document-versioning-with-azure-blob-storage</a></p>
 <h3 id="todo-">todo :<a href="#todo-" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h3>
 <ul>
-<li>expliquer le principe des versions des fichiers dans azure</li>
-<li>expliquer comment jouer avec les verions des fichiers</li>
+<li>Expliquer comment jouer avec les verions des fichiers</li>
+<li>Expliquer le principe des versions des fichiers dans azure</li>
 </ul>
 <p>Regarder les fichiers supprimés :</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#39;https://mbtwebsite.blob.core.windows.net/$web/?restype=container&amp;comp=list&amp;include=versions&#39;</span> -H <span style="color:#e6db74">&#39;x-ms-version: 2019-12-12&#39;</span> | xmllint --format - &gt; all_version_id.xml
