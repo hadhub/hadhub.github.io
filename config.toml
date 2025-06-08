@@ -1,0 +1,63 @@
+baseURL = "https://example.org/"
+defaultContentLanguage = "en"
+languageCode = "en"
+theme = "gokarna"
+title = "Had's blog"
+
+
+[params]
+  accentColor = "#51c8f0"
+  avatarURL = "assets/img/avatar.jpg"
+  avatarSize = "size-m"
+  description = "student / sysadmin / streamer / htb player / offsec & cat lover"
+  footer = "Another blog of an another IT nerd 👀"
+  metaKeywords = ["hadzah", "hadhub github", "hadrien"]
+  displayReadingTime = true
+  # ??
+  showPostsOnHomePage = ""
+  numberPostsOnHomePage = 4
+
+  socialIcons = [
+    {name = "linkedin", url = "https://www.linkedin.com/in/hadrien-c/"},
+    {name = "email", url = "mailto:chauder.hadrien@gmail.com"}
+  ]
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 2
+    
+  [[menu.main]]
+    identifier = "github"
+    url = "https://github.com/hadhub"
+    weight = 3
+    pre = "<span data-feather='github'></span>"
+    post = ""
+
+  [[menu.main]]
+    identifier = "twitch"
+    url = "https://www.twitch.tv/hadzah_fr/"
+    weight = 4
+    pre = "<span data-feather='twitch'></span>"
+    post = ""
+
+  [[menu.main]]
+    identifier = "youtube"
+    url = "https://www.youtube.com/@hadzah_fr"
+    weight = 5
+    pre = "<span data-feather='youtube'></span>"
+    post = ""
+
+  [[menu.main]]
+    identifier = "HackTheBox"
+    name = "HackTheBox Profile"
+    url = "https://app.hackthebox.com/profile/1987977"
+    weight = 6
+    pre = "<span data-feather='box'></span>"
+    post = ""
