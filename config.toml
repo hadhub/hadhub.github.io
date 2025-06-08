@@ -7,8 +7,8 @@ title = "Had's blog"
 
 [params]
   accentColor = "#51c8f0"
-  avatarURL = "assets/img/avatar.jpg"
-  avatarSize = "size-m"
+  #avatarURL = "assets/img/avatar.jpg"
+  #avatarSize = "size-m"
   description = "student / sysadmin / streamer / htb player / offsec & cat lover"
   footer = "Another blog of an another IT nerd 👀"
   metaKeywords = ["hadzah", "hadhub github", "hadrien"]
