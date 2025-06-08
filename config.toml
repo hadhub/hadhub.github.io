@@ -14,7 +14,7 @@ title = "Had's blog"
   metaKeywords = ["hadzah", "hadhub github", "hadrien"]
   displayReadingTime = true
   # ??
-  showPostsOnHomePage = ""
+  showPostsOnHomePage = "recent"
   numberPostsOnHomePage = 4
 
   socialIcons = [
