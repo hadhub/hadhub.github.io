@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Had&#39;s blog</title>
-    <link>https://hadrien.cat/</link>
-    <description>Recent content on Had&#39;s blog</description>
+    <title>Posts on Had&#39;s blog</title>
+    <link>https://hadrien.cat/posts/</link>
+    <description>Recent content in Posts on Had&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 08 Jun 2025 21:13:35 +0200</lastBuildDate><atom:link href="https://hadrien.cat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 Jun 2025 21:13:35 +0200</lastBuildDate><atom:link href="https://hadrien.cat/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello There!</title>
       <link>https://hadrien.cat/posts/hello-there/</link>

@@ -1,4 +1,4 @@
-baseURL = "https://example.org/"
+baseURL = "https://hadrien.cat"
 defaultContentLanguage = "en"
 languageCode = "en"
 theme = "gokarna"
@@ -14,8 +14,8 @@ title = "Had's blog"
   metaKeywords = ["hadzah", "hadhub github", "hadrien"]
   displayReadingTime = true
   # ??
-  #showPostsOnHomePage = ""
-  #numberPostsOnHomePage = 4
+  showPostsOnHomePage = ""
+  numberPostsOnHomePage = 4
 
   socialIcons = [
     {name = "linkedin", url = "https://www.linkedin.com/in/hadrien-c/"},
