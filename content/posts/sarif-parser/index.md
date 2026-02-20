@@ -23,15 +23,17 @@ When I first became interested in code review, I came across a video by [noraj](
 
 Instead of fighting with raw JSON, I wanted a proper web interface that turns SARIF output into an actionable todo list, something where you can drag-and-drop your file, browse findings visually, and track your progress through an audit.
 
-The main dashboard gives you a sortable, filterable list of all findings with their severity, status, and source location:
+The main dashboard supports multiple SARIF projects side by side and gives you a sortable, filterable table of all findings with their severity, rule, file location, code snippet, tool, CWE, status, and notes:
 
-{{< figure src="img/dark_mod.png" align="center" >}}
+{{< figure src="img/s1.png" align="center" >}}
 
-A graph view provides visual representations of rule information, code flows from source to sink, and finding locations:
+Clicking "Graph" on a finding opens a detailed view showing the rule-to-finding flow, the associated CWE, the code snippet, and a full description with references and OWASP tags:
 
-{{< figure src="img/dark_modgraph.png" align="center" >}}
+{{< figure src="img/s2.png" align="center" >}}
 
-A light mode is also available for those who prefer it.
+Bulk operations let you update the status of multiple findings at once, with lifecycle states like New, Confirmed, False Positive, Mitigated, and Accepted Risk:
+
+{{< figure src="img/s3.png" align="center" >}}
 
 ## Features
 

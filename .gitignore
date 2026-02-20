@@ -3,3 +3,4 @@ resources/
 .hugo_build.lock
 .claude/
 CLAUDE.md
+cheatsheet-hugo.md
