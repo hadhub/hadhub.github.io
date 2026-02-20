@@ -1,0 +1,33 @@
+// Near full-width layout — ~125px margin on each side on 1080p
+// Theme defaults: $narrow-size: 720px, $wide-size: 890px
+
+.page-wrapper {
+  max-width: calc(100vw - 250px);
+
+  @include media-query($on-mobile) {
+    max-width: calc(100vw - 40px);
+  }
+}
+
+.navbar {
+  max-width: calc(100vw - 250px);
+
+  @include media-query($on-mobile) {
+    max-width: calc(100vw - 40px);
+  }
+}
+
+// Bigger text on homepage
+.author .author-name {
+  font-size: 2.2em;
+}
+
+.author .author-bio {
+  font-size: 1.15em;
+}
+
+// Bigger social icons (default: 24px)
+.footer_social-icons svg {
+  width: 30px;
+  height: 30px;
+}

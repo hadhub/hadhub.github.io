@@ -1,0 +1,59 @@
+title = "Hadzah | Home"
+baseURL = 'https://hadrien.cat/'
+languageCode = 'en-us'
+defaultContentLanguage = "en"
+enableEmoji = true
+theme = "hugo-blog-awesome"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+    ordered = false
+
+[[menus.main]]
+  pageRef = "/"
+  name = 'Home'
+  url = '/'
+  weight = 10
+
+[[menus.main]]
+  pageRef = "posts"
+  name = 'Articles'
+  url = '/posts/'
+  weight = 20
+
+[params]
+  sitename = "Hadzah"
+  defaultColor = "dark"
+  description = "You will find articles about my research and the tools I use. Enjoy reading!"
+  mainSections = ['posts']
+  toc = true
+  tocOpen = false
+  goToTop = true
+
+  [params.author]
+    avatar = "shadokhehe.png"
+    intro = "Hadzah"
+    name = "Hadrien Chauder"
+    description = "You will find articles about my research and the tools I use. Enjoy reading!"
+
+[[params.socialIcons]]
+  name = "linkedin"
+  url = "https://www.linkedin.com/in/hadrien-c/"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/hadhub"
+
+[[params.socialIcons]]
+  name = "twitch"
+  url = "https://www.twitch.tv/hadzah_fr"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:hadrien.chauder@proton.me"
