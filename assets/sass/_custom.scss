@@ -17,6 +17,15 @@
   }
 }
 
+// Widen article content to match page-wrapper
+.wrapper {
+  max-width: calc(100vw - 400px);
+
+  @include media-query($on-mobile) {
+    max-width: calc(100vw - 40px);
+  }
+}
+
 // Bigger text on homepage
 .author .author-name {
   font-size: 2.2em;

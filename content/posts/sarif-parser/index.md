@@ -17,7 +17,7 @@ The problem? SARIF files are dense, deeply nested JSON. Scrolling through hundre
 
 When I first became interested in code review, I came across a video by [noraj](https://www.youtube.com/watch?v=k99ml1v6FmA) explaining how to use semgrep to extract a sarif file and read it using vscode. I thought it was a smart idea and wanted to explore it further with my friend Claude Code, who immediately understood the concept. :))))
 
-{{< figure src="img/readsarifat3am.png" alt="" align="center" width="50%" >}}
+{{< figure src="img/readsarifat3am.png" alt="" align="center" width="20%" >}}
 
 ## The idea
 
@@ -25,11 +25,11 @@ Instead of fighting with raw JSON, I wanted a proper web interface that turns SA
 
 The main dashboard gives you a sortable, filterable list of all findings with their severity, status, and source location:
 
-{{< figure src="img/dark_mod.png" align="center" width="100%" >}}
+{{< figure src="img/dark_mod.png" align="center" >}}
 
 A graph view provides visual representations of rule information, code flows from source to sink, and finding locations:
 
-{{< figure src="img/dark_modgraph.png" align="center" width="100%" >}}
+{{< figure src="img/dark_modgraph.png" align="center" >}}
 
 A light mode is also available for those who prefer it.
 
