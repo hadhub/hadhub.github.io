@@ -35,16 +35,30 @@ Bulk operations let you update the status of multiple findings at once, with lif
 
 {{< figure src="img/s3.png" align="center" >}}
 
+## Compatible tools
+
+The tool has been tested with several popular static analysis and secret detection tools:
+
+- **Semgrep / Opengrep** — static analysis
+- **CodeQL** — GitHub's code scanning engine
+- **Snyk** — vulnerability scanner
+- **Gitleaks** — secret detection in git repos
+- **Trufflehog** — secret detection across multiple sources
+
+Any tool that outputs valid SARIF should work out of the box.
+
 ## Features
 
-- **SARIF file upload** drag-and-drop support with automatic parsing
-- **Finding management** browse, filter, and search findings by severity, status, rule ID, file path, message, or code snippet
-- **Status tracking** track findings through their lifecycle: New, Confirmed, False Positive, Mitigated, Accepted Risk
-- **Annotations** add notes to individual findings for documentation and collaboration
-- **SVG visualizations** generated graphs showing rule information, code flows (source to sink), and locations
-- **Bulk operations** update the status of multiple findings at once
-- **SARIF export** export findings back to SARIF format with embedded review status and notes
-- **Multi-project support** manage multiple SARIF uploads as separate projects
+- **SARIF file upload** — drag-and-drop support with automatic parsing
+- **Multi-file projects** — upload multiple SARIF files into the same project; findings are merged with automatic deduplication
+- **Finding management** — browse, filter, and search findings by severity, status, rule ID, file path, message, or code snippet
+- **Status tracking** — track findings through their lifecycle: New, Confirmed, False Positive, Mitigated, Accepted Risk
+- **Annotations** — add notes to individual findings for documentation and collaboration
+- **SVG visualizations** — generated graphs showing rule information, code flows (source to sink), and locations
+- **Bulk operations** — update the status of multiple findings at once
+- **SARIF export** — export findings back to SARIF format with embedded review status and notes
+- **Multi-project support** — manage multiple SARIF uploads as separate projects
+- **REST API** — all features are accessible via a REST API, making it easy to integrate sarif2web into your CI/CD pipeline or automation scripts
 
 ## Result
 
