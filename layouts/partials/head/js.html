@@ -1,0 +1,196 @@
+{{ $constants := resources.Get "js/common/constants.js" }}
+{{ $utils := resources.Get "js/utils.js" }}
+{{ $themeToggle := resources.Get "js/theme-toggle.js" }}
+{{ $search := resources.Get "js/search.js" }}
+{{ $scrollToTop := resources.Get "js/scroll-to-top.js" }}
+{{ $navigation := resources.Get "js/navigation.js" }}
+{{ $toc := resources.Get "js/toc.js" }}
+{{ $filters := resources.Get "js/filters.js" }}
+{{ $codeBlocks := resources.Get "js/code-blocks.js" }}
+{{ $blockquotes := resources.Get "js/blockquotes.js" }}
+{{ $languageSwitcher := resources.Get "js/language-switcher.js" }}
+{{ $pageTransitions := resources.Get "js/page-transitions.js" }}
+{{ $readingProgress := resources.Get "js/reading-progress.js" }}
+{{ $js := slice $constants $utils $themeToggle $search $scrollToTop $navigation $toc $filters $codeBlocks $blockquotes $languageSwitcher $pageTransitions $readingProgress | resources.Concat "js/main.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer></script>
+
+<style>
+  /* Figure shortcode rendering inside post content */
+  .post-content-main figure {
+    margin: 1.5em auto;
+    text-align: center;
+  }
+  .post-content-main figure img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+  .post-content-main figure figcaption {
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+  }
+
+  /* Mermaid figures */
+  pre.mermaid {
+    text-align: center;
+    background: none;
+    border: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .mermaid-figure {
+    text-align: center;
+    margin: 1.5em 0;
+  }
+  .mermaid-figure figcaption {
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+  }
+
+  /* Lightbox for in-content images */
+  .post-content-main img {
+    cursor: zoom-in;
+  }
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    cursor: zoom-out;
+    justify-content: center;
+    align-items: center;
+  }
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  .lightbox-overlay img {
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+</style>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const themeVars = (isLight) => isLight ? {
+      background: '#ffffff',
+      primaryColor: '#fde8e8',
+      primaryTextColor: '#1e293b',
+      primaryBorderColor: '#c91e1e',
+      lineColor: '#c91e1e',
+      secondaryColor: '#fef2f2',
+      tertiaryColor: '#fde8e8',
+      noteBkgColor: '#fef2f2',
+      noteTextColor: '#1e293b',
+      noteBorderColor: '#c91e1e',
+      actorBkg: '#fde8e8',
+      actorTextColor: '#1e293b',
+      actorBorder: '#c91e1e',
+      actorLineColor: '#c91e1e',
+      signalColor: '#1e293b',
+      signalTextColor: '#1e293b',
+      labelBoxBkgColor: '#fde8e8',
+      labelBoxBorderColor: '#c91e1e',
+      labelTextColor: '#1e293b',
+      loopTextColor: '#1e293b',
+      activationBkgColor: '#fef2f2',
+      activationBorderColor: '#c91e1e',
+      sequenceNumberColor: '#ffffff'
+    } : {
+      background: '#1a1a2e',
+      primaryColor: '#2a2a3e',
+      primaryTextColor: '#e8e8f0',
+      primaryBorderColor: '#f24e4e',
+      lineColor: '#f24e4e',
+      secondaryColor: '#1f1f2f',
+      tertiaryColor: '#2a2a3e',
+      noteBkgColor: '#2a2a3e',
+      noteTextColor: '#e8e8f0',
+      noteBorderColor: '#f24e4e',
+      actorBkg: '#2a2a3e',
+      actorTextColor: '#e8e8f0',
+      actorBorder: '#f24e4e',
+      actorLineColor: '#f24e4e',
+      signalColor: '#e8e8f0',
+      signalTextColor: '#e8e8f0',
+      labelBoxBkgColor: '#2a2a3e',
+      labelBoxBorderColor: '#f24e4e',
+      labelTextColor: '#e8e8f0',
+      loopTextColor: '#e8e8f0',
+      activationBkgColor: '#1f1f2f',
+      activationBorderColor: '#f24e4e',
+      sequenceNumberColor: '#1a1a2e'
+    };
+
+  const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+
+  const configure = () => {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: themeVars(isLight())
+    });
+  };
+
+  const render = async () => {
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      if (!el.dataset.source) {
+        el.dataset.source = el.textContent.trim();
+      }
+      el.removeAttribute('data-processed');
+      el.innerHTML = el.dataset.source;
+    });
+    configure();
+    await mermaid.run({ querySelector: '.mermaid' });
+  };
+
+  const init = () => { render(); };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-theme') {
+        render();
+      }
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    const lbImg = document.createElement('img');
+    overlay.appendChild(lbImg);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', function () {
+      overlay.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+
+    document.querySelectorAll('.post-content-main img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        lbImg.src = img.src;
+        overlay.classList.add('active');
+      });
+    });
+  });
+</script>

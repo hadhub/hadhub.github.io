@@ -1,0 +1,38 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'hadzah'
+theme = "mana"
+
+[params]
+  description = "offsec engineer, CVE(s) and tools..."
+  favicon = "/favicon/favicon.ico"
+  footerText = "Hugo & Mana theme"  # Optional
+  
+  # Hero section title (optional - defaults to site.Title)
+  heroTitleLine1 = "Welcome to had's workspace"  # First line of hero title
+  heroTitleLine2 = "Enjoy reading!"    # Second line of hero title (optional)
+
+[params.social]
+  github = "https://github.com/hadhub"
+  linkedin = "https://linkedin.com/in/hadrien-c"
+  email = "hadrien.chauder@proton.me"
+
+[params.avatar]
+  [params.avatar.home]
+    assetPath = "images/avatar.png"
+  [params.avatar.about]
+    assetPath = "images/avatar.png"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    noClasses = false
+    style = "catppuccin-macchiato"

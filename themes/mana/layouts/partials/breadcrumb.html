@@ -1,0 +1,23 @@
+{{ if and .IsPage (not .IsHome) }}
+{{ $postsPage := site.GetPage "/posts" }}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ "/" | relLangURL }}" itemprop="item"><span itemprop="name">{{ i18n "home" | default "Home" }}</span></a>
+      <meta itemprop="position" content="1" />
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+    </li>
+    {{ with $postsPage }}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ .RelPermalink }}" itemprop="item"><span itemprop="name">{{ i18n "posts" | default "Posts" }}</span></a>
+      <meta itemprop="position" content="2" />
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+    </li>
+    {{ end }}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name" class="breadcrumb-current">{{ .Title }}</span>
+      <meta itemprop="position" content="{{ if $postsPage }}3{{ else }}2{{ end }}" />
+    </li>
+  </ol>
+</nav>
+{{ end }}

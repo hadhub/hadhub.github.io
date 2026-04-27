@@ -1,0 +1,93 @@
+/* Scroll to Top */
+
+.scroll-to-top {
+  position: fixed;
+  bottom: calc(var(--spacing-lg) + 60px);
+  right: var(--spacing-lg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  transition: all var(--transition-base);
+  z-index: 999;
+}
+
+.scroll-to-top.visible {
+  display: flex;
+}
+
+.scroll-to-top:hover {
+  background-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: none;
+  color: var(--accent-hover);
+}
+
+.scroll-to-top svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Buy Me a Coffee */
+.buy-me-coffee {
+  position: fixed;
+  bottom: calc(var(--spacing-lg) + 60px);
+  right: var(--spacing-lg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--yellow-accent);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  z-index: 999;
+  text-decoration: none;
+}
+
+.buy-me-coffee:hover {
+  background-color: var(--yellow-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.buy-me-coffee svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Buy Me a Coffee Widget - Fade effect when mobile menu is open */
+/* Target the Buy Me a Coffee widget container (common selectors) */
+/* The widget typically creates an iframe or div with id starting with "bmc-wbtn" */
+#bmc-wbtn,
+[id^="bmc-wbtn"],
+iframe[src*="buymeacoffee"],
+iframe[id*="bmc"],
+.bmc-btn-container,
+.bmc-btn {
+  transition: opacity var(--transition-base) ease-in-out, 
+              visibility var(--transition-base) ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fade out Buy Me a Coffee widget when mobile menu is open */
+body.mobile-menu-open #bmc-wbtn,
+body.mobile-menu-open [id^="bmc-wbtn"],
+body.mobile-menu-open iframe[src*="buymeacoffee"],
+body.mobile-menu-open iframe[id*="bmc"],
+body.mobile-menu-open .bmc-btn-container,
+body.mobile-menu-open .bmc-btn {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

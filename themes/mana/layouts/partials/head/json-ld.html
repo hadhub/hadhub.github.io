@@ -1,0 +1,74 @@
+{{ if .IsPage }}
+{{ $authorName := cond (ne (.Params.author | default "") "") .Params.author (cond (ne (site.Params.author | default "") "") site.Params.author site.Title) }}
+{{ $authorSameAs := slice }}
+{{ if site.Params.social.github }}{{ $authorSameAs = $authorSameAs | append site.Params.social.github }}{{ end }}
+{{ if site.Params.social.gitlab }}{{ $authorSameAs = $authorSameAs | append site.Params.social.gitlab }}{{ end }}
+{{ if site.Params.social.linkedin }}{{ $authorSameAs = $authorSameAs | append site.Params.social.linkedin }}{{ end }}
+{{ if site.Params.social.twitter }}{{ $authorSameAs = $authorSameAs | append (printf "https://twitter.com/%s" (strings.TrimPrefix "@" site.Params.social.twitter)) }}{{ end }}
+{{ $author := dict "@type" "Person" "name" $authorName }}
+{{ if $authorSameAs }}{{ $author = merge $author (dict "sameAs" $authorSameAs) }}{{ end }}
+{{ if site.Params.social.email }}
+  {{ $author = merge $author (dict "email" site.Params.social.email) }}
+{{ end }}
+{{ $publisher := dict "@type" "Organization" "name" site.Title "url" site.BaseURL }}
+{{ if and site.Params.avatar site.Params.avatar.home.assetPath }}
+  {{ $publisher = merge $publisher (dict "logo" (dict "@type" "ImageObject" "url" (site.Params.avatar.home.assetPath | absURL))) }}
+{{ end }}
+{{ $blogPosting := dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" .Title
+  "description" (cond (ne .Description "") .Description (.Summary | plainify | truncate 160))
+  "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+  "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+  "url" .Permalink
+  "inLanguage" .Language.LanguageCode
+  "wordCount" .WordCount
+  "timeRequired" (printf "PT%dM" .ReadingTime)
+  "author" $author
+  "publisher" $publisher
+}}
+{{ $resolvedImage := partial "post-image-resolve.html" . }}
+{{ if $resolvedImage.image }}
+  {{ $blogPosting = merge $blogPosting (dict "image" ($resolvedImage.image | absURL)) }}
+{{ else if and site.Params.avatar site.Params.avatar.home.assetPath }}
+  {{ $blogPosting = merge $blogPosting (dict "image" (site.Params.avatar.home.assetPath | absURL)) }}
+{{ end }}
+{{ if .Params.tags }}
+  {{ $blogPosting = merge $blogPosting (dict "keywords" .Params.tags) }}
+{{ end }}
+{{ printf "<script type=\"application/ld+json\">%s</script>" ($blogPosting | jsonify) | safeHTML }}
+{{ end }}
+
+{{ if and .IsPage (not .IsHome) }}
+  {{ $postsPage := site.GetPage "/posts" }}
+  {{ $breadcrumbItems := slice (dict "@type" "ListItem" "position" 1 "name" (i18n "home" | default "Home") "item" site.Home.Permalink) }}
+  {{ if $postsPage }}
+    {{ $breadcrumbItems = $breadcrumbItems | append (dict "@type" "ListItem" "position" 2 "name" (i18n "posts" | default "Posts") "item" $postsPage.Permalink) }}
+  {{ end }}
+  {{ $position := cond (ne $postsPage nil) 3 2 }}
+  {{ $breadcrumbItems = $breadcrumbItems | append (dict "@type" "ListItem" "position" $position "name" .Title "item" .Permalink) }}
+{{ printf "<script type=\"application/ld+json\">%s</script>" (dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $breadcrumbItems | jsonify) | safeHTML }}
+{{ end }}
+
+{{ if .IsHome }}
+  {{ $webSite := dict
+    "@context" "https://schema.org"
+    "@type" "WebSite"
+    "name" site.Title
+    "url" site.BaseURL
+    "description" site.Params.description
+  }}
+  {{ if site.Params.social }}
+    {{ $webSite = merge $webSite (dict "author" (dict "@type" "Person" "name" (cond (ne (site.Params.author | default "") "") site.Params.author site.Title))) }}
+    {{ if site.Params.social.email }}
+      {{ $webSite = merge $webSite (dict "author" (merge ($webSite.author) (dict "email" site.Params.social.email))) }}
+    {{ end }}
+  {{ end }}
+  {{ if and site.Params.avatar site.Params.avatar.home.assetPath }}
+    {{ $webSite = merge $webSite (dict "publisher" (dict "@type" "Organization" "name" site.Title "logo" (dict "@type" "ImageObject" "url" (site.Params.avatar.home.assetPath | absURL)))) }}
+  {{ end }}
+  {{ $webSite = merge $webSite (dict "potentialAction" (dict "@type" "SearchAction" "target" (dict "@type" "EntryPoint" "urlTemplate" (printf "%s?q={search_term_string}" site.BaseURL)) "query-input" "required name=search_term_string")) }}
+{{ printf "<script type=\"application/ld+json\">%s</script>" ($webSite | jsonify) | safeHTML }}
+{{ end }}

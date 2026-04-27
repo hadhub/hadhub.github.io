@@ -1,0 +1,87 @@
+# Traductions des alertes/avertissements
+note = "Remarque"
+tip = "Astuce"
+important = "Important"
+warning = "Avertissement"
+caution = "Attention"
+info = "Info"
+success = "Succès"
+question = "Question"
+danger = "Danger"
+bug = "Bug"
+example = "Exemple"
+
+# En-tête et navigation
+menu = "Menu"
+search = "Recherche"
+searchPlaceholder = "Rechercher..."
+clearSearch = "Effacer la recherche"
+closeSearch = "Fermer la recherche"
+toggleMenu = "Basculer le menu"
+closeMenu = "Fermer menu"
+toggleTheme = "Basculer le thème"
+language = "Langue"
+
+# Accessibilité
+skipToMain = "Passer au contenu principal"
+scrollToTop = "Aller en haut de la page"
+
+# Accueil
+home = "Accueil"
+recentPosts = "Articles récents"
+
+# List & filters
+posts = "Articles"
+filters = "Filtres"
+searchTags = "Rechercher des labels..."
+tagsLabel = "Labels"
+yearMonth = "Année et mois"
+allDates = "Toutes les dates"
+clearFilters = "Effacer les filtres"
+
+# Pagination
+pageOf = "Page %s sur %s"
+postSingular = "article"
+postPlural = "articles"
+pageSingular = "page"
+pagePlural = "pages"
+postsOnThisPage = "sur cette page"
+paginationFirst = "Premier"
+paginationPrev = "Précédent"
+paginationNext = "Suivant"
+paginationLast = "Dernier"
+
+# Liens de navigation
+backToHome = "Retour à la page d'accueil"
+allTags = "Tous les labels"
+readMore = "Lire la suite"
+
+# Archive
+archive = "Archive"
+
+# Article unique
+relatedPosts = "Articles similaires"
+tags = "Labels"
+navPrev = "Précédent"
+navNext = "Suivant"
+
+# Méta-données de l'article
+wordCount = "mots"
+readingTime = "min"
+
+# Table des matières
+tableOfContents = "Table des matières"
+toggleToc = "Afficher/masquer la table des matières"
+
+# Page des labels
+tagsHelp = "Cliquez sur un label pour afficher les articles associés"
+searchNoResults = "Aucun résultat trouvé"
+searchNoTagsFound = "Aucun label trouvé"
+
+# Buy Me a Coffee
+buyMeACoffeeDescription = "Soutenez-moi sur Buy me a coffee !"
+
+# Page 404
+404Title = "Cette page n'existe pas"
+404DefaultMessage = "Désolé, la page que vous recherchez est introuvable."
+404ReturnHome = "Retour à la page d'accueil"

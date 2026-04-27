@@ -1,0 +1,131 @@
+{{ if .Paginator }}
+  {{ $paginator := .Paginator }}
+  {{ $currentPage := $paginator.PageNumber }}
+  {{ $totalPages := $paginator.TotalPages }}
+  
+  {{ if gt $totalPages 1 }}
+    <nav class="pagination" aria-label="Pagination Navigation">
+      <div class="pagination-info">
+        <span class="pagination-text">
+          {{ printf (i18n "pageOf") $currentPage $totalPages }}
+        </span>
+        <span class="pagination-count">
+          ({{ $paginator.NumberOfElements }} {{ if eq $paginator.NumberOfElements 1 }}{{ i18n "postSingular" }}{{ else }}{{ i18n "postPlural" }}{{ end }} {{ i18n "postsOnThisPage" }})
+        </span>
+      </div>
+
+      <div class="pagination-controls">
+        {{/* First page link */}}
+        {{ if ne $currentPage 1 }}
+          <a href="{{ $paginator.First.URL }}" class="pagination-link pagination-link-first" aria-label="{{ i18n "paginationFirst" }}">
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+            </svg>
+            <span class="pagination-link-text">{{ i18n "paginationFirst" }}</span>
+          </a>
+        {{ else }}
+          <span class="pagination-link pagination-link-disabled" aria-disabled="true">
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path>
+            </svg>
+            <span class="pagination-link-text">{{ i18n "paginationFirst" }}</span>
+          </span>
+        {{ end }}
+
+        {{/* Previous page link */}}
+        {{ if $paginator.HasPrev }}
+          <a href="{{ $paginator.Prev.URL }}" class="pagination-link pagination-link-prev" aria-label="{{ i18n "paginationPrev" }}">
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            <span class="pagination-link-text">{{ i18n "paginationPrev" }}</span>
+          </a>
+        {{ else }}
+          <span class="pagination-link pagination-link-disabled" aria-disabled="true">
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            <span class="pagination-link-text">{{ i18n "paginationPrev" }}</span>
+          </span>
+        {{ end }}
+
+        {{/* Page number links */}}
+        <div class="pagination-numbers">
+          {{ $windowSize := 2 }}
+          {{ $startPage := sub $currentPage $windowSize }}
+          {{ $endPage := add $currentPage $windowSize }}
+          
+          {{ if lt $startPage 1 }}
+            {{ $startPage = 1 }}
+          {{ end }}
+          
+          {{ if gt $endPage $totalPages }}
+            {{ $endPage = $totalPages }}
+          {{ end }}
+
+          {{/* Show first page if not in window */}}
+          {{ if gt $startPage 1 }}
+            <a href="{{ $paginator.First.URL }}" class="pagination-number" aria-label="Go to page 1">1</a>
+            {{ if gt $startPage 2 }}
+              <span class="pagination-ellipsis" aria-hidden="true">…</span>
+            {{ end }}
+          {{ end }}
+
+          {{/* Show page numbers in window */}}
+          {{ range $paginator.Pagers }}
+            {{ if and (ge .PageNumber $startPage) (le .PageNumber $endPage) }}
+              {{ if eq .PageNumber $currentPage }}
+                <span class="pagination-number pagination-number-current" aria-current="page" aria-label="Current page, page {{ .PageNumber }}">{{ .PageNumber }}</span>
+              {{ else }}
+                <a href="{{ .URL }}" class="pagination-number" aria-label="Go to page {{ .PageNumber }}">{{ .PageNumber }}</a>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+
+          {{/* Show last page if not in window */}}
+          {{ if lt $endPage $totalPages }}
+            {{ if lt $endPage (sub $totalPages 1) }}
+              <span class="pagination-ellipsis" aria-hidden="true">…</span>
+            {{ end }}
+            <a href="{{ $paginator.Last.URL }}" class="pagination-number" aria-label="Go to page {{ $totalPages }}">{{ $totalPages }}</a>
+          {{ end }}
+        </div>
+
+        {{/* Next page link */}}
+        {{ if $paginator.HasNext }}
+          <a href="{{ $paginator.Next.URL }}" class="pagination-link pagination-link-next" aria-label="{{ i18n "paginationNext" }}">
+            <span class="pagination-link-text">{{ i18n "paginationNext" }}</span>
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        {{ else }}
+          <span class="pagination-link pagination-link-disabled" aria-disabled="true">
+            <span class="pagination-link-text">{{ i18n "paginationNext" }}</span>
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        {{ end }}
+
+        {{/* Last page link */}}
+        {{ if ne $currentPage $totalPages }}
+          <a href="{{ $paginator.Last.URL }}" class="pagination-link pagination-link-last" aria-label="{{ i18n "paginationLast" }}">
+            <span class="pagination-link-text">{{ i18n "paginationLast" }}</span>
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        {{ else }}
+          <span class="pagination-link pagination-link-disabled" aria-disabled="true">
+            <span class="pagination-link-text">{{ i18n "paginationLast" }}</span>
+            <svg class="pagination-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        {{ end }}
+      </div>
+    {{ end }}
+  </nav>
+{{ end }}
+

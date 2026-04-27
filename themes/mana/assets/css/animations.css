@@ -1,0 +1,60 @@
+/* Animations */
+
+/* ── Page Transitions (CSS View Transitions API) ─────────────────────────── */
+
+/* Enable MPA view transitions — default crossfade for all navigations */
+@view-transition {
+  navigation: auto;
+}
+
+/* swipe-left: old page exits left, new page enters from right */
+html[data-page-enter="swipe-left"]::view-transition-old(root) {
+  animation: 400ms ease-in-out both vt-exit-left;
+}
+html[data-page-enter="swipe-left"]::view-transition-new(root) {
+  animation: 400ms ease-in-out both vt-enter-from-right;
+}
+
+/* swipe-right: old page exits right, new page enters from left */
+html[data-page-enter="swipe-right"]::view-transition-old(root) {
+  animation: 400ms ease-in-out both vt-exit-right;
+}
+html[data-page-enter="swipe-right"]::view-transition-new(root) {
+  animation: 400ms ease-in-out both vt-enter-from-left;
+}
+
+/* Pure translate — no opacity change; both pages fully visible during swipe */
+@keyframes vt-exit-left        { to   { transform: translateX(-100%); } }
+@keyframes vt-enter-from-right { from { transform: translateX(100%);  } }
+@keyframes vt-exit-right       { to   { transform: translateX(100%);  } }
+@keyframes vt-enter-from-left  { from { transform: translateX(-100%); } }
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html[data-page-enter]::view-transition-old(root),
+  html[data-page-enter]::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

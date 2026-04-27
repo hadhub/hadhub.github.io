@@ -1,0 +1,336 @@
+/* Targeted RTL styling - applied when body has .rtl class */
+
+/* Sticky header: ensure it works in RTL on narrow screens (fixes Chromium/Safari bugs) */
+.rtl .sticky-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  width: 100%;
+}
+
+/* Navbar: reverse menu order (Home right, Posts, Tags, About left) */
+.rtl .menu-list {
+  flex-direction: row-reverse;
+}
+
+/* Mobile menu: keep vertical stack (same as LTR), do not apply row-reverse */
+.rtl .mobile-menu-nav .menu-list {
+  flex-direction: column;
+}
+
+.rtl .mobile-menu-nav .menu-link {
+  text-align: right;
+}
+
+
+/* Hero section: description on right, logo on left */
+.rtl .hero-text {
+  order: 2;
+}
+
+.rtl .hero-image {
+  order: 1;
+}
+
+/* Hero title: right-aligned */
+.rtl .hero-title {
+  text-align: right;
+}
+
+/* Hero section: centered on mobile */
+@media (max-width: 768px) {
+  .rtl .hero-title,
+  .rtl .hero-text,
+  .rtl .hero-subtitle {
+    text-align: center;
+  }
+
+  .rtl .hero-text {
+    align-items: center;
+  }
+}
+
+/* Posts filter: flip layout */
+.rtl .filter-toggle-btn {
+  flex-direction: row-reverse;
+}
+
+.rtl .posts-filter {
+  flex-direction: row-reverse;
+}
+
+.rtl .filter-group {
+  align-items: stretch;
+}
+
+.rtl .filter-label {
+  text-align: right;
+}
+
+.rtl .tag-search-container,
+.rtl .filter-select {
+  width: 100%;
+  min-width: 0;
+}
+
+.rtl .filter-select {
+  background-position: left 0.75rem center;
+  text-align: right;
+  direction: rtl;
+}
+
+.rtl .tag-search-input {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Recent posts: align to the right */
+.rtl .posts-section,
+.rtl .posts-title,
+.rtl .posts-list {
+  text-align: right;
+}
+
+/* Tag page post cards: RTL direction for layout and correct punctuation */
+.rtl .tag-post-content {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .tag-post-title {
+  direction: rtl;
+}
+
+.rtl .tag-post-summary {
+  direction: rtl;
+}
+
+/* Tag page: date and tags aligned to the right (flex-start = right when direction: rtl) */
+.rtl .tag-post-header {
+  align-items: flex-start;
+  text-align: right;
+}
+
+.rtl .tag-post-date {
+  text-align: right;
+  align-self: flex-start;
+}
+
+.rtl .tag-post-tags {
+  justify-content: flex-start;
+}
+
+.rtl .post-card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.rtl .post-content {
+  align-items: flex-end;
+}
+
+/* Post title and description: direction rtl ensures punctuation (periods, quotes) renders correctly */
+.rtl .post-title,
+.rtl .post-title a {
+  direction: rtl;
+}
+
+.rtl .post-description {
+  direction: rtl;
+}
+
+/* Single post header: RTL direction and right alignment */
+.rtl .post-header {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .post-title-main {
+  text-align: right;
+}
+
+/* Post information: RTL direction, flex-start aligns to right in RTL */
+.rtl .post-meta {
+  align-items: flex-start;
+  text-align: right;
+  direction: rtl;
+}
+
+.rtl .post-meta .post-tags {
+  align-self: flex-start;
+  justify-content: flex-start;
+}
+
+.rtl .post-meta-info,
+.rtl .post-meta-inline {
+  text-align: right;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+/* Single post: TOC left, post right (desktop only - narrow screens use column) */
+.rtl .single-post-wrapper {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 1024px) {
+  .rtl .single-post-wrapper {
+    flex-direction: column;
+  }
+}
+
+/* TOC: RTL direction for section titles and layout */
+.rtl .post-toc {
+  direction: rtl;
+}
+
+.rtl .toc-nav {
+  direction: rtl;
+  text-align: right;
+}
+
+/* TOC toggle: RTL layout - icon right, chevron left */
+.rtl .toc-toggle {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* Single post: content text right-aligned with proper RTL direction for punctuation */
+.rtl .post-content-main {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl .post-content-main ul,
+.rtl .post-content-main ol {
+  padding-right: 1.5em;
+  padding-left: 0;
+}
+
+.rtl .post-content-main ul ul,
+.rtl .post-content-main ol ol,
+.rtl .post-content-main ul ol,
+.rtl .post-content-main ol ul {
+  padding-right: 1.5em;
+  padding-left: 0;
+}
+
+/* Code blocks: always LTR - programming code is typically in English */
+.rtl .post-content-main .code-block-wrapper,
+.rtl .post-content-main .highlight,
+.rtl .post-content-main pre {
+  direction: ltr;
+  text-align: left;
+}
+
+/* TOC: RTL active indicator and nested lists */
+.rtl .toc-nav a {
+  border-left: none;
+  border-right: 2px solid transparent;
+  border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.rtl .toc-nav a.active {
+  border-right-color: var(--accent-primary);
+}
+
+.rtl .toc-nav ul ul {
+  padding-right: var(--spacing-sm);
+  padding-left: 0;
+  margin-right: 0.5rem;
+  margin-left: 0;
+  border-right: 1px solid var(--border-color);
+  border-left: none;
+}
+
+.rtl .toc-nav ul ul a {
+  padding-right: 0.5rem;
+  padding-left: 0;
+}
+
+/* Post tags footer: with direction rtl, row puts label on right, tags flow left */
+.rtl .post-tags-footer {
+  flex-direction: row;
+  direction: rtl;
+}
+
+/* Search modal: RTL layout - icon right, input center, close/clear left */
+.rtl .search-input-wrapper {
+  flex-direction: row-reverse;
+}
+
+.rtl .search-input-icon {
+  left: auto;
+  right: var(--spacing-lg);
+}
+
+.rtl .search-input-clear {
+  right: auto;
+  left: calc(var(--spacing-lg) + 2rem + var(--spacing-sm));
+}
+
+.rtl .search-modal-close {
+  right: auto;
+  left: var(--spacing-lg);
+}
+
+.rtl .search-input {
+  text-align: right;
+  direction: rtl;
+  padding: 0 calc(var(--spacing-lg) + 1.5rem + var(--spacing-md)) 0
+    calc(var(--spacing-lg) + 2rem + var(--spacing-sm) + 2rem + var(--spacing-lg));
+}
+
+/* Admonitions/blockquotes: accent strip on the right in RTL */
+.rtl .post-content-main blockquote.blockquote-regular {
+  border-left: none;
+  border-right: 4px solid var(--accent-primary);
+}
+
+[data-theme="light"] .rtl .post-content-main blockquote.blockquote-regular {
+  border-left: none;
+  border-right-color: var(--accent-primary);
+}
+
+.rtl .post-content-main .alert-note,
+.rtl .post-content-main .alert-tip,
+.rtl .post-content-main .alert-important,
+.rtl .post-content-main .alert-warning,
+.rtl .post-content-main .alert-caution,
+.rtl .post-content-main .alert-info,
+.rtl .post-content-main .alert-success,
+.rtl .post-content-main .alert-question,
+.rtl .post-content-main .alert-danger,
+.rtl .post-content-main .alert-bug,
+.rtl .post-content-main .alert-example {
+  border-left: none;
+  border-right: 4px solid;
+}
+
+.rtl .post-content-main .alert-note { border-right-color: #3b82f6; }
+.rtl .post-content-main .alert-tip { border-right-color: #10b981; }
+.rtl .post-content-main .alert-important { border-right-color: #f59e0b; }
+.rtl .post-content-main .alert-warning { border-right-color: #f59e0b; }
+.rtl .post-content-main .alert-caution { border-right-color: #ef4444; }
+.rtl .post-content-main .alert-info { border-right-color: #3b82f6; }
+.rtl .post-content-main .alert-success { border-right-color: #10b981; }
+.rtl .post-content-main .alert-question { border-right-color: #8b5cf6; }
+.rtl .post-content-main .alert-danger { border-right-color: #ef4444; }
+.rtl .post-content-main .alert-bug { border-right-color: #f97316; }
+.rtl .post-content-main .alert-example { border-right-color: #6366f1; }
+
+/* Alert header: icon on right in RTL */
+.rtl .post-content-main .alert-header {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* Alert content: lists RTL padding */
+.rtl .post-content-main .alert-content ul,
+.rtl .post-content-main .alert-content ol {
+  padding-left: 0;
+  padding-right: 1.5em;
+}

@@ -1,0 +1,41 @@
+<nav class="header-nav" role="navigation" aria-label="Main navigation">
+  <div class="header-content">
+    <div class="header-logo">
+      <a href="{{ "/" | relLangURL }}" class="logo-link" aria-label="Home - {{ site.Title }}">
+        {{ site.Title }}
+      </a>
+    </div>
+
+    <!-- Hamburger menu button (mobile only) -->
+    <button 
+      id="mobile-menu-toggle" 
+      class="mobile-menu-toggle" 
+      aria-label="{{ i18n "toggleMenu" }}" 
+      aria-expanded="false"
+      type="button">
+      <span class="hamburger-icon">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+
+    <div class="header-menu">
+      {{ partial "menu.html" . }}
+
+      <button id="search-toggle" class="search-toggle" aria-label="{{ i18n "search" }}" type="button">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+      {{ partial "language-switcher.html" . }}
+
+      {{ partial "theme-toggle.html" . }}
+    </div>
+  </div>
+</nav>

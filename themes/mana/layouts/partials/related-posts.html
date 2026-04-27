@@ -1,0 +1,17 @@
+{{ $count := site.Params.relatedPostsCount | default 3 }}
+{{ $related := .Site.RegularPages.Related . | first $count }}
+{{ with $related }}
+<section class="related-posts" aria-label="{{ i18n "relatedPosts" | default "Related Posts" }}">
+  <h2 class="related-posts-title">{{ i18n "relatedPosts" | default "Related Posts" }}</h2>
+  <ul class="related-posts-list">
+    {{ range . }}
+    <li class="related-post-item">
+      <a href="{{ .RelPermalink }}" class="related-post-link">
+        <strong>{{ .Title }}</strong>
+        <span>{{ .Description | default (.Summary | plainify | truncate 120) }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

@@ -1,0 +1,140 @@
+<!doctype html><html lang=en-us class=h-full><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta charset=utf-8><meta name=language content="en-us"><meta name=theme-color content="#BD5FFF"><script>(function(){const e=localStorage.getItem("theme"),t=window.matchMedia("(prefers-color-scheme: light)").matches,n=e||(t?"light":"dark");document.documentElement.setAttribute("data-theme",n)})(),function(){var e=sessionStorage.getItem("mana_pt");e&&(document.documentElement.setAttribute("data-page-enter",e),sessionStorage.removeItem("mana_pt"))}(),window.MANA_SEARCH_INDEX_URL="/index.json",window.MANA_LANG_PREFIXES=["en"]</script><title>Because reading JSON at 2 a.m. is a no-go. | hadzah blog</title><meta name=description content="
+    From Sarif to TODOLIST
+  
+  "><meta name=keywords content="tools,research"><meta name=author content="Hadzah"><link rel=canonical href=https://hadrien.cat/posts/sarif-parser/><link rel=alternate hreflang=en-us href=https://hadrien.cat/posts/sarif-parser/><link rel=alternate hreflang=x-default href=https://hadrien.cat/posts/sarif-parser/><meta name=robots content="index, follow"><meta property="og:type" content="article"><meta property="og:locale" content="en_us"><meta property="og:title" content="Because reading JSON at 2 a.m. is a no-go. | hadzah blog"><meta property="og:description" content="From Sarif to TODOLIST"><meta property="og:url" content="https://hadrien.cat/posts/sarif-parser/"><meta property="og:site_name" content="hadzah blog"><meta property="article:published_time" content="2026-02-20T00:00:00Z"><meta property="article:modified_time" content="2026-02-20T00:00:00Z"><meta property="article:author" content="Hadzah"><meta property="article:section" content="tools"><meta property="article:tag" content="tools"><meta property="article:tag" content="research"><meta name=twitter:card content="summary_large_image"><meta name=twitter:title content="Because reading JSON at 2 a.m. is a no-go. | hadzah blog"><meta name=twitter:description content="From Sarif to TODOLIST"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","email":"hadrien.chauder@proton.me","name":"Hadzah","sameAs":["https://github.com/hadhub","https://linkedin.com/in/hadrien-c"]},"dateModified":"2026-02-20T00:00:00Z","datePublished":"2026-02-20T00:00:00Z","description":"From Sarif to TODOLIST","headline":"Because reading JSON at 2 a.m. is a no-go.","image":"https://hadrien.cat/images/avatar.png","inLanguage":"en-us","keywords":["tools","research"],"mainEntityOfPage":{"@id":"https://hadrien.cat/posts/sarif-parser/","@type":"WebPage"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://hadrien.cat/images/avatar.png"},"name":"hadzah blog","url":"https://hadrien.cat/"},"timeRequired":"PT3M","url":"https://hadrien.cat/posts/sarif-parser/","wordCount":599}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://hadrien.cat/","name":"Home","position":1},{"@type":"ListItem","item":"https://hadrien.cat/posts/","name":"Posts","position":2},{"@type":"ListItem","item":"https://hadrien.cat/posts/sarif-parser/","name":"Because reading JSON at 2 a.m. is a no-go.","position":3}]}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel=stylesheet media=print onload='this.media="all"'><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel=stylesheet></noscript><link rel=stylesheet href=/css/theme.min.1be873a9eb84b694842a9145014bd8e6b5209553dc755368b9c8b3112369d102.css><link rel=stylesheet href=/css/syntax-dark.min.b01037e5609e6260b74d6fcdd6d5131e8dcbc4d46d6ef4bfbe5a60bdfc1a9f30.css id=syntax-dark-theme class=syntax-theme><link rel=stylesheet href=/css/syntax-light.min.9602bc2fcef52b4c62e05eae14b48ba428e114f116e993e504d83ed5a3aeda98.css id=syntax-light-theme class=syntax-theme disabled><script>(function(){const n=localStorage.getItem("theme"),s=window.matchMedia("(prefers-color-scheme: light)").matches,o=n||(s?"light":"dark"),e=document.getElementById("syntax-dark-theme"),t=document.getElementById("syntax-light-theme");o==="light"?(e&&(e.disabled=!0),t&&(t.disabled=!1)):(e&&(e.disabled=!1),t&&(t.disabled=!0));const i=new MutationObserver(()=>{const n=document.documentElement.getAttribute("data-theme");n==="light"?(e&&(e.disabled=!0),t&&(t.disabled=!1)):(e&&(e.disabled=!1),t&&(t.disabled=!0))});i.observe(document.documentElement,{attributes:!0,attributeFilter:["data-theme"]})})()</script><link rel=stylesheet href=/css/bundle.min.cd0c0a9058b351cc4cd6f7242b8849ed724ea17b18825bbec04f8774a9f71f07.css><link rel=icon type=image/x-icon href=/favicon.ico><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png href=/favicon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=192x192 href=/android-chrome-192x192.png><link rel=icon type=image/png sizes=512x512 href=/android-chrome-512x512.png><link rel=manifest href=/site.webmanifest><link rel=alternate type=application/rss+xml href=/index.xml title="hadzah blog"></head><body class="flex flex-col min-h-screen"><a href=#main-content class=skip-to-main aria-label="Skip to main content">Skip to main content</a><header class=sticky-header><div class=header-container><nav class=header-nav role=navigation aria-label="Main navigation"><div class=header-content><div class=header-logo><a href=/ class=logo-link aria-label="Home - hadzah blog">hadzah blog</a></div><button id=mobile-menu-toggle class=mobile-menu-toggle aria-label="Toggle menu" aria-expanded=false type=button>
+<span class=hamburger-icon><span class=hamburger-line></span>
+<span class=hamburger-line></span>
+<span class=hamburger-line></span></span></button><div class=header-menu><ul class=menu-list></ul><button id=search-toggle class=search-toggle aria-label=Search type=button>
+<svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5A7 7 0 113 10a7 7 0 0114 0z"/></svg>
+</button>
+<button id=theme-toggle class=theme-toggle aria-label="Toggle theme" type=button>
+<svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728.0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+<svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003.0 0012 21a9.003 9.003.0 008.354-5.646z"/></svg></button></div></div></nav></div><div class=reading-progress-bar aria-hidden=true></div></header><main id=main-content class=flex-1 role=main><div class=single-post-wrapper><article class=single-post><header class=post-header><nav aria-label=breadcrumb class=breadcrumb-nav><ol class=breadcrumb-list itemscope itemtype=https://schema.org/BreadcrumbList><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/ itemprop=item><span itemprop=name>Home</span></a>
+<meta itemprop=position content="1"><span aria-hidden=true class=breadcrumb-sep>›</span></li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a href=/posts/ itemprop=item><span itemprop=name>Posts</span></a>
+<meta itemprop=position content="2"><span aria-hidden=true class=breadcrumb-sep>›</span></li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name class=breadcrumb-current>Because reading JSON at 2 a.m. is a no-go.</span>
+<meta itemprop=position content="3"></li></ol></nav><h1 class=post-title-main>Because reading JSON at 2 a.m. is a no-go.</h1><p class=post-description-main>From Sarif to TODOLIST</p><div class=post-meta><div class=post-meta-info><time datetime=2026-02-20T00:00:00Z class=post-date><svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5A2 2 0 003 7v12a2 2 0 002 2z"/></svg>
+February 20, 2026
+</time><span class=meta-separator>•</span>
+<span class=post-word-count><svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+599 words
+</span><span class=meta-separator>•</span>
+<span class=post-reading-time><svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3A9 9 0 113 12a9 9 0 0118 0z"/></svg>
+3 min</span></div><div class=post-tags><a href=/tags/tools class=post-tag>tools</a>
+<a href=/tags/research class=post-tag>research</a></div></div></header><div class=post-content-main><h2 id=what-is-sarif>What is SARIF?</h2><p>SARIF (Static Analysis Results Interchange Format) is a standardized JSON format used by static analysis tools to report their findings. Tools like <strong>semgrep</strong> and <strong>opengrep</strong> can output their results in SARIF, making it possible to process and visualize findings from different scanners in a unified way.</p><p>The problem? SARIF files are dense, deeply nested JSON. Scrolling through hundreds of findings in a raw JSON file or even in VSCode gets painful fast, especially when you need to triage, annotate, and track the status of each finding across a full audit.</p><h2 id=why-this-tool>Why this tool?</h2><p>When I first became interested in code review, I came across a video by <a href="https://www.youtube.com/watch?v=k99ml1v6FmA">noraj</a> explaining how to use semgrep to extract a sarif file and read it using vscode. I thought it was a smart idea and wanted to explore it further with my friend Claude Code, who immediately understood the concept. :))))</p><figure><img src=/posts/sarif-parser/img/readsarifat3am.png width=20%></figure><h2 id=the-idea>The idea</h2><p>Instead of fighting with raw JSON, I wanted a proper web interface that turns SARIF output into an actionable todo list, something where you can drag-and-drop your file, browse findings visually, and track your progress through an audit.</p><p>The main dashboard supports multiple SARIF projects side by side and gives you a sortable, filterable table of all findings with their severity, rule, file location, code snippet, tool, CWE, status, and notes:</p><figure><img src=/posts/sarif-parser/img/s1.png></figure><p>Clicking &ldquo;Graph&rdquo; on a finding opens a detailed view showing the rule-to-finding flow, the associated CWE, the code snippet, and a full description with references and OWASP tags:</p><figure><img src=/posts/sarif-parser/img/s2.png></figure><p>Bulk operations let you update the status of multiple findings at once, with lifecycle states like New, Confirmed, False Positive, Mitigated, and Accepted Risk:</p><figure><img src=/posts/sarif-parser/img/s3.png></figure><h2 id=compatible-tools>Compatible tools</h2><p>The tool has been tested with several popular static analysis and secret detection tools:</p><ul><li><strong>Semgrep / Opengrep</strong> — static analysis</li><li><strong>CodeQL</strong> — GitHub&rsquo;s code scanning engine</li><li><strong>Snyk</strong> — vulnerability scanner</li><li><strong>Gitleaks</strong> — secret detection in git repos</li><li><strong>Trufflehog</strong> — secret detection across multiple sources</li></ul><p>Any tool that outputs valid SARIF should work out of the box.</p><h2 id=features>Features</h2><ul><li><strong>SARIF file upload</strong> — drag-and-drop support with automatic parsing</li><li><strong>Multi-file projects</strong> — upload multiple SARIF files into the same project; findings are merged with automatic deduplication</li><li><strong>Finding management</strong> — browse, filter, and search findings by severity, status, rule ID, file path, message, or code snippet</li><li><strong>Status tracking</strong> — track findings through their lifecycle: New, Confirmed, False Positive, Mitigated, Accepted Risk</li><li><strong>Annotations</strong> — add notes to individual findings for documentation and collaboration</li><li><strong>SVG visualizations</strong> — generated graphs showing rule information, code flows (source to sink), and locations</li><li><strong>Bulk operations</strong> — update the status of multiple findings at once</li><li><strong>SARIF export</strong> — export findings back to SARIF format with embedded review status and notes</li><li><strong>Multi-project support</strong> — manage multiple SARIF uploads as separate projects</li><li><strong>REST API</strong> — all features are accessible via a REST API, making it easy to integrate sarif2web into your CI/CD pipeline or automation scripts</li></ul><h2 id=result>Result</h2><p>At the time of writing this article, sarif2web is available on my GitHub: <a href=https://github.com/hadhub/sarif2web>sarif2web</a></p><p>You can deploy it via Docker and import sarif files. Each time you edit the status of a finding, it is stored in a MongoDB database so that you can return to it later without having to re-sort.</p><h2 id=whats-next>What&rsquo;s next?</h2><p>This is just the beginning. Here are some ideas I&rsquo;m exploring:</p><ul><li>Support for additional static analysis formats beyond SARIF</li><li>Link to the code base that triggered the alert</li><li>Markdown/PDF export</li></ul><p>The tool is open source and built to evolve. If you have ideas, feedback, or want to contribute, feel free to reach out on Discord (<strong>hadzah</strong>) or open a pull request on the repo.</p></div><footer class=post-footer><div class=post-tags-footer><span class=tags-label>Tags:</span>
+<a href=/tags/tools class=post-tag>tools</a>
+<a href=/tags/research class=post-tag>research</a></div></footer><nav class=post-navigation aria-label="Post navigation"><a href=/posts/mercator-account-takeover/ class="nav-link nav-next" aria-label="Next post: CVE-2026-27639 Mercator — Account Takeover via Stored XSS"><span class=nav-label>Next</span>
+<span class=nav-title>CVE-2026-27639 Mercator — Account Takeover via Stored XSS</span></a></nav></article><aside class=post-toc id=post-toc aria-label="Table of Contents"><button class=toc-toggle id=toc-toggle aria-expanded=true aria-controls=toc-content aria-label="Toggle table of contents">
+<svg class="toc-burger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+<span class=toc-toggle-text>Table of Contents</span>
+<svg class="toc-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class=toc-content id=toc-content><nav class=toc-nav aria-label="Table of Contents"><nav id=TableOfContents><ul><li><a href=#what-is-sarif>What is SARIF?</a></li><li><a href=#why-this-tool>Why this tool?</a></li><li><a href=#the-idea>The idea</a></li><li><a href=#compatible-tools>Compatible tools</a></li><li><a href=#features>Features</a></li><li><a href=#result>Result</a></li><li><a href=#whats-next>What&rsquo;s next?</a></li></ul></nav></nav></div></aside></div></main><footer><footer class=site-footer><div class=footer-content><p class=footer-text>&copy;
+2026
+hadzah blog.
+Hugo & Mana theme</p><div class=footer-social><div class=social-links><a href=https://github.com/hadhub target=_blank rel="noopener noreferrer" class=social-link aria-label=GitHub><svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483.0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951.0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65.0.0.84-.27 2.75 1.026A9.564 9.564.0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688.0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855.0 1.338-.012 2.419-.012 2.747.0.268.18.58.688.482A10.019 10.019.0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+</a><a href=https://linkedin.com/in/hadrien-c target=_blank rel="noopener noreferrer" class=social-link aria-label=LinkedIn><svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853.0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601.0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144.0-2.063-.926-2.063-2.065.0-1.138.92-2.063 2.063-2.063 1.14.0 2.064.925 2.064 2.063.0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225.0H1.771C.792.0.0.774.0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2.0 22.222.0h.003z"/></svg>
+</a><a href=mailto:hadrien.chauder@proton.me class=social-link aria-label=Email><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22.0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5A2 2 0 003 7v10a2 2 0 002 2z"/></svg></a></div></div></div></footer></footer><div id=search-modal class=search-modal aria-hidden=true role=dialog aria-label=Search data-no-results="No results found"><div class=search-modal-backdrop id=search-modal-backdrop></div><div class=search-modal-container><div class=search-input-wrapper><svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5A7 7 0 113 10a7 7 0 0114 0z"/></svg>
+<input type=search id=search-input class=search-input placeholder=Search... autocomplete=off aria-label=Search>
+<button class=search-input-clear id=search-input-clear aria-label="Clear search">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4A1 1 0 009 4v3M4 7h16"/></svg>
+</button>
+<button class=search-modal-close id=search-modal-close aria-label="Close search">
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/></svg></button></div><div id=search-results class=search-results></div></div></div><div id=mobile-menu class=mobile-menu aria-hidden=true><div class=mobile-menu-overlay></div><div class=mobile-menu-content><div class=mobile-menu-header><span class=mobile-menu-title>Menu</span>
+<button id=mobile-menu-close class=mobile-menu-close aria-label="Close menu" type=button>
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/></svg></button></div><nav class=mobile-menu-nav role=navigation aria-label="Mobile navigation"><ul class=menu-list></ul></nav><div class=mobile-menu-footer><button id=mobile-search-toggle class=mobile-search-toggle aria-label=Search type=button>
+<svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5A7 7 0 113 10a7 7 0 0114 0z"/></svg>
+<span>Search</span>
+</button>
+<button class=theme-toggle aria-label="Toggle theme" type=button>
+<svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728.0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+<svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003.0 0012 21a9.003 9.003.0 008.354-5.646z"/></svg></button></div></div></div><button id=scroll-to-top class=scroll-to-top aria-label="Scroll to top" type=button>
+<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0 7 7m-7-7v18"/></svg>
+</button>
+<script src=/js/main.min.137938305a4255a5ce0531471a42b4448c4adb05e04052a70000719c0704d082.js defer></script><style>.post-content-main figure{margin:1.5em auto;text-align:center}.post-content-main figure img{max-width:100%;height:auto;display:inline-block}.post-content-main figure figcaption{font-style:italic;opacity:.7;margin-top:.5em;font-size:.9em}pre.mermaid{text-align:center;background:0 0;border:none;padding:0;overflow:visible}.mermaid-figure{text-align:center;margin:1.5em 0}.mermaid-figure figcaption{font-style:italic;opacity:.7;margin-top:.5em;font-size:.9em}.post-content-main img{cursor:zoom-in}.lightbox-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center}.lightbox-overlay.active{display:flex}.lightbox-overlay img{max-width:95vw;max-height:95vh;object-fit:contain;border-radius:4px}</style><script type=module>
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const themeVars = (isLight) => isLight ? {
+      background: '#ffffff',
+      primaryColor: '#fde8e8',
+      primaryTextColor: '#1e293b',
+      primaryBorderColor: '#c91e1e',
+      lineColor: '#c91e1e',
+      secondaryColor: '#fef2f2',
+      tertiaryColor: '#fde8e8',
+      noteBkgColor: '#fef2f2',
+      noteTextColor: '#1e293b',
+      noteBorderColor: '#c91e1e',
+      actorBkg: '#fde8e8',
+      actorTextColor: '#1e293b',
+      actorBorder: '#c91e1e',
+      actorLineColor: '#c91e1e',
+      signalColor: '#1e293b',
+      signalTextColor: '#1e293b',
+      labelBoxBkgColor: '#fde8e8',
+      labelBoxBorderColor: '#c91e1e',
+      labelTextColor: '#1e293b',
+      loopTextColor: '#1e293b',
+      activationBkgColor: '#fef2f2',
+      activationBorderColor: '#c91e1e',
+      sequenceNumberColor: '#ffffff'
+    } : {
+      background: '#1a1a2e',
+      primaryColor: '#2a2a3e',
+      primaryTextColor: '#e8e8f0',
+      primaryBorderColor: '#f24e4e',
+      lineColor: '#f24e4e',
+      secondaryColor: '#1f1f2f',
+      tertiaryColor: '#2a2a3e',
+      noteBkgColor: '#2a2a3e',
+      noteTextColor: '#e8e8f0',
+      noteBorderColor: '#f24e4e',
+      actorBkg: '#2a2a3e',
+      actorTextColor: '#e8e8f0',
+      actorBorder: '#f24e4e',
+      actorLineColor: '#f24e4e',
+      signalColor: '#e8e8f0',
+      signalTextColor: '#e8e8f0',
+      labelBoxBkgColor: '#2a2a3e',
+      labelBoxBorderColor: '#f24e4e',
+      labelTextColor: '#e8e8f0',
+      loopTextColor: '#e8e8f0',
+      activationBkgColor: '#1f1f2f',
+      activationBorderColor: '#f24e4e',
+      sequenceNumberColor: '#1a1a2e'
+    };
+
+  const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+
+  const configure = () => {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: themeVars(isLight())
+    });
+  };
+
+  const render = async () => {
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      if (!el.dataset.source) {
+        el.dataset.source = el.textContent.trim();
+      }
+      el.removeAttribute('data-processed');
+      el.innerHTML = el.dataset.source;
+    });
+    configure();
+    await mermaid.run({ querySelector: '.mermaid' });
+  };
+
+  const init = () => { render(); };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-theme') {
+        render();
+      }
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script><script>document.addEventListener("DOMContentLoaded",function(){const e=document.createElement("div");e.className="lightbox-overlay";const t=document.createElement("img");e.appendChild(t),document.body.appendChild(e),e.addEventListener("click",function(){e.classList.remove("active")}),document.addEventListener("keydown",function(t){t.key==="Escape"&&e.classList.remove("active")}),document.querySelectorAll(".post-content-main img").forEach(function(n){n.addEventListener("click",function(){t.src=n.src,e.classList.add("active")})})})</script></body></html>
