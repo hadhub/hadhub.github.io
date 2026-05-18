@@ -34,7 +34,7 @@ The `description` field is also reflected in `ecosystem.blade.php`, but `entity_
 |---|---|---|---|
 | `contact_point` | None | `index.blade.php`, `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes, highest impact** (reflected in entity listing) |
 | `description` | None | `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes**, detail + ecosystem report only |
-| `entity_type` | None | `_details.blade.php` | **Yes** — detail view only |
+| `entity_type` | None | `_details.blade.php` | **Yes**, detail view only |
 | `security_level` | `integer` | `_details.blade.php`, `ecosystem.blade.php`, `edit.blade.php`, `create.blade.php` | No , type constraint blocks injection |
 
 ---
