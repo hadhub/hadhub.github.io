@@ -1,5 +1,5 @@
 ---
-title: "CVE-2026-27639 Mercator — Account Takeover via Stored XSS"
+title: "CVE-2026-27639 Mercator : Account Takeover via Stored XSS"
 date: 2026-02-21
 draft: false
 author: "Hadzah"
@@ -9,7 +9,8 @@ description: "CVE-2026-27639 Stored XSS to admin account takeover in Mercator"
 
 ## Description
 
-A low-privileged user (with the `User` role) can achieve a **full administrator account takeover** on Mercator by injecting a malicious script into the `contact_point` field when creating an entity. When an admin visits the entity listing page, the payload executes in their browser context, silently changing the admin password without any re-authentication.
+A low-privileged user (with the `User` role) can achieve a **full administrator account takeover** on Mercator by injecting a malicious script into the `contact_point` field when creating an entity.
+When an admin visits the entity listing page, the payload executes in their browser context, silently changing the admin password without any re-authentication.
 
 | | |
 |---|---|
@@ -26,14 +27,15 @@ A low-privileged user (with the `User` role) can achieve a **full administrator 
 
 ### Vulnerable fields
 
-Three fields accept unsanitized input and are rendered with `{!! !!}`, but `contact_point` is the most impactful: it is the only one reflected in `index.blade.php` (the entity listing), meaning the payload triggers as soon as any admin visits `/admin/entities` — no need to open a specific entity. The `description` field is also reflected in `ecosystem.blade.php`, but `entity_type` only appears in the detail view.
+Three fields accept unsanitized input and are rendered with `{!! !!}`, but `contact_point` is the most impactful: it is the only one reflected in `index.blade.php` (the entity listing), meaning the payload triggers as soon as any admin visits `/admin/entities`, no need to open a specific entity.
+The `description` field is also reflected in `ecosystem.blade.php`, but `entity_type` only appears in the detail view.
 
 | Field | Validation | Rendered with `{!! !!}` | Exploitable |
 |---|---|---|---|
-| `contact_point` | None | `index.blade.php`, `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes — highest impact** (reflected in entity listing) |
-| `description` | None | `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes** — detail + ecosystem report only |
+| `contact_point` | None | `index.blade.php`, `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes, highest impact** (reflected in entity listing) |
+| `description` | None | `_details.blade.php`, `edit.blade.php`, `create.blade.php`, `ecosystem.blade.php` | **Yes**, detail + ecosystem report only |
 | `entity_type` | None | `_details.blade.php` | **Yes** — detail view only |
-| `security_level` | `integer` | `_details.blade.php`, `ecosystem.blade.php`, `edit.blade.php`, `create.blade.php` | No — type constraint blocks injection |
+| `security_level` | `integer` | `_details.blade.php`, `ecosystem.blade.php`, `edit.blade.php`, `create.blade.php` | No , type constraint blocks injection |
 
 ---
 
@@ -98,7 +100,8 @@ sequenceDiagram
 
 ### Application file flow (source to sink)
 
-This diagram maps the vulnerability across the Mercator codebase. It traces user input from the route definition, through validation (where `contact_point` is not checked), into the controller that stores it raw in the database, and finally to the Blade views that render it without escaping.
+This diagram maps the vulnerability across the Mercator codebase.
+It traces user input from the route definition, through validation (where `contact_point` is not checked), into the controller that stores it raw in the database, and finally to the Blade views that render it without escaping.
 
 {{< mermaid caption="State diagram — Vulnerability path through application files from input to unescaped rendering" >}}
 stateDiagram-v2
@@ -179,8 +182,6 @@ The two operating scripts are available here : https://github.com/hadhub/CVE-202
 - **Content Security Policy header** : A ``SecurityHeaders`` middleware will emit a CSP with per-request nonces on all responses, preventing injected scripts from executing even if they reach the browser.
 
 More details : [https://github.com/dbarzin/mercator/security/advisories/GHSA-65p7-pph2-966g](https://github.com/dbarzin/mercator/security/advisories/GHSA-65p7-pph2-966g)
-
-
 
 Thank you to him for the various exchanges we had by email. This application addresses many IT issues from the perspective of managing and understanding a modern and complex infrastructure.
 
