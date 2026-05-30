@@ -4,7 +4,7 @@ date: "2026-05-21"
 draft: false
 author: "hadzah"
 tags: ["cve", "web", "open-source", "mercator"]
-description: "CVE-2026-49345 Leak PII via JSON DSL"
+description: "CVE-2026-49344 Leak PII via JSON DSL"
 ---
 
 # PII Extraction via JSON DSL query
@@ -270,7 +270,8 @@ HTTP 200 response observed on the `dev` lab. It contains the `login` and `email`
 Other relations enable the pivot: `Permission::users()`, `AuditLog::user()`, `ApplicationEvent::user()`, `SavedQuery::user()`.
 The `AdminUser` model is not even part of the blocklist.
 
-**The residual impact is still significant**. The fix raised the minimum required privilege. A read-only `Auditor` role no longer suffices. The `query_create` permission is now required. But a plain `User` account still recovers the complete account directory. This is personal data covered by the GDPR. The same account also reads the entire CMDB. This bypasses the row-level access model based on `granularity`.
+**The residual impact is still significant**. The fix raised the minimum required privilege. A read-only `Auditor` role no longer suffices. The `query_create` permission is now required. But a plain `User` account still recovers the complete account directory.
+The same account also reads the entire CMDB. This bypasses the row-level access model based on `granularity`.
 
 ## Adjust Remedies
 
@@ -284,7 +285,9 @@ To structurally close the relation pivot, here are the recommendations:
 
 The first two recommendations form the minimal fix.
 They close the relation pivot that restores the full account directory disclosure.
-Thank you to him for the various exchanges we had by email. This application addresses many IT issues from the perspective of managing and understanding a modern and complex infrastructure.
+
+Thank you to him for the various exchanges we had by email.
+This application addresses many IT issues from the perspective of managing and understanding a modern and complex infrastructure.
 
 ## Demo :
 
