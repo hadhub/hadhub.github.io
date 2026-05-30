@@ -1,7 +1,7 @@
 ---
 title: "CVE-2026-49344 Mercator : Leak PII via JSON DSL"
 date: "2026-05-21"
-draft: true
+draft: false
 author: "hadzah"
 tags: ["cve", "web", "open-source", "mercator"]
 description: "CVE-2026- Leak PII via JSON DSL"
