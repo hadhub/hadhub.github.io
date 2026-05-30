@@ -2,144 +2,124 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/tags/cve/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
+    <loc>https://example.org/tags/cve/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/tags/cve/"/>
+               href="https://example.org/tags/cve/"/>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/pii_leak_mercator/pii-leak-mercator/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/posts/pii_leak_mercator/pii-leak-mercator/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/posts/ssrf_mercator/ssrf-mercator/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/posts/ssrf_mercator/ssrf-mercator/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/tags/mercator/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/tags/mercator/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/tags/open-source/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/tags/open-source/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/posts/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/tags/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/tags/web/</loc>
-    <lastmod>2026-05-21T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link
-               rel="alternate"
-               hreflang="en"
-               href="http://localhost:1313/tags/web/"/>
-  </url>
-  <url>
-    <loc>http://localhost:1313/posts/mercator-account-takeover/</loc>
+    <loc>https://example.org/posts/mercator-account-takeover/</loc>
     <lastmod>2026-02-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/posts/mercator-account-takeover/"/>
+               href="https://example.org/posts/mercator-account-takeover/"/>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/sarif-parser/</loc>
+    <loc>https://example.org/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/"/>
+  </url>
+  <url>
+    <loc>https://example.org/tags/mercator/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/tags/mercator/"/>
+  </url>
+  <url>
+    <loc>https://example.org/tags/open-source/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/tags/open-source/"/>
+  </url>
+  <url>
+    <loc>https://example.org/posts/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/posts/"/>
+  </url>
+  <url>
+    <loc>https://example.org/tags/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/tags/"/>
+  </url>
+  <url>
+    <loc>https://example.org/tags/web/</loc>
+    <lastmod>2026-02-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link
+               rel="alternate"
+               hreflang="en"
+               href="https://example.org/tags/web/"/>
+  </url>
+  <url>
+    <loc>https://example.org/posts/sarif-parser/</loc>
     <lastmod>2026-02-20T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/posts/sarif-parser/"/>
+               href="https://example.org/posts/sarif-parser/"/>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/research/</loc>
+    <loc>https://example.org/tags/research/</loc>
     <lastmod>2026-02-20T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/tags/research/"/>
+               href="https://example.org/tags/research/"/>
   </url>
   <url>
-    <loc>http://localhost:1313/tags/tools/</loc>
+    <loc>https://example.org/tags/tools/</loc>
     <lastmod>2026-02-20T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/tags/tools/"/>
+               href="https://example.org/tags/tools/"/>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://example.org/categories/</loc>
     
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
     <xhtml:link
                rel="alternate"
                hreflang="en"
-               href="http://localhost:1313/categories/"/>
+               href="https://example.org/categories/"/>
   </url>
   
 </urlset>
