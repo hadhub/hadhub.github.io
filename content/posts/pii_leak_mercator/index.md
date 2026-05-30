@@ -4,7 +4,7 @@ date: "2026-05-21"
 draft: false
 author: "hadzah"
 tags: ["cve", "web", "open-source", "mercator"]
-description: "CVE-2026- Leak PII via JSON DSL"
+description: "CVE-2026-49345 Leak PII via JSON DSL"
 ---
 
 # PII Extraction via JSON DSL query

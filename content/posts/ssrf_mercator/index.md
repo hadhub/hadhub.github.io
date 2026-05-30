@@ -4,7 +4,7 @@ date: "2026-05-21"
 draft: false
 author: "hadzah"
 tags: ["cve", "web", "open-source", "mercator"]
-description: "CVE-2026- Server Side Request Forgery Portscan & Conditional RCE"
+description: "CVE-2026-49345 Server Side Request Forgery Portscan & Conditional RCE"
 ---
 
 # SSRF inside Provider feature
