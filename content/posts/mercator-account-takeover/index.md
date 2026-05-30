@@ -3,7 +3,7 @@ title: "CVE-2026-27639 Mercator : Account Takeover via Stored XSS"
 date: 2026-02-21
 draft: false
 author: "Hadzah"
-tags: ["cve", "xss", "account-takeover", "mercator"]
+tags: ["cve", "web", "open-source", "mercator"]
 description: "CVE-2026-27639 Stored XSS to admin account takeover in Mercator"
 ---
 

@@ -1,3 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Research on hadzah blog</title><link>https://hadrien.cat/tags/research/</link><description>Recent content in Research on hadzah blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://hadrien.cat/tags/research/index.xml" rel="self" type="application/rss+xml"/><item><title>Because reading JSON at 2 a.m. is a no-go.</title><link>https://hadrien.cat/posts/sarif-parser/</link><pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate><guid>https://hadrien.cat/posts/sarif-parser/</guid><description>&lt;h2 id="what-is-sarif"&gt;What is SARIF?&lt;/h2&gt;
-&lt;p&gt;SARIF (Static Analysis Results Interchange Format) is a standardized JSON format used by static analysis tools to report their findings. Tools like &lt;strong&gt;semgrep&lt;/strong&gt; and &lt;strong&gt;opengrep&lt;/strong&gt; can output their results in SARIF, making it possible to process and visualize findings from different scanners in a unified way.&lt;/p&gt;
-&lt;p&gt;The problem? SARIF files are dense, deeply nested JSON. Scrolling through hundreds of findings in a raw JSON file or even in VSCode gets painful fast, especially when you need to triage, annotate, and track the status of each finding across a full audit.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on hadzah</title>
+    <link>http://localhost:1313/tags/research/</link>
+    <description>Recent content in Research on hadzah</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Because reading JSON at 2 a.m. is a no-go.</title>
+      <link>http://localhost:1313/posts/sarif-parser/</link>
+      <pubDate>Fri, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/sarif-parser/</guid>
+      <description>&lt;h2 id=&#34;what-is-sarif&#34;&gt;What is SARIF?&lt;/h2&gt;&#xA;&lt;p&gt;SARIF (Static Analysis Results Interchange Format) is a standardized JSON format used by static analysis tools to report their findings. Tools like &lt;strong&gt;semgrep&lt;/strong&gt; and &lt;strong&gt;opengrep&lt;/strong&gt; can output their results in SARIF, making it possible to process and visualize findings from different scanners in a unified way.&lt;/p&gt;&#xA;&lt;p&gt;The problem? SARIF files are dense, deeply nested JSON. Scrolling through hundreds of findings in a raw JSON file or even in VSCode gets painful fast, especially when you need to triage, annotate, and track the status of each finding across a full audit.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

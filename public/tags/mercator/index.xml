@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mercator on hadzah blog</title><link>https://hadrien.cat/tags/mercator/</link><description>Recent content in Mercator on hadzah blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 21 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://hadrien.cat/tags/mercator/index.xml" rel="self" type="application/rss+xml"/><item><title>CVE-2026-27639 Mercator — Account Takeover via Stored XSS</title><link>https://hadrien.cat/posts/mercator-account-takeover/</link><pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate><guid>https://hadrien.cat/posts/mercator-account-takeover/</guid><description>&lt;h2 id="description"&gt;Description&lt;/h2&gt;
-&lt;p&gt;A low-privileged user (with the &lt;code&gt;User&lt;/code&gt; role) can achieve a &lt;strong&gt;full administrator account takeover&lt;/strong&gt; on Mercator by injecting a malicious script into the &lt;code&gt;contact_point&lt;/code&gt; field when creating an entity. When an admin visits the entity listing page, the payload executes in their browser context, silently changing the admin password without any re-authentication.&lt;/p&gt;
-&lt;table&gt;
- &lt;thead&gt;
- &lt;tr&gt;
- &lt;th&gt;&lt;/th&gt;
- &lt;th&gt;&lt;/th&gt;
- &lt;/tr&gt;
- &lt;/thead&gt;
- &lt;tbody&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;Product&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&lt;a href="https://github.com/dbarzin/mercator"&gt;Mercator&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;Version&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&amp;lt;= 2026.03.01&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;Type&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&lt;a href="https://cwe.mitre.org/data/definitions/79.html"&gt;CWE-79: Improper Neutralization of Input During Web Page Generation (&amp;lsquo;Cross-site Scripting&amp;rsquo;)&lt;/a&gt;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;tr&gt;
- &lt;td&gt;&lt;strong&gt;CVSS 4.0&lt;/strong&gt;&lt;/td&gt;
- &lt;td&gt;&lt;strong&gt;8.5&lt;/strong&gt; — &lt;code&gt;CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N&lt;/code&gt;&lt;/td&gt;
- &lt;/tr&gt;
- &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id="prerequisites"&gt;Prerequisites&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;A valid account on the Mercator instance with the &lt;strong&gt;User&lt;/strong&gt; role&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;entity_create&lt;/code&gt; permission (granted to all users by default)&lt;/li&gt;
-&lt;li&gt;Network reachability between the victim&amp;rsquo;s browser and the attacker&amp;rsquo;s HTTP server (to serve the JS payload)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="vulnerable-fields"&gt;Vulnerable fields&lt;/h3&gt;
-&lt;p&gt;Three fields accept unsanitized input and are rendered with &lt;code&gt;{!! !!}&lt;/code&gt;, but &lt;code&gt;contact_point&lt;/code&gt; is the most impactful: it is the only one reflected in &lt;code&gt;index.blade.php&lt;/code&gt; (the entity listing), meaning the payload triggers as soon as any admin visits &lt;code&gt;/admin/entities&lt;/code&gt; — no need to open a specific entity. The &lt;code&gt;description&lt;/code&gt; field is also reflected in &lt;code&gt;ecosystem.blade.php&lt;/code&gt;, but &lt;code&gt;entity_type&lt;/code&gt; only appears in the detail view.&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mercator on hadzah</title>
+    <link>http://localhost:1313/tags/mercator/</link>
+    <description>Recent content in Mercator on hadzah</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 May 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/mercator/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CVE-2026- Mercator : Leak PII via JSON DSL</title>
+      <link>http://localhost:1313/posts/pii_leak_mercator/pii-leak-mercator/</link>
+      <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/pii_leak_mercator/pii-leak-mercator/</guid>
+      <description>&lt;h1 id=&#34;pii-extraction-via-json-dsl-query&#34;&gt;PII Extraction via JSON DSL query&lt;/h1&gt;&#xA;&lt;p&gt;For PoC, check my github : &lt;a href=&#34;https://github.com/hadhub/CVE-2026-XXXXX-Mercator-JSON-DSL&#34;&gt;https://github.com/hadhub/CVE-2026-XXXXX-Mercator-JSON-DSL&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;&#xA;&lt;p&gt;Mercator embeds a &amp;ldquo;Query Engine&amp;rdquo;.&#xA;This feature allows users to enter a JSON DSL that describes a query against the application&amp;rsquo;s Eloquent models.&#xA;The DSL accepts the keys &lt;code&gt;from&lt;/code&gt;, &lt;code&gt;select&lt;/code&gt;, &lt;code&gt;filters&lt;/code&gt;, &lt;code&gt;traverse&lt;/code&gt; and &lt;code&gt;output&lt;/code&gt;.&#xA;The engine translates the DSL into an Eloquent query and returns the rows in JSON.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;code&gt;QueryController::execute()&lt;/code&gt; method initially performs no access control on the target model.&#xA;The engine applies no allowlist on the reachable models.&#xA;Any authenticated account can therefore query the &lt;code&gt;users&lt;/code&gt; table along with any model class declared under &lt;code&gt;app/Models/&lt;/code&gt;.&#xA;The direct consequence is full disclosure of the application&amp;rsquo;s account directory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CVE-2026-49344 Mercator : SSRF To Conditional RCE</title>
+      <link>http://localhost:1313/posts/ssrf_mercator/ssrf-mercator/</link>
+      <pubDate>Thu, 21 May 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ssrf_mercator/ssrf-mercator/</guid>
+      <description>&lt;h1 id=&#34;ssrf-inside-provider-feature&#34;&gt;SSRF inside Provider feature&lt;/h1&gt;&#xA;&lt;p&gt;For PoC, check my github : &lt;a href=&#34;https://github.com/hadhub/CVE-2026-XXXXX-Mercator-SSRF&#34;&gt;https://github.com/hadhub/CVE-2026-XXXXX-Mercator-SSRF&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;&#xA;&lt;p&gt;The &amp;ldquo;CVE&amp;rdquo; tab on the Mercator configuration page exposes a &amp;ldquo;Test Provider&amp;rdquo; button.&#xA;This button is intended to check that a CVE provider URL answers correctly on its &lt;code&gt;/api/dbInfo&lt;/code&gt; endpoint.&#xA;The value of the &lt;code&gt;provider&lt;/code&gt; field is passed as is to &lt;code&gt;curl_init()&lt;/code&gt; and executed by &lt;code&gt;curl_exec()&lt;/code&gt;.&#xA;No validation is applied on the scheme, on the host or on the destination IP address.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CVE-2026-27639 Mercator : Account Takeover via Stored XSS</title>
+      <link>http://localhost:1313/posts/mercator-account-takeover/</link>
+      <pubDate>Sat, 21 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/mercator-account-takeover/</guid>
+      <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;&#xA;&lt;p&gt;A low-privileged user (with the &lt;code&gt;User&lt;/code&gt; role) can achieve a &lt;strong&gt;full administrator account takeover&lt;/strong&gt; on Mercator by injecting a malicious script into the &lt;code&gt;contact_point&lt;/code&gt; field when creating an entity.&#xA;When an admin visits the entity listing page, the payload executes in their browser context, silently changing the admin password without any re-authentication.&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;&lt;/th&gt;&#xA;          &lt;th&gt;&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Product&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://github.com/dbarzin/mercator&#34;&gt;Mercator&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Version&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&amp;lt;= 2026.03.01&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;Type&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;a href=&#34;https://cwe.mitre.org/data/definitions/79.html&#34;&gt;CWE-79: Improper Neutralization of Input During Web Page Generation (&amp;lsquo;Cross-site Scripting&amp;rsquo;)&lt;/a&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;&lt;strong&gt;CVSS 4.0&lt;/strong&gt;&lt;/td&gt;&#xA;          &lt;td&gt;&lt;strong&gt;8.5&lt;/strong&gt; — &lt;code&gt;CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:P/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N&lt;/code&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;&#xA;&lt;h3 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A valid account on the Mercator instance with the &lt;strong&gt;User&lt;/strong&gt; role&lt;/li&gt;&#xA;&lt;li&gt;The &lt;code&gt;entity_create&lt;/code&gt; permission (granted to all users by default)&lt;/li&gt;&#xA;&lt;li&gt;Network reachability between the victim&amp;rsquo;s browser and the attacker&amp;rsquo;s HTTP server (to serve the JS payload)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;vulnerable-fields&#34;&gt;Vulnerable fields&lt;/h3&gt;&#xA;&lt;p&gt;Three fields accept unsanitized input and are rendered with &lt;code&gt;{!! !!}&lt;/code&gt;, but &lt;code&gt;contact_point&lt;/code&gt; is the most impactful: it is the only one reflected in &lt;code&gt;index.blade.php&lt;/code&gt; (the entity listing), meaning the payload triggers as soon as any admin visits &lt;code&gt;/admin/entities&lt;/code&gt;, no need to open a specific entity.&#xA;The &lt;code&gt;description&lt;/code&gt; field is also reflected in &lt;code&gt;ecosystem.blade.php&lt;/code&gt;, but &lt;code&gt;entity_type&lt;/code&gt; only appears in the detail view.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
