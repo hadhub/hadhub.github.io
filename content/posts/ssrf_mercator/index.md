@@ -10,7 +10,8 @@ description: "CVE-2026- Server Side Request Forgery Portscan & Conditional RCE"
 # SSRF inside Provider feature
 
 For PoC, check my github : https://github.com/hadhub/CVE-2026-49345-Mercator-SSRF
-The Advisory : https://github.com/sourcentis/mercator/security/advisories/GHSA-6q97-4q5r-96j6
+
+The advisory : https://github.com/sourcentis/mercator/security/advisories/GHSA-6q97-4q5r-96j6
 
 ## Description
 

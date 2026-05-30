@@ -9,7 +9,9 @@ description: "CVE-2026- Leak PII via JSON DSL"
 
 # PII Extraction via JSON DSL query
 
-For PoC, check my github : https://github.com/hadhub/CVE-2026-XXXXX-Mercator-JSON-DSL
+For PoC, check my github : https://github.com/hadhub/CVE-2026-49344-Mercator-JSON-DSL
+
+The advisory : https://github.com/sourcentis/mercator/security/advisories/GHSA-q3r8-3h7c-96w3
 
 ## Description
 

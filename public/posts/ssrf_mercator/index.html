@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="en-us" class="h-full">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="language" content="en-us">
+<meta name="theme-color" content="#BD5FFF">
+<script>
+  
+  (function () {
+    const storedTheme = localStorage.getItem("theme");
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const theme = storedTheme || (systemPrefersLight ? "light" : "dark");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+  
+  (function(){var t=sessionStorage.getItem('mana_pt');if(t){document.documentElement.setAttribute('data-page-enter',t);sessionStorage.removeItem('mana_pt');}})();
+  
+  window.MANA_SEARCH_INDEX_URL = '\/index.json';
+  
+  window.MANA_LANG_PREFIXES = ['en'];
+</script>
+<title>CVE-2026-49345 Mercator : SSRF To Conditional RCE | hadzah</title>
+<meta
+  name="description"
+  content="
+    CVE-2026- Server Side Request Forgery Portscan &amp; Conditional RCE
+  
+  ">
+
+
+  <meta name="keywords" content="cve, web, open-source, mercator">
+
+
+
+  <meta name="author" content="hadzah">
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/ssrf_mercator/">
+
+
+<link rel="alternate" hreflang="en-us" href="http://localhost:1313/posts/ssrf_mercator/"><link rel="alternate" hreflang="x-default" href="http://localhost:1313/posts/ssrf_mercator/">
+
+
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_us">
+<meta property="og:title" content="CVE-2026-49345 Mercator : SSRF To Conditional RCE | hadzah">
+<meta property="og:description" content="CVE-2026- Server Side Request Forgery Portscan &amp; Conditional RCE">
+<meta property="og:url" content="http://localhost:1313/posts/ssrf_mercator/">
+<meta property="og:site_name" content="hadzah"><meta property="article:published_time" content="2026-05-21T00:00:00Z">
+  <meta
+    property="article:modified_time"
+    content="2026-05-21T00:00:00Z"><meta property="article:author" content="hadzah"><meta property="article:section" content="cve"><meta property="article:tag" content="cve"><meta property="article:tag" content="web"><meta property="article:tag" content="open-source"><meta property="article:tag" content="mercator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CVE-2026-49345 Mercator : SSRF To Conditional RCE | hadzah">
+<meta name="twitter:description" content="CVE-2026- Server Side Request Forgery Portscan &amp; Conditional RCE">
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","email":"hadrien.chauder@proton.me","name":"hadzah","sameAs":["https://github.com/hadhub","https://linkedin.com/in/hadrien-c"]},"dateModified":"2026-05-21T00:00:00Z","datePublished":"2026-05-21T00:00:00Z","description":"CVE-2026- Server Side Request Forgery Portscan \u0026 Conditional RCE","headline":"CVE-2026-49345 Mercator : SSRF To Conditional RCE","image":"http://localhost:1313/images/avatar.png","inLanguage":"en-us","keywords":["cve","web","open-source","mercator"],"mainEntityOfPage":{"@id":"http://localhost:1313/posts/ssrf_mercator/","@type":"WebPage"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:1313/images/avatar.png"},"name":"hadzah","url":"http://localhost:1313/"},"timeRequired":"PT7M","url":"http://localhost:1313/posts/ssrf_mercator/","wordCount":1337}</script>
+
+
+
+  
+  
+  
+    
+  
+  
+  
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"http://localhost:1313/","name":"Home","position":1},{"@type":"ListItem","item":"http://localhost:1313/posts/","name":"Posts","position":2},{"@type":"ListItem","item":"http://localhost:1313/posts/ssrf_mercator/","name":"CVE-2026-49345 Mercator : SSRF To Conditional RCE","position":3}]}</script>
+
+
+
+
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+  media="print"
+  onload="this.media='all'">
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+</noscript>
+
+<link rel="stylesheet" href="/css/theme.min.1be873a9eb84b694842a9145014bd8e6b5209553dc755368b9c8b3112369d102.css">
+
+
+  <link
+    rel="stylesheet"
+    href="/css/syntax-dark.min.b01037e5609e6260b74d6fcdd6d5131e8dcbc4d46d6ef4bfbe5a60bdfc1a9f30.css"
+    id="syntax-dark-theme"
+    class="syntax-theme">
+  <link
+    rel="stylesheet"
+    href="/css/syntax-light.min.9602bc2fcef52b4c62e05eae14b48ba428e114f116e993e504d83ed5a3aeda98.css"
+    id="syntax-light-theme"
+    class="syntax-theme"
+    disabled><script>
+  
+  (function () {
+    const storedTheme = localStorage.getItem("theme");
+    const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const theme = storedTheme || (systemPrefersLight ? "light" : "dark");
+
+    const syntaxDark = document.getElementById("syntax-dark-theme");
+    const syntaxLight = document.getElementById("syntax-light-theme");
+
+    if (theme === "light") {
+      if (syntaxDark) syntaxDark.disabled = true;
+      if (syntaxLight) syntaxLight.disabled = false;
+    } else {
+      if (syntaxDark) syntaxDark.disabled = false;
+      if (syntaxLight) syntaxLight.disabled = true;
+    }
+
+    
+    const observer = new MutationObserver(() => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      if (currentTheme === "light") {
+        if (syntaxDark) syntaxDark.disabled = true;
+        if (syntaxLight) syntaxLight.disabled = false;
+      } else {
+        if (syntaxDark) syntaxDark.disabled = false;
+        if (syntaxLight) syntaxLight.disabled = true;
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  })();
+</script>
+
+
+
+
+<link rel="stylesheet" href="/css/bundle.min.cd0c0a9058b351cc4cd6f7242b8849ed724ea17b18825bbec04f8774a9f71f07.css">
+
+
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+
+<link rel="icon" type="image/png" href="/favicon.png">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+
+
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+
+
+
+
+  
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="/index.xml"
+      title="hadzah">
+  
+
+
+
+
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <a href="#main-content" class="skip-to-main" aria-label="Skip to main content"
+      >Skip to main content</a
+    >
+    <header class="sticky-header">
+      <div class="header-container">
+        <nav class="header-nav" role="navigation" aria-label="Main navigation">
+  <div class="header-content">
+    <div class="header-logo">
+      <a href="/" class="logo-link" aria-label="Home - hadzah">
+        hadzah
+      </a>
+    </div>
+
+    
+    <button 
+      id="mobile-menu-toggle" 
+      class="mobile-menu-toggle" 
+      aria-label="Toggle menu" 
+      aria-expanded="false"
+      type="button">
+      <span class="hamburger-icon">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
+
+    <div class="header-menu">
+      <ul class="menu-list">
+  
+</ul>
+
+
+      <button id="search-toggle" class="search-toggle" aria-label="Search" type="button">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+      
+
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
+  <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+  </svg>
+  <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+  </svg>
+</button>
+
+    </div>
+  </div>
+</nav>
+
+      </div>
+      <div class="reading-progress-bar" aria-hidden="true"></div>
+    </header>
+
+    <main id="main-content" class="flex-1" role="main">
+      
+  <div class="single-post-wrapper">
+    <article class="single-post">
+      
+
+
+
+
+
+
+
+      <header class="post-header">
+        
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1" />
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+    </li>
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/posts/" itemprop="item"><span itemprop="name">Posts</span></a>
+      <meta itemprop="position" content="2" />
+      <span aria-hidden="true" class="breadcrumb-sep">›</span>
+    </li>
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name" class="breadcrumb-current">CVE-2026-49345 Mercator : SSRF To Conditional RCE</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ol>
+</nav>
+
+
+        <h1 class="post-title-main">CVE-2026-49345 Mercator : SSRF To Conditional RCE</h1>
+
+        
+          <p class="post-description-main">CVE-2026- Server Side Request Forgery Portscan &amp; Conditional RCE</p>
+        
+
+        <div class="post-meta">
+  <div class="post-meta-info">
+    <time datetime="2026-05-21T00:00:00Z" class="post-date">
+      <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+      </svg>
+      May 21, 2026
+    </time>
+
+    <span class="meta-separator">•</span>
+
+    
+      <span class="post-word-count">
+        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        1337 words
+      </span>
+    
+
+    
+      <span class="meta-separator">•</span>
+      <span class="post-reading-time">
+        <svg class="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        7 min
+      </span>
+    
+  </div>
+
+  
+    <div class="post-tags">
+      
+        <a href="/tags/cve" class="post-tag">cve</a>
+      
+        <a href="/tags/web" class="post-tag">web</a>
+      
+        <a href="/tags/open-source" class="post-tag">open-source</a>
+      
+        <a href="/tags/mercator" class="post-tag">mercator</a>
+      
+    </div>
+  
+</div>
+
+      </header>
+
+      <div class="post-content-main">
+        <h1 id="ssrf-inside-provider-feature">SSRF inside Provider feature</h1>
+<p>For PoC, check my github : <a href="https://github.com/hadhub/CVE-2026-49345-Mercator-SSRF">https://github.com/hadhub/CVE-2026-49345-Mercator-SSRF</a></p>
+<p>The advisory : <a href="https://github.com/sourcentis/mercator/security/advisories/GHSA-6q97-4q5r-96j6">https://github.com/sourcentis/mercator/security/advisories/GHSA-6q97-4q5r-96j6</a></p>
+<h2 id="description">Description</h2>
+<p>The &ldquo;CVE&rdquo; tab on the Mercator configuration page exposes a &ldquo;Test Provider&rdquo; button.
+This button is intended to check that a CVE provider URL answers correctly on its <code>/api/dbInfo</code> endpoint.
+The value of the <code>provider</code> field is passed as is to <code>curl_init()</code> and executed by <code>curl_exec()</code>.
+No validation is applied on the scheme, on the host or on the destination IP address.</p>
+<p>An authenticated low-privilege attacker can therefore force the Mercator server to emit arbitrary network requests.
+The partial output of the target&rsquo;s response is returned to the page through the redirect flash message.
+The resulting primitive enables internal port scanning and out-of-band interaction with unauthenticated internal services.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>To reach the vulnerable function the attacker needs:</p>
+<ul>
+<li>An authenticated account holding the <code>configure</code> permission (id 262 in the seeder).</li>
+<li>This permission is granted by default to the <code>Admin</code>, <code>User</code> and <code>Cartographer</code> roles.</li>
+<li>Only the <code>Auditor</code> role lacks this permission.</li>
+<li>The <code>lowuser</code> account (User role) is enough to exploit the bug. This proves that the feature is not restricted to administrators.</li>
+</ul>
+<p>No other server-side condition is required to trigger the base SSRF.</p>
+<h3 id="vulnerable-fields">Vulnerable fields</h3>
+<p>The vulnerable field is unique:</p>
+<ul>
+<li>HTTP parameter: <code>provider</code>.</li>
+<li>Endpoint: <code>POST /admin/config/parameters</code> with <code>_method=PUT</code> spoofing.</li>
+<li>Required hidden fields: <code>active_tab=cve</code> and <code>action=test_provider</code>.</li>
+</ul>
+<p>The <code>provider</code> value is concatenated with the literal string <code>/api/dbInfo</code> then passed to <code>curl_init</code>.
+The <code>#</code> character cancels the concatenation by turning the suffix into a URL fragment.</p>
+<hr>
+<h2 id="workflows">Workflows</h2>
+<h3 id="attack-sequence">Attack sequence</h3>
+<p>The diagram below describes the complete SSRF flow.
+The red zone isolates the phase where the Mercator server emits an arbitrary request toward an internal target chosen by the attacker.
+The partial response of that target is sent back through the redirect flash message. This forms the exploitable return channel.</p>
+<figure class="mermaid-figure">
+  <pre class="mermaid">
+sequenceDiagram
+    actor Attacker as Attacker (User role)
+    participant Server as Mercator Server
+    participant Internal as Internal Service (127.0.0.1, Redis, etc.)
+
+    Note over Attacker,Internal: Phase 1, Attacker authentication
+
+    Attacker->>Server: POST /login (lowuser, Lowuser123!)
+    Server-->>Attacker: 302 to /admin (authenticated session)
+
+    Note over Attacker,Internal: Phase 2, CSRF token harvest
+
+    Attacker->>Server: GET /admin/config/parameters?tab=cve
+    Server-->>Attacker: HTML form + CSRF token
+
+    Note over Attacker,Internal: Phase 3, SSRF trigger (SOURCE)
+
+    Attacker->>Server: POST /admin/config/parameters<br/>_method=PUT, active_tab=cve, action=test_provider<br/>provider=http://127.0.0.1:6379/path#
+    Server->>Server: handleCve('test_provider', $request)<br/>testProvider($provider)
+
+    rect rgba(242, 78, 78, 0.2)
+        Note over Server,Internal: Outbound request (SINK)
+        Server->>Internal: curl_init($provider . '/api/dbInfo')<br/>curl_exec()
+        Internal-->>Server: Response body or connection error
+    end
+
+    Note over Attacker,Internal: Phase 4, Information disclosure
+
+    Server-->>Attacker: 302 to /admin/config/parameters?tab=cve<br/>flash message contains target output
+    Attacker->>Attacker: Read flash message<br/>(open port, banner, JSON fields)
+
+    Note over Attacker,Internal: Phase 5, Pivot scenarios
+
+    Attacker->>Server: provider=telnet://127.0.0.1:3306#<br/>(port scan)
+    Attacker->>Server: provider=gopher://127.0.0.1:6379/_...#<br/>(Redis RCE, conditional)
+
+  </pre>
+  
+  <figcaption>Sequence diagram, full SSRF chain from authenticated request to internal service interaction</figcaption>
+  
+</figure>
+
+<p>With this primitive the attacker can:</p>
+<ul>
+<li>Scan internal IP ports by measuring the curl response delay.</li>
+<li>Reach <code>127.0.0.1</code> and <code>localhost</code>, which often host unauthenticated services.</li>
+<li>Pivot to a service such as Redis or Memcached to escalate to a conditional RCE.</li>
+</ul>
+<h3 id="application-file-flow-source-to-sink">Application file flow (source to sink)</h3>
+<p>The diagram below maps the vulnerability across the Mercator code base.
+It follows the user input from the route, traverses the <code>saveConfig</code> method then <code>handleCve</code>, and lands in <code>testProvider</code> where the raw string is passed to <code>curl_init</code>.</p>
+<figure class="mermaid-figure">
+  <pre class="mermaid">
+stateDiagram-v2
+    direction TB
+
+    state "routes/web.php" as routes
+    state "ConfigurationController::saveConfig" as save
+    state "ConfigurationController::handleCve" as handleCve
+    state "ConfigurationController::testProvider" as testProvider
+    state "curl_exec, outbound request" as curl
+
+    note right of routes
+        POST /admin/config/parameters
+        web.protected middleware (auth + gates)
+        gates defines but does not enforce
+    end note
+
+    note right of save
+        abort_if Gate denies configure
+        Admin, User, Cartographer pass
+        match tab cve calls handleCve
+    end note
+
+    note right of handleCve
+        action test_provider
+        provider value taken raw
+        no URL scheme check
+        no host validation
+    end note
+
+    note right of testProvider
+        curl_init provider concat /api/dbInfo
+        suffix bypassable with hash sign
+        no scheme allowlist
+        no private IP block
+    end note
+
+    note right of curl
+        curl_exec hits attacker target
+        response body returned to flash
+        information disclosure channel
+    end note
+
+    [*] --> routes : POST /admin/config/parameters
+    routes --> save : saveConfig
+    save --> handleCve : match tab cve
+    handleCve --> testProvider : action test_provider
+    testProvider --> curl : curl_init then curl_exec
+    curl --> [*] : flash success or error
+
+  </pre>
+  
+  <figcaption>State diagram, vulnerability path through application files from provider input to curl_exec</figcaption>
+  
+</figure>
+
+<p>Initial vulnerable code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// app/Http/Controllers/Admin/ConfigurationController.php
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$action</span> <span class="o">===</span> <span class="s1">&#39;test_provider&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">testProvider</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">input</span><span class="p">(</span><span class="s1">&#39;provider&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span> <span class="k">function</span> <span class="nf">testProvider</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$provider</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$client</span> <span class="o">=</span> <span class="nx">curl_init</span><span class="p">(</span><span class="nv">$provider</span> <span class="o">.</span> <span class="s1">&#39;/api/dbInfo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$client</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$client</span><span class="p">,</span> <span class="nx">CURLOPT_TIMEOUT</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$response</span> <span class="o">=</span> <span class="nx">curl_exec</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">curl_close</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="first-remediation">First Remediation</h2>
+<p>Commit <code>2e6f761a</code> &ldquo;fix Server-Side Request Forgery&rdquo; on the <code>dev</code> branch introduces two controls inside <code>ConfigurationController</code>.</p>
+<p>The first control is <code>validateProviderUrl()</code> which filters the URL string:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">function</span> <span class="nf">validateProviderUrl</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$url</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">preg_match</span><span class="p">(</span><span class="s1">&#39;/[?#@]/&#39;</span><span class="p">,</span> <span class="nv">$url</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\InvalidArgumentException</span><span class="p">(</span><span class="s1">&#39;Invalid provider URL.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$parsed</span> <span class="o">=</span> <span class="nx">parse_url</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$parsed</span> <span class="o">||</span> <span class="o">!</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$parsed</span><span class="p">[</span><span class="s1">&#39;scheme&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="s1">&#39;https&#39;</span><span class="p">],</span> <span class="k">true</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\InvalidArgumentException</span><span class="p">(</span><span class="s1">&#39;Invalid provider URL scheme.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$url</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The second control is <code>rejectPrivateHost()</code> which resolves the hostname and rejects private addresses:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">private</span> <span class="k">function</span> <span class="nf">rejectPrivateHost</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$url</span><span class="p">)</span><span class="o">:</span> <span class="nx">void</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$host</span> <span class="o">=</span> <span class="nx">parse_url</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nx">PHP_URL_HOST</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$ip</span>   <span class="o">=</span> <span class="nx">gethostbyname</span><span class="p">(</span><span class="nv">$host</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">filter_var</span><span class="p">(</span><span class="nv">$ip</span><span class="p">,</span> <span class="nx">FILTER_VALIDATE_IP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">FILTER_FLAG_NO_PRIV_RANGE</span> <span class="o">|</span> <span class="nx">FILTER_FLAG_NO_RES_RANGE</span><span class="p">)</span> <span class="o">===</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nx">\InvalidArgumentException</span><span class="p">(</span><span class="s1">&#39;Provider host resolves to a private or reserved address.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The curl call is also hardened with a protocol restriction:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$client</span><span class="p">,</span> <span class="nx">CURLOPT_PROTOCOLS</span><span class="p">,</span> <span class="nx">CURLPROTO_HTTP</span> <span class="o">|</span> <span class="nx">CURLPROTO_HTTPS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">curl_setopt</span><span class="p">(</span><span class="nv">$client</span><span class="p">,</span> <span class="nx">CURLOPT_REDIR_PROTOCOLS</span><span class="p">,</span> <span class="nx">CURLPROTO_HTTP</span> <span class="o">|</span> <span class="nx">CURLPROTO_HTTPS</span><span class="p">);</span>
+</span></span></code></pre></div><p>These two measures effectively close the multi-protocol scan and the RCE chain through <code>gopher://</code>.</p>
+<h2 id="partial-bypass-identified">Partial bypass identified</h2>
+<p>The <code>rejectPrivateHost()</code> control validates a DNS resolution that differs from the one used by curl.
+This divergence leaves two attack paths open.</p>
+<p><strong>Flaw number 1, DNS rebinding</strong>. The address validated by <code>gethostbyname()</code> is not the address curl later connects to.
+There are two separate resolutions in the code. This forms a time-of-check to time-of-use, race condition (CWE-367).
+The attacker supplies a hostname under their control.
+That domain is served by a DNS that returns a public address on the first resolution and an internal address on the second.
+The control sees the public address and lets the request through.
+curl then sees the internal address and connects to it.</p>
+<p><strong>Flaw number 2, A versus AAAA split</strong>. The <code>gethostbyname()</code> function only reads the IPv4 <code>A</code> record.
+The attacker publishes a hostname with an <code>A</code> record pointing to a public address.
+The same name exposes an <code>AAAA</code> record pointing to <code>::1</code> or to an internal IPv6 address.
+The control only inspects the <code>A</code> record and lets the request through.
+curl uses <code>getaddrinfo</code> which reads the <code>AAAA</code> record and connects to the internal IPv6 address.
+This flaw does not depend on a timing race. It is deterministic.</p>
+<p>After bypass, the residual primitive is an SSRF restricted to HTTP and HTTPS schemes.
+The RCE through <code>gopher://</code> is closed by the protocol restriction.
+HTTP reconnaissance toward the internal network remains possible.</p>
+<h2 id="adjust-remedies">Adjust Remedies</h2>
+<p>To structurally close both DNS divergence flaws, here are the minimal fixes:</p>
+<ul>
+<li>Resolve the host only once then pin the validated IP into curl with <code>curl_setopt($client, CURLOPT_RESOLVE, [&quot;{$host}:{$port}:{$validatedIp}&quot;])</code>. curl no longer performs a second resolution. There is only one resolution left and it is the one that was validated.</li>
+<li>Replace <code>gethostbyname()</code> with <code>dns_get_record($host, DNS_A | DNS_AAAA)</code>. Reject the request if any record is a private or reserved address. This closes the A versus AAAA split bypass.</li>
+<li>Use an explicit CIDR blocklist instead of the <code>filter_var</code> flags. Include ranges that the flags do not cover: <code>100.64.0.0/10</code> for CGNAT, <code>::1</code> for IPv6 loopback, <code>fc00::/7</code> for ULA and <code>fe80::/10</code> for IPv6 link-local. Also include IPv4-mapped IPv6 (<code>::ffff:0:0/96</code>) and normalize before the test.</li>
+<li>Explicitly set <code>CURLOPT_FOLLOWLOCATION</code> to <code>false</code>. This prevents a future change from reintroducing a redirect-based bypass.</li>
+<li>As defense in depth, restrict the provider URL to an allowlist of legitimate provider domains. The feature never needs to reach anything other than the configured provider.</li>
+</ul>
+<p>The first two recommendations form the minimal mandatory fix.
+They close the race condition (CWE-367) along with the A versus AAAA split bypass.
+Thank you to him for the various exchanges we had by email. This application addresses many IT issues from the perspective of managing and understanding a modern and complex infrastructure.</p>
+<p>Thank you for reading this article :D</p>
+<h2 id="demo-">Demo :</h2>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/c9ynL2_WzyQ?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+
+      </div>
+
+      
+        <footer class="post-footer">
+          <div class="post-tags-footer">
+            <span class="tags-label">Tags:</span>
+            
+              <a href="/tags/cve" class="post-tag">cve</a>
+            
+              <a href="/tags/web" class="post-tag">web</a>
+            
+              <a href="/tags/open-source" class="post-tag">open-source</a>
+            
+              <a href="/tags/mercator" class="post-tag">mercator</a>
+            
+          </div>
+        </footer>
+      
+
+      
+
+
+<section class="related-posts" aria-label="Related Posts">
+  <h2 class="related-posts-title">Related Posts</h2>
+  <ul class="related-posts-list">
+    
+    <li class="related-post-item">
+      <a href="/posts/pii_leak_mercator/" class="related-post-link">
+        <strong>CVE-2026-49344 Mercator : Leak PII via JSON DSL</strong>
+        <span>CVE-2026- Leak PII via JSON DSL</span>
+      </a>
+    </li>
+    
+    <li class="related-post-item">
+      <a href="/posts/mercator-account-takeover/" class="related-post-link">
+        <strong>CVE-2026-27639 Mercator : Account Takeover via Stored XSS</strong>
+        <span>CVE-2026-27639 Stored XSS to admin account takeover in Mercator</span>
+      </a>
+    </li>
+    
+  </ul>
+</section>
+
+
+
+      <nav class="post-navigation" aria-label="Post navigation">
+        
+          <a
+            href="/posts/mercator-account-takeover/"
+            class="nav-link nav-prev"
+            aria-label="Previous post: CVE-2026-27639 Mercator : Account Takeover via Stored XSS">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">CVE-2026-27639 Mercator : Account Takeover via Stored XSS</span>
+          </a>
+        
+
+        
+          <a
+            href="/posts/pii_leak_mercator/"
+            class="nav-link nav-next"
+            aria-label="Next post: CVE-2026-49344 Mercator : Leak PII via JSON DSL">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">CVE-2026-49344 Mercator : Leak PII via JSON DSL</span>
+          </a>
+        
+      </nav>
+    </article>
+
+    
+  <aside class="post-toc" id="post-toc" aria-label="Table of Contents">
+    <button
+      class="toc-toggle"
+      id="toc-toggle"
+      aria-expanded="true"
+      aria-controls="toc-content"
+      aria-label="Toggle table of contents">
+      <svg
+        class="toc-burger-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span class="toc-toggle-text">Table of Contents</span>
+      <svg
+        class="toc-chevron-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </button>
+    <div class="toc-content" id="toc-content">
+      <nav class="toc-nav" aria-label="Table of Contents">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#description">Description</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#vulnerable-fields">Vulnerable fields</a></li>
+      </ul>
+    </li>
+    <li><a href="#workflows">Workflows</a>
+      <ul>
+        <li><a href="#attack-sequence">Attack sequence</a></li>
+        <li><a href="#application-file-flow-source-to-sink">Application file flow (source to sink)</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-remediation">First Remediation</a></li>
+    <li><a href="#partial-bypass-identified">Partial bypass identified</a></li>
+    <li><a href="#adjust-remedies">Adjust Remedies</a></li>
+    <li><a href="#demo-">Demo :</a></li>
+  </ul>
+</nav>
+      </nav>
+    </div>
+  </aside>
+
+
+  </div>
+
+    </main>
+
+    <footer>
+      <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-text">
+      &copy;
+      
+      2026
+      
+      hadzah.
+      
+        Hugo &amp; Mana theme
+      
+    </p>
+    
+      <div class="footer-social">
+        <div class="social-links">
+  
+    <a
+      href="https://github.com/hadhub"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="GitHub">
+      <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill-rule="evenodd"
+          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </a>
+  
+
+  
+
+  
+    <a
+      href="https://linkedin.com/in/hadrien-c"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="social-link"
+      aria-label="LinkedIn">
+      <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+      </svg>
+    </a>
+  
+
+  
+
+  
+    <a href="mailto:hadrien.chauder@proton.me" class="social-link" aria-label="Email">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+    </a>
+  
+  
+</div>
+
+      </div>
+    
+  </div>
+</footer>
+
+    </footer>
+
+    <div id="search-modal" class="search-modal" aria-hidden="true" role="dialog" aria-label="Search" data-no-results="No results found">
+  <div class="search-modal-backdrop" id="search-modal-backdrop"></div>
+  <div class="search-modal-container">
+    <div class="search-input-wrapper">
+      <svg class="search-input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        placeholder="Search..."
+        autocomplete="off"
+        aria-label="Search">
+      <button class="search-input-clear" id="search-input-clear" aria-label="Clear search">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+        </svg>
+      </button>
+      <button class="search-modal-close" id="search-modal-close" aria-label="Close search">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+</div>
+
+    
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-overlay"></div>
+  <div class="mobile-menu-content">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">Menu</span>
+      <button
+        id="mobile-menu-close"
+        class="mobile-menu-close"
+        aria-label="Close menu"
+        type="button">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu-nav" role="navigation" aria-label="Mobile navigation">
+      <ul class="menu-list">
+  
+</ul>
+
+    </nav>
+    <div class="mobile-menu-footer">
+      <button id="mobile-search-toggle" class="mobile-search-toggle" aria-label="Search" type="button">
+        <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <span>Search</span>
+      </button>
+      
+
+      <button class="theme-toggle" aria-label="Toggle theme" type="button">
+        <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <svg class="icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+    
+
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top" type="button">
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.min.137938305a4255a5ce0531471a42b4448c4adb05e04052a70000719c0704d082.js" defer></script>
+
+<style>
+   
+  .post-content-main figure {
+    margin: 1.5em auto;
+    text-align: center;
+  }
+  .post-content-main figure img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+  .post-content-main figure figcaption {
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+  }
+
+   
+  pre.mermaid {
+    text-align: center;
+    background: none;
+    border: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .mermaid-figure {
+    text-align: center;
+    margin: 1.5em 0;
+  }
+  .mermaid-figure figcaption {
+    font-style: italic;
+    opacity: 0.7;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+  }
+
+   
+  .post-content-main img {
+    cursor: zoom-in;
+  }
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    cursor: zoom-out;
+    justify-content: center;
+    align-items: center;
+  }
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  .lightbox-overlay img {
+    max-width: 95vw;
+    max-height: 95vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+</style>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  const themeVars = (isLight) => isLight ? {
+      background: '#ffffff',
+      primaryColor: '#fde8e8',
+      primaryTextColor: '#1e293b',
+      primaryBorderColor: '#c91e1e',
+      lineColor: '#c91e1e',
+      secondaryColor: '#fef2f2',
+      tertiaryColor: '#fde8e8',
+      noteBkgColor: '#fef2f2',
+      noteTextColor: '#1e293b',
+      noteBorderColor: '#c91e1e',
+      actorBkg: '#fde8e8',
+      actorTextColor: '#1e293b',
+      actorBorder: '#c91e1e',
+      actorLineColor: '#c91e1e',
+      signalColor: '#1e293b',
+      signalTextColor: '#1e293b',
+      labelBoxBkgColor: '#fde8e8',
+      labelBoxBorderColor: '#c91e1e',
+      labelTextColor: '#1e293b',
+      loopTextColor: '#1e293b',
+      activationBkgColor: '#fef2f2',
+      activationBorderColor: '#c91e1e',
+      sequenceNumberColor: '#ffffff'
+    } : {
+      background: '#1a1a2e',
+      primaryColor: '#2a2a3e',
+      primaryTextColor: '#e8e8f0',
+      primaryBorderColor: '#f24e4e',
+      lineColor: '#f24e4e',
+      secondaryColor: '#1f1f2f',
+      tertiaryColor: '#2a2a3e',
+      noteBkgColor: '#2a2a3e',
+      noteTextColor: '#e8e8f0',
+      noteBorderColor: '#f24e4e',
+      actorBkg: '#2a2a3e',
+      actorTextColor: '#e8e8f0',
+      actorBorder: '#f24e4e',
+      actorLineColor: '#f24e4e',
+      signalColor: '#e8e8f0',
+      signalTextColor: '#e8e8f0',
+      labelBoxBkgColor: '#2a2a3e',
+      labelBoxBorderColor: '#f24e4e',
+      labelTextColor: '#e8e8f0',
+      loopTextColor: '#e8e8f0',
+      activationBkgColor: '#1f1f2f',
+      activationBorderColor: '#f24e4e',
+      sequenceNumberColor: '#1a1a2e'
+    };
+
+  const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+
+  const configure = () => {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: themeVars(isLight())
+    });
+  };
+
+  const render = async () => {
+    document.querySelectorAll('.mermaid').forEach((el) => {
+      if (!el.dataset.source) {
+        el.dataset.source = el.textContent.trim();
+      }
+      el.removeAttribute('data-processed');
+      el.innerHTML = el.dataset.source;
+    });
+    configure();
+    await mermaid.run({ querySelector: '.mermaid' });
+  };
+
+  const init = () => { render(); };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      if (m.attributeName === 'data-theme') {
+        render();
+      }
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    const lbImg = document.createElement('img');
+    overlay.appendChild(lbImg);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', function () {
+      overlay.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlay.classList.remove('active');
+    });
+
+    document.querySelectorAll('.post-content-main img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        lbImg.src = img.src;
+        overlay.classList.add('active');
+      });
+    });
+  });
+</script>
+
+  </body>
+</html>
